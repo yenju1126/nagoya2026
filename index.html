@@ -214,6 +214,32 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
   background:#1A1A1A;color:#fff;padding:8px 18px;border-radius:20px;
   font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:400;white-space:nowrap}
 .toast.show{opacity:1}
+/* --- 微調版面與文字大小 --- */
+
+/* 1. 頂部保持滿版 */
+.top-header { width: 100% !important; }
+
+/* 2. 內容區塊給予適度邊距 */
+#itinerary-body, #shopping-body { 
+  padding: 0 14px !important; 
+  margin-top: 10px;
+}
+
+/* 3. 調整文字大小：稍微放大但不至於太巨大 */
+body { font-size: 15px !important; line-height: 1.5 !important; } 
+
+.ic-title { font-size: 15px !important; font-weight: 700; } 
+.ic-desc { font-size: 13px !important; color: var(--sub); }
+.dtab { font-size: 13px !important; }
+.nav-btn { font-size: 12px !important; }
+
+/* 4. 調整卡片間距：舒適但節省空間 */
+.item-card { padding: 14px !important; margin-bottom: 12px !important; }
+.segments { padding-bottom: 100px !important; }
+
+/* 5. 隱藏原有的標題與 Banner */
+.day-hdr { display: none !important; }
+.banner { display: none !important; }
 </style>
 </head>
 <body>
