@@ -25,7 +25,7 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
 .th-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .th-title{font-size:17px;font-weight:700;letter-spacing:.3px}
 .th-sub{font-size:11px;color:rgba(255,255,255,.55);margin-top:2px}
-.db-dot{width:8px;height:8px;border-radius:50%;background:#6B7280;flex-shrink:0;transition:background .3s;cursor:pointer}
+.db-dot{width:10px;height:10px;border-radius:50%;background:#6B7280;flex-shrink:0;transition:background .3s;cursor:pointer}
 .db-dot.ok{background:#22C55E}.db-dot.err{background:#EF4444}
 
 /* ── DAY TABS ── */
@@ -215,7 +215,7 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
       <div class="th-title">🗾 高山・上高地・名古屋 2026</div>
       <div class="th-sub">9/22（二）— 9/26（六）· 2026 銀色週</div>
     </div>
-    <div id="dbDot" class="db-dot" title="點擊強制還原預設行程資料" onclick="forceResetData()"></div>
+    <div id="dbDot" class="db-dot" title="點擊強制恢復出廠預設行程" onclick="forceResetData()"></div>
   </div>
   <div id="topTabs"></div></div>
 
@@ -370,15 +370,16 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
 <script>
 // ══════════════════════════════════════════════════════
 // 🔥 FIREBASE CONFIG
+// 已自動填入你的專屬雲端金鑰，完美無縫連線
 // ══════════════════════════════════════════════════════
 const FB_CONFIG = {
-  apiKey: "AIzaSyCYOotAZxuDqGYNRMejPJEo_ym89FVS0b4",
-  authDomain: "nagoya2026-ca060.firebaseapp.com",
-  databaseURL: "https://nagoya2026-ca060-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "nagoya2026-ca060",
-  storageBucket: "nagoya2026-ca060.firebasestorage.app",
+  apiKey:            "AIzaSyCYOotAZxuDqGYNRMejPJEo_ym89FVS0b4",
+  authDomain:        "nagoya2026-ca060.firebaseapp.com",
+  databaseURL:       "https://nagoya2026-ca060-default-rtdb.asia-southeast1.firebasedatabase.app",   
+  projectId:         "nagoya2026-ca060",
+  storageBucket:     "nagoya2026-ca060.firebasestorage.app",
   messagingSenderId: "29982428738",
-  appId: "1:29982428738:web:0d818fd9589217f8a467db"
+  appId:             "1:29982428738:web:0d818fd9589217f8a467db"
 };
 
 // ══════════════════════════════════════════════════════
@@ -440,7 +441,7 @@ const D={
        {k:'item',id:209,type:'spot',time:'11:25',title:'大正池バス停 下車（告知司機！）',desc:'1915年燒岳噴發形成，枯木倒影＋穗高連峰映湖面，九月底初秋色彩絕美。',note:''},
        {k:'item',id:210,type:'spot',time:'11:30',title:'健行：大正池→田代池→河童橋（3km）',desc:'沿梓川河畔平坦步道，60–90分鐘。秋色漸起，空氣清透。',note:''},
        {k:'item',id:211,type:'eat',time:'13:00',title:'必吃：帝国ホテル ローストビーフサンド（¥1,200）',desc:'全日本唯一，抵河童橋後先去帝国ホテルLounge排隊買，邊健行邊吃。',note:'⭐ 先去買再健行，不然可能賣完！'},
-       {k:'item',id:212,type:'shop',time:'13:45',title:'必買：上高地限定バッジ、帆布袋（¥300–500）',desc:'バ幕ターミナル購買，全日本限定，唯一機會！',note:''},
+       {k:'item',id:212,type:'shop',time:'13:45',title:'必買：上高地限定バッジ、帆布袋（¥300–500）',desc:'バスターミナル購買，全日本限定，唯一機會！',note:''},
        {k:'item',id:213,type:'shop',time:'13:45',title:'上高地ビール（バスターミナル）',desc:'限地精釀啤酒，健行後喝最對味。',note:''},
        {k:'tr',id:214,tool:'巴士',line:'上高地→平湯→高山 返程',dir:'河童橋→高山',dep:'14:30',arr:'16:00',dur:'1h30m',cost:'套票內含',note:'Silver Week排隊多，提早到バス停。14:30或15:00班次。'},
        {k:'item',id:215,type:'tran',time:'16:10',title:'東急STAY 取代存行李',desc:'飯店代存行李通常到18:00，出發前確認時間。',note:''},
@@ -487,7 +488,7 @@ const D={
        {k:'item',id:408,type:'shop',time:'14:30',title:'必買：犬山限定御朱印帳、御守',desc:'城下町各神社寺院限定朱印，紀念品首選。',note:''},
        {k:'tr',id:409,tool:'名鉄',line:'犬山線',dir:'犬山遊園→名鉄名古屋',dep:'15:30',arr:'16:05',dur:'35分',cost:'¥570',note:''},
        {k:'item',id:410,type:'shop',time:'16:00',title:'松坂屋名古屋店 B1 補漏購買',desc:'昨天有漏買的伴手禮，在此補齊。',note:''},
-       {k:'item',id:411,type:'eat',time:'19:00',title:'晚餐：味仙今池本店 台湾ラーメン（¥850）',desc:'名古屋原創辣肉醬拉麵，今池本店最正宗。',note:'}
+       {k:'item',id:411,type:'eat',time:'19:00',title:'晚餐：味仙今池本店 台湾ラーメン（¥850）',desc:'名古屋原創辣肉醬拉麵，今池本店最正宗。',note:''}
      ]
     },
     // ── DAY 4: 9/26 ──
@@ -512,7 +513,7 @@ const D={
       {id:601,cat:'高山',name:'飛驒牛みそ漬け（真空包）',price:'¥1,500–3,000',note:'重物先寄宅配',done:false},
       {id:602,cat:'高山',name:'さるぼぼ 吉祥物',price:'¥500–1,500',note:'農家手工版',done:false},
       {id:603,cat:'高山',name:'山車 日本酒（二木酒造）',price:'¥1,500–2,000',note:'試飲後購買',done:false},
-      {id:604,cat:'高山',name:'深山菊 日本酒（舩坂酒造）',price:'¥1,500–2,000',note:'可試飲',done:false},
+      {id:604,cat:'高山',name:'深山菊 日本酒（官方酒造）',price:'¥1,500–2,000',note:'可試飲',done:false},
       {id:605,cat:'高山',name:'飛騨の雫 クラフトビール',price:'¥300–500/罐',note:'帶回喝',done:false},
       {id:606,cat:'上高地',name:'上高地限定徽章',price:'¥300–500',note:'バスターミナル購買',done:false},
       {id:607,cat:'上高地',name:'上高地帆布袋',price:'¥1,000–1,500',note:'全日本限定',done:false},
@@ -545,70 +546,92 @@ const D={
 // ══════════════════════════════════════════════════════
 // STATE
 // ══════════════════════════════════════════════════════
-let S = JSON.parse(JSON.stringify(D));
+let S = {}; 
 let db = null;
 let saveTimer = null;
 let curPage = 'itinerary';
 let curDay  = 0;
 let curPerson = 'yenru';
 let sortables = {};
-let editCtx = null;
+let editCtx = null; 
 let confirmCb = null;
 
 // ══════════════════════════════════════════════════════
-// FIREBASE
+// FIREBASE & LOCAL STORAGE LOGIC
 // ══════════════════════════════════════════════════════
 function initFirebase(){
   const dot = document.getElementById('dbDot');
-  if(!FB_CONFIG.apiKey){
-    dot.title='未設定Firebase，使用本地儲存';
-    loadLocal(); return;
+  
+  if(!FB_CONFIG.apiKey || FB_CONFIG.apiKey === ""){
+    dot.title='未填寫Firebase設定，使用本地預設行程';
+    dot.style.background = '#6B7280'; 
+    loadLocalWithDefault(); 
+    return;
   }
+  
   try{
     firebase.initializeApp(FB_CONFIG);
     db = firebase.database();
     db.ref('japan2026').once('value').then(snap=>{
       const val = snap.val();
-      // ✨ 關鍵修正：如果雲端沒資料、或者資料裡面的 days 不存在/長度為0，就自動將預設資料同步寫入雲端
-      if(val && val.days && val.days.length > 0) {
+      if(val && val.days && val.days.length > 0){
         S = val;
-        showToast('已同步雲端行程 ☁️');
+        dot.className = 'db-dot ok';
+        dot.title = 'Firebase 已連線 ☁️';
       } else {
-        S = JSON.parse(stringifyData(D));
+        console.log("雲端資料為空，正在初始化預設行程...");
+        S = JSON.parse(JSON.stringify(D));
         db.ref('japan2026').set(S);
-        showToast('初始化雲端資料庫 🚀');
+        dot.className = 'db-dot ok';
+        dot.title = 'Firebase 已連線(已初始化資料)';
       }
-      dot.classList.add('ok');
-      dot.title='Firebase 已連線 (點擊可還原預設資料)';
+      try{ localStorage.setItem('japan2026', JSON.stringify(S)); }catch(e){}
       renderAll();
     }).catch(e=>{
-      console.warn('Firebase read failed',e);
-      dot.classList.add('err'); dot.title='Firebase 讀取失敗，使用本地儲存';
-      loadLocal();
+      console.warn('Firebase read failed', e);
+      dot.className = 'db-dot err'; 
+      dot.title = 'Firebase 讀取失敗，使用本地儲存';
+      loadLocalWithDefault();
     });
   }catch(e){
-    dot.classList.add('err');
-    loadLocal();
+    console.error(e);
+    dot.className = 'db-dot err';
+    loadLocalWithDefault();
   }
 }
 
-// 用來輔助深拷貝與排除例外
-function stringifyData(obj) {
-  return JSON.stringify(obj, (key, value) => value === undefined ? null : value);
+function loadLocalWithDefault(){
+  try{
+    const s = localStorage.getItem('japan2026');
+    if(s){
+      const parsed = JSON.parse(s);
+      if(parsed && parsed.days && parsed.days.length > 0){
+        S = parsed;
+      } else {
+        S = JSON.parse(JSON.stringify(D));
+        localStorage.setItem('japan2026', JSON.stringify(S));
+      }
+    } else {
+      S = JSON.parse(JSON.stringify(D));
+      localStorage.setItem('japan2026', JSON.stringify(S));
+    }
+  }catch(e){
+    S = JSON.parse(JSON.stringify(D));
+  }
+  renderAll();
 }
 
-// 💥 隱藏功能：萬一以後想要徹底清空、重創預設行程，可以點擊右上角的圓點
-function forceResetData() {
-  if(confirm("確定要清除所有修改，並將「雲端與本地資料」恢復到最原始的預設行程嗎？")) {
-    S = JSON.parse(stringifyData(D));
-    if(db) {
-      db.ref('japan2026').set(S).then(() => {
-        showToast('已強制還原預設資料 🔄');
+function forceResetData(){
+  if(confirm("確定要清除目前所有修改，並將「本地與雲端資料」重置恢復到最原始的預設行程嗎？")){
+    S = JSON.parse(JSON.stringify(D));
+    try{ localStorage.setItem('japan2026', JSON.stringify(S)); }catch(e){}
+    if(db){
+      db.ref('japan2026').set(S).then(()=>{
+        showToast('雲端與本地已同步重置 🚀');
         renderAll();
       });
     } else {
-      localStorage.setItem('japan2026', stringifyData(S));
-      showToast('已還原本地預設資料 🔄');
+      showToast('本地快取已成功重置 💾');
       renderAll();
     }
   }
@@ -620,28 +643,21 @@ function scheduleSave(){
 }
 
 function doSave(){
-  try{ localStorage.setItem('japan2026', stringifyData(S)); }catch(e){}
+  try{ localStorage.setItem('japan2026', JSON.stringify(S)); }catch(e){}
   if(db){
     db.ref('japan2026').set(S)
-      .then(()=>showToast('已儲存 ☁️'))
-      .catch(e=>{console.warn('Firebase save err',e); showToast('本地儲存 💾');});
+      .then(()=>showToast('已同步到雲端 ☁️'))
+      .catch(e=>{console.warn('Firebase save err',e); showToast('僅本地儲存 💾');});
   } else {
-    showToast('本地儲存 💾');
+    showToast('已存至本地瀏覽器 💾');
   }
-}
-
-function loadLocal(){
-  try{
-    const s = localStorage.getItem('japan2026');
-    if(s) S = JSON.parse(s);
-  }catch(e){}
-  renderAll();
 }
 
 // ══════════════════════════════════════════════════════
 // RENDER ALL
 // ══════════════════════════════════════════════════════
 function renderAll(){
+  if(!S || !S.days) return;
   renderItinerary();
   renderShopping();
   updateNav();
@@ -666,6 +682,7 @@ function updateNav(){
 
 function renderTopTabs(){
   const c = document.getElementById('topTabs');
+  if(!c || !S || !S.days) return;
   if(curPage==='itinerary'){
     c.innerHTML = '<div class="day-tabs" id="day-tabs-inner"></div>';
     const dt = document.getElementById('day-tabs-inner');
@@ -691,7 +708,7 @@ function setPerson(p){ curPerson=p; renderAll(); }
 // ══════════════════════════════════════════════════════
 function renderItinerary(){
   renderTopTabs();
-  const day = S.days[curDay];
+  const day = S.days ? S.days[curDay] : null;
   if(!day) return;
   const body = document.getElementById('itinerary-body');
 
@@ -834,7 +851,6 @@ function saveItem(){
     note: document.getElementById('iNote').value.trim()
   };
   const day = S.days[editCtx.dayIdx];
-  if(!day.segments) day.segments = [];
   if(editCtx.id){ 
     const idx = day.segments.findIndex(s=>s.id==editCtx.id);
     if(idx>=0) day.segments[idx]=seg;
@@ -888,7 +904,6 @@ function saveTr(){
     note: document.getElementById('tNote').value.trim()
   };
   const day = S.days[editCtx.dayIdx];
-  if(!day.segments) day.segments = [];
   if(editCtx.id){
     const idx = day.segments.findIndex(s=>s.id==editCtx.id);
     if(idx>=0) day.segments[idx]=seg;
@@ -911,7 +926,7 @@ function delSeg(di, id){
 // ══════════════════════════════════════════════════════
 function renderShopping(){
   renderTopTabs();
-  if(!S.shopping) S.shopping = { yenru: [], yueyun: [] };
+  if(!S.shopping) S.shopping = { yenru:[], yueyun:[] };
   const list = S.shopping[curPerson] || [];
   const cats = ['高山','上高地','名古屋','機場','其他'];
   const body = document.getElementById('shopping-body');
@@ -950,7 +965,6 @@ function renderShopping(){
     html += '</div>';
   });
 
-  // Uncategorized
   const others = list.filter(i=>!cats.includes(i.cat));
   if(others.length){
     html += `<div class="shop-section"><div class="shop-cat-hdr">其他</div>`;
@@ -994,7 +1008,6 @@ function saveShopItem(){
     note: document.getElementById('sNote').value.trim(),
     done: false
   };
-  if(!S.shopping) S.shopping = { yenru: [], yueyun: [] };
   if(!S.shopping[editCtx.person]) S.shopping[editCtx.person]=[];
   S.shopping[editCtx.person].push(item);
   closeModal('modalShop');
@@ -1035,6 +1048,7 @@ function closeConfirm(yes){
 let toastTimer = null;
 function showToast(msg){
   const t = document.getElementById('toast');
+  if(!t) return;
   t.textContent = msg;
   t.classList.add('show');
   clearTimeout(toastTimer);
