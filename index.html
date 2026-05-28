@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>🗾 日本行程 2026</title>
+
 <style>
+/* ── 變數設定：統一管理網頁的主題顏色與陰影 ── */
 :root{
   --red:#C8392B;--navy:#0F2040;--cream:#F7F5F0;--card:#fff;
   --border:#E5E0D8;--text:#1A1A1A;--sub:#888;--radius:14px;
@@ -14,21 +16,23 @@
   --shadow:0 2px 8px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.05);
   --bnav:60px;
 }
+/* ── 基本重設：取消瀏覽器預設邊距，防止手機點擊時出現藍色高亮 ── */
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden}
 body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
   background:var(--cream);color:var(--text);font-size:14px;
   max-width:480px;margin:0 auto;display:flex;flex-direction:column}
 
-/* ── TOP HEADER ── */
+/* ── 頂部標題列 (Header) 的外觀 ── */
 .top-header{background:var(--navy);color:#fff;padding:14px 16px 0;flex-shrink:0;z-index:50}
 .th-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .th-title{font-size:17px;font-weight:700;letter-spacing:.3px}
 .th-sub{font-size:11px;color:rgba(255,255,255,.55);margin-top:2px}
+/* Firebase 狀態連線小圓點 */
 .db-dot{width:10px;height:10px;border-radius:50%;background:#6B7280;flex-shrink:0;transition:background .3s;cursor:pointer}
 .db-dot.ok{background:#22C55E}.db-dot.err{background:#EF4444}
 
-/* ── DAY TABS ── */
+/* ── 日期切換頁籤 (Day Tabs) ── */
 .day-tabs{display:flex;overflow-x:auto;gap:6px;padding:0 14px 10px;scroll-snap-type:x mandatory}
 .day-tabs::-webkit-scrollbar{display:none}
 .dtab{flex-shrink:0;scroll-snap-align:start;border:1.5px solid rgba(255,255,255,.2);
@@ -40,19 +44,19 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
 .dtab.holiday{border-color:#F59E0B}
 .dtab.active.holiday{background:#D97706;border-color:#D97706}
 
-/* ── PERSON TABS (shopping) ── */
+/* ── 購物清單成員切換頁籤 (Person Tabs) ── */
 .person-tabs{display:flex;gap:6px;padding:12px 16px 0;background:var(--navy)}
 .ptab{flex:1;border:1.5px solid rgba(255,255,255,.25);border-radius:20px;
   padding:6px;font-size:13px;font-weight:600;color:rgba(255,255,255,.65);
   cursor:pointer;background:transparent}
 .ptab.active{background:var(--red);border-color:var(--red);color:#fff}
 
-/* ── PAGES ── */
+/* ── 行程與購物 主分頁主體（active 才顯示） ── */
 .page{display:none;flex-direction:column;flex:1;overflow:hidden}
 .page.active{display:flex}
 .page-body{flex:1;overflow-y:auto;padding:12px 12px calc(var(--bnav)+20px);-webkit-overflow-scrolling:touch}
 
-/* ── BOTTOM NAV ── */
+/* ── 底部導覽列 (Bottom Navigation) ── */
 .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);
   width:100%;max-width:480px;height:var(--bnav);
   background:var(--card);border-top:1px solid var(--border);
@@ -63,7 +67,7 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
 .nav-btn .ni{font-size:22px;line-height:1}
 .nav-btn.active{color:var(--red)}
 
-/* ── DAY HEADER ── */
+/* ── 每日行程的大標題區 ── */
 .day-hdr{padding:14px 4px 8px}
 .day-hdr-title{font-size:20px;font-weight:800;color:var(--navy)}
 .day-hdr-sub{font-size:12px;color:var(--sub);margin-top:2px}
@@ -71,7 +75,7 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
   font-size:10px;font-weight:700;padding:1px 7px;border-radius:4px;margin-left:6px;vertical-align:2px}
 .holiday-badge.sw{background:#D97706}
 
-/* ── BANNERS ── */
+/* ── 頂部重要提醒橫幅 (Banners) ── */
 .banner{border-radius:10px;padding:9px 12px;margin:8px 0;font-size:12px;
   line-height:1.6;display:flex;gap:8px;align-items:flex-start;border:1px solid}
 .bi{font-size:15px;flex-shrink:0}
@@ -79,10 +83,8 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
 .b-warn{background:#FEF3C7;border-color:#FCD34D;color:#78350F}
 .b-blue{background:#EFF6FF;border-color:#93C5FD;color:#1E3A8A}
 
-/* ── SEGMENTS LIST ── */
+/* ── 行程卡片樣式 ── */
 .segments{position:relative}
-
-/* ── ITEM CARD ── */
 .seg-item{margin:6px 0;position:relative}
 .item-card{background:var(--card);border-radius:var(--radius);
   padding:11px 12px 10px;box-shadow:var(--shadow);border:1px solid var(--border);
@@ -107,14 +109,14 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
 .btn-edit{background:#F3F4F6;color:#374151}
 .btn-del{background:#FEE2E2;color:#B91C1C}
 
-/* type colors */
+/* 行程各類型的專屬顏色背景 */
 .spot-c{background:#EDE9FE;color:#6D28D9}.spot-d{background:var(--spot)}
 .eat-c{background:#FEE2E2;color:#B91C1C}.eat-d{background:var(--eat)}
 .shop-c{background:#DCFCE7;color:#15803D}.shop-d{background:var(--shop)}
 .hotel-c{background:#DBEAFE;color:#1E40AF}.hotel-d{background:var(--hotel)}
 .tran-c{background:#DBEAFE;color:#1D4ED8}.tran-d{background:var(--tran)}
 
-/* ── TRANSPORT CONNECTOR ── */
+/* ── 獨立的「交通連接線型」卡片樣式 ── */
 .seg-transport{margin:0;position:relative}
 .transport-card{background:var(--transport-bg);border-left:3px solid var(--transport-border);
   border-radius:0 10px 10px 0;margin:0 0 0 16px;padding:9px 12px;
@@ -135,14 +137,14 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
 .tr-drag{font-size:16px;color:#B0B8D1;cursor:grab;flex-shrink:0;padding:0 2px;
   touch-action:none;user-select:none;margin-top:2px}
 
-/* ── ADD BUTTONS ── */
+/* ── 新增按鈕 ── */
 .add-row{display:flex;gap:8px;margin:10px 0 4px}
 .add-btn{flex:1;display:flex;align-items:center;justify-content:center;
   gap:5px;padding:10px;border:1.5px dashed var(--border);border-radius:10px;
   background:transparent;color:var(--sub);font-size:12px;cursor:pointer;transition:all .15s}
 .add-btn:active{background:var(--border)}
 
-/* ── SHOPPING ── */
+/* ── 購物清單專屬樣式 ── */
 .shop-section{margin-bottom:16px}
 .shop-cat-hdr{display:flex;align-items:center;gap:8px;padding:10px 0 6px;
   font-size:13px;font-weight:700;color:var(--navy)}
@@ -165,7 +167,7 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
 .shop-progress-bar{height:4px;border-radius:10px;background:var(--shop);transition:width .3s}
 .shop-progress-text{font-size:11px;color:var(--sub);margin-bottom:6px}
 
-/* ── MODAL ── */
+/* ── 彈出輸入視窗 (Modal) ── */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);
   z-index:200;display:none;align-items:flex-end;justify-content:center}
 .modal-overlay.open{display:flex}
@@ -189,7 +191,7 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
 .btn-cancel{flex:1;background:var(--border);color:var(--text);border:none;
   border-radius:10px;padding:14px;font-size:15px;font-weight:600;cursor:pointer}
 
-/* ── CONFIRM DIALOG ── */
+/* ── 確認刪除提示視窗 ── */
 .confirm-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);
   z-index:300;display:none;align-items:center;justify-content:center;padding:20px}
 .confirm-overlay.open{display:flex}
@@ -200,7 +202,7 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
 .conf-ok{flex:1;background:var(--red);color:#fff;border:none;border-radius:8px;padding:10px;font-size:14px;font-weight:600;cursor:pointer}
 .conf-no{flex:1;background:var(--border);color:var(--text);border:none;border-radius:8px;padding:10px;font-size:14px;cursor:pointer}
 
-/* ── TOAST ── */
+/* ── 全域 Toast 提示 ── */
 .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
   background:#1A1A1A;color:#fff;padding:8px 18px;border-radius:20px;
   font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:400;white-space:nowrap}
@@ -213,11 +215,12 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
   <div class="th-row">
     <div>
       <div class="th-title">🗾 高山・上高地・名古屋 2026</div>
-      <div class="th-sub">9/22（二）— 9/26（六）· 2026 銀色週</div>
+      <div class="th-sub">9/22（二）— 9/26（六）· 銀色週</div>
     </div>
     <div id="dbDot" class="db-dot" title="點擊強制恢復出廠預設行程" onclick="forceResetData()"></div>
   </div>
-  <div id="topTabs"></div></div>
+  <div id="topTabs"></div>
+</div>
 
 <div id="page-itinerary" class="page active">
   <div class="page-body" id="itinerary-body"></div>
@@ -263,8 +266,8 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
       <textarea class="ftextarea" id="iDesc" placeholder="細節、費用..."></textarea>
     </div>
     <div class="fg">
-      <label class="flabel">備註（會以色塊顯示）</label>
-      <textarea class="ftextarea" id="iNote" placeholder="特別提醒、小訣竅..." style="min-height:56px"></textarea>
+      <label class="flabel">備註（色塊顯示）</label>
+      <textarea class="ftextarea" id="iNote" placeholder="特別提醒..." style="min-height:56px"></textarea>
     </div>
     <div class="mactions">
       <button class="btn-cancel" onclick="closeModal('modalItem')">取消</button>
@@ -291,7 +294,7 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
     </div>
     <div class="fg">
       <label class="flabel">路線／班次名稱</label>
-      <input class="finput" id="tLine" placeholder="例：特急ひだ3号、μSky">
+      <input class="finput" id="tLine" placeholder="例：特急ひだ3号">
     </div>
     <div class="fg">
       <label class="flabel">行駛方向</label>
@@ -322,7 +325,7 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
     <div class="modal-title" id="modalShopTitle">新增購物項目</div>
     <div class="fg">
       <label class="flabel">商品名稱</label>
-      <input class="finput" id="sName" placeholder="例：飛驒牛みそ漬け">
+      <input class="finput" id="sName" placeholder="商品名稱">
     </div>
     <div class="frow">
       <div class="fg">
@@ -342,7 +345,7 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
     </div>
     <div class="fg">
       <label class="flabel">備註</label>
-      <input class="finput" id="sNote" placeholder="數量、注意事項...">
+      <input class="finput" id="sNote" placeholder="數量、規格...">
     </div>
     <div class="mactions">
       <button class="btn-cancel" onclick="closeModal('modalShop')">取消</button>
@@ -368,10 +371,8 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
-// ══════════════════════════════════════════════════════
-// 🔥 FIREBASE CONFIG
-// 已自動填入你的專屬雲端金鑰，完美無縫連線
-// ══════════════════════════════════════════════════════
+
+// Firebase 雲端金鑰配置
 const FB_CONFIG = {
   apiKey:            "AIzaSyCYOotAZxuDqGYNRMejPJEo_ym89FVS0b4",
   authDomain:        "nagoya2026-ca060.firebaseapp.com",
@@ -379,12 +380,9 @@ const FB_CONFIG = {
   projectId:         "nagoya2026-ca060",
   storageBucket:     "nagoya2026-ca060.firebasestorage.app",
   messagingSenderId: "29982428738",
-  appId:             "1:29982428738:web:0d818fd9589217f8a467db"
+  appId: "1:29982428738:web:0d818fd9589217f8a467db"
 };
 
-// ══════════════════════════════════════════════════════
-// TYPE CONFIG
-// ══════════════════════════════════════════════════════
 const TC = {
   spot:  {label:'🏔 景點', badge:'spot-c', dot:'spot-d'},
   eat:   {label:'🍽 美食', badge:'eat-c',  dot:'eat-d'},
@@ -395,157 +393,148 @@ const TC = {
 const TOOL_ICON = {JR:'🚆',名鉄:'🚃',巴士:'🚌',地下鉄:'🚇',計程車:'🚕',步行:'🚶',飛機:'✈️'};
 const CAT_COLOR = {高山:'#DC2626',上高地:'#7C3AED',名古屋:'#D97706',機場:'#2563EB',其他:'#6B7280'};
 
-// ══════════════════════════════════════════════════════
-// DEFAULT DATA
-// ══════════════════════════════════════════════════════
 function mkId(){return Date.now()+Math.floor(Math.random()*10000)}
+
+// 預設核心資料庫
 const D={
   days:[
-    // ── DAY 0: 9/22 ──
     {date:'9/22',wd:'二',label:'中部機場→名古屋→飛驒高山',holiday:'国民の休日',silverWeek:true,
      banners:[
-       {t:'red',i:'🚨',msg:'<b>9/22 是 2026 銀色週「国民の休日」（法定假日）！</b>機場、特急ひだ人潮超多，名鉄使用休日班表。'},
-       {t:'warn',i:'🎫',msg:'JR 特急ひだ3号 指定席在 <b>8/22（六）10:00 JST</b> 開搶，Silver Week 秒殺，請準時上線訂票！'}
+       {t:'red',i:'🚨',msg:'<b>9/22 是 2026 銀色週「国民の休日」！</b>機場、特急ひだ人潮超多，名鉄使用假日班表。'},
+       {t:'warn',i:'🎫',msg:'JR 特急ひだ3号 指定席在 <b>8/22 10:00 JST</b> 開搶，請準時上線訂票！'}
      ],
      segments:[
-       {k:'item',id:101,type:'spot',time:'06:00',title:'落地中部国際空港',desc:'出關 + 提行李，預估 06:45–07:00 出航廈。Silver Week 入境人潮多。',note:''},
-       {k:'tr',id:102,tool:'名鉄',line:'μSky（休日班表）',dir:'中部機場→名鉄名古屋',dep:'07:29',arr:'07:57',dur:'28分',cost:'¥1,250',note:'休日班表！首班07:13，目標07:29。備用：07:59→08:27 仍可趕JR 08:43。'},
-       {k:'item',id:103,type:'tran',time:'08:00',title:'JR名古屋駅 大型ロッカー 存行李',desc:'中央改札外大型格 ¥700–800/天。支援IC Card。預留約15分鐘。',note:''},
-       {k:'tr',id:104,tool:'JR',line:'特急ひだ3号',dir:'名古屋→高山',dep:'08:43',arr:'11:20',dur:'2h37m',cost:'¥5,610 指定席',note:'⚠ 需在8/22搶訂指定席！若趕不上此班，下一班約10:00，抵高山12:35。'},
-       {k:'item',id:105,type:'spot',time:'11:20',title:'抵高山駅，東急STAY 存小包',desc:'飯店距車站步行約5分鐘，check-in 15:00。帶隔夜小包（盥洗包、換洗×1套、外套）。',note:''},
-       {k:'item',id:106,type:'eat',time:'11:40',title:'午餐：飛驒牛握り寿司 or 高山ラーメン',desc:'「飛騨牛にぎり壱之」¥800–1,200/貫，或「人参」中華そば ¥850。',note:''},
-       {k:'item',id:107,type:'spot',time:'13:00',title:'三町筋老街散策（1.5–2小時）',desc:'江戶時代保留的商家街道，採買飛驒伴手禮。',note:'📦 買完重物記得寄ヤマト宅急便到名古屋錦威斯特（飯店代收）¥1,500–2,000/箱'},
-       {k:'item',id:108,type:'shop',time:'13:00',title:'必買：飛驒牛みそ漬け 真空包',desc:'¥1,500–3,000，真空包裝，可帶上飛機手提。',note:''},
-       {k:'item',id:109,type:'shop',time:'13:30',title:'酒類：山車（二木酒造）、深山菊（舩坂酒造）',desc:'兩家酒造都在老街上，免費試飲後再決定買哪款。飛騨の雫クラフトビール罐裝也推薦。',note:''},
-       {k:'item',id:110,type:'shop',time:'13:30',title:'必買：さるぼぼ 吉祥物、春慶塗工藝品',desc:'農家手工版さるぼぼ最有溫度。春慶塗金黃漆器、一位一刀彫木雕適合送禮。',note:''},
-       {k:'item',id:111,type:'spot',time:'15:00',title:'高山陣屋（¥440）',desc:'開放至17:00，江戶幕府代官所，唯一保存至今的政廳建築。',note:''},
-       {k:'item',id:112,type:'hotel',time:'16:30',title:'Check-in 東急STAY 飛驒高山 結之湯',desc:'飯店有天然溫泉「結之湯」，好好泡湯備戰隔天！',note:''},
-       {k:'item',id:113,type:'eat',time:'18:30',title:'晚餐：朴葉みそ定食 + 飛驒地酒',desc:'木蘭葉承載飛驒みそ在炭火加熱，香氣逼人。',note:'⏰ 早點就寢！明天 07:00 飯店早餐，07:50 出發宮川朝市'}
+       {k:'item',id:101,type:'spot',time:'06:00',title:'落地中部国際空港',desc:'出關 + 提行李，預估 06:45–07:00 出航廈。',note:''},
+       {k:'tr',id:102,tool:'名鉄',line:'μSky（假日班表）',dir:'中部機場→名鉄名古屋',dep:'07:29',arr:'07:57',dur:'28分',cost:'¥1,250',note:'假日班表！目標07:29。'},
+       {k:'item',id:103,type:'tran',time:'08:00',title:'JR名古屋駅 大型寄物櫃存行李',desc:'中央改札外大型格 ¥700–800/天。',note:''},
+       {k:'tr',id:104,tool:'JR',line:'特急ひだ3号',dir:'名古屋→高山',dep:'08:43',arr:'11:20',dur:'2h37m',cost:'¥5,610 指定席',note:'⚠ 需在8/22搶訂指定席！'},
+       {k:'item',id:105,type:'spot',time:'11:20',title:'抵高山駅，東急STAY 存小包',desc:'飯店距車站步行約5分鐘。帶隔夜小包即可。',note:''},
+       {k:'item',id:106,type:'eat',time:'11:40',title:'午餐：飛驒牛握り寿司',desc:'「飛騨牛にぎり壱之」¥800–1,200/貫。',note:''},
+       {k:'item',id:107,type:'spot',time:'13:00',title:'三町筋老街散策',desc:'江戶時代保留的商家街道。',note:'📦 買完重物記得寄ヤマト宅急便到名古屋飯店'},
+       {k:'item',id:108,type:'shop',time:'13:00',title:'必買：飛驒牛みそ漬け 真空包',desc:'真空包裝，可帶上飛機手提。',note:''},
+       {k:'item',id:109,type:'shop',time:'13:30',title:'酒類：山車、深山菊酒造',desc:'老街上可免費或付費試飲。',note:''},
+       {k:'item',id:110,type:'shop',time:'13:30',title:'必買：さるぼぼ 吉祥物、春慶塗工藝品',desc:'農家手工版最有溫度。',note:''},
+       {k:'item',id:111,type:'spot',time:'15:00',title:'高山陣屋（¥440）',desc:'開放至17:00，唯一保存至今的江戶代官所。',note:''},
+       {k:'item',id:112,type:'hotel',time:'16:30',title:'Check-in 東急STAY 飛驒高山 結之湯',desc:'飯店有天然溫泉「結之湯」。',note:''},
+       {k:'item',id:113,type:'eat',time:'18:30',title:'晚餐：朴葉みそ定食 + 飛驒地酒',desc:'木蘭葉承載飛驒味噌在炭火加熱。',note:''}
      ]
     },
-    // ── DAY 1: 9/23 ──
     {date:'9/23',wd:'三',label:'宮川朝市→上高地→名古屋',holiday:'秋分の日',silverWeek:true,
      banners:[
-       {t:'red',i:'🚨',msg:'<b>銀色週最終日！</b>上高地人潮年度高峰，巴士排隊可能30–60分。09:45前到バスセンター。'},
-       {t:'warn',i:'⏰',msg:'先吃飯店早餐再出發宮川朝市，07:00開始吃，07:50出門剛剛好。'}
+       {t:'red',i:'🚨',msg:'<b>銀色週最終日！</b>上高地人潮高峰，回程巴士排隊久，請提早至停留所。'},
+       {t:'warn',i:'⏰',msg:'07:00 先吃飯店早餐，07:50 出門前往朝市剛剛好。'}
      ],
      segments:[
-       {k:'item',id:201,type:'eat',time:'07:00',title:'飯店早餐（東急STAY）',desc:'07:00 開始，快速吃完出發，目標 07:50 抵宮川朝市。',note:''},
-       {k:'item',id:202,type:'spot',time:'07:50',title:'步行前往宮川朝市（約10分）',desc:'宮川右岸約300m，06:00–12:00營業，約65個攤位。',note:''},
-       {k:'item',id:203,type:'eat',time:'08:00',title:'必吃：みたらし団子（¥100–150）',desc:'飛驒式醬油＋山椒，不甜，現烤。完全不同京都版，務必嘗試！',note:''},
-       {k:'item',id:204,type:'eat',time:'08:20',title:'必吃：飛驒牛乳コロッケ or 農家朝食',desc:'農家現炸可樂餅 ¥200–400，或農家味噌湯＋飯套組。',note:''},
-       {k:'item',id:205,type:'shop',time:'08:40',title:'必買：農家手作り漬物（¥500–800）',desc:'試吃後購買，辣蘿蔔、紫蘇漬、糠漬，農家直售最有特色。',note:''},
-       {k:'item',id:206,type:'tran',time:'09:30',title:'回飯店取行李，Check-out',desc:'取完直接步行5分鐘到高山濃飛バスセンター。',note:''},
-       {k:'item',id:207,type:'tran',time:'09:45',title:'高山濃飛バスセンター 購票 + 排隊',desc:'套票 ¥5,800/人（來回含平湯轉乘）。Silver Week 假日人多，提前15分排。',note:''},
-       {k:'tr',id:208,tool:'巴士',line:'濃飛バス + Alpico轉乘',dir:'高山→平湯→上高地大正池',dep:'10:00',arr:'11:25',dur:'1h25m',cost:'套票內含',note:'在平湯バスターミナル轉乘Alpico巴士到上高地，告知司機大正池下車。'},
-       {k:'item',id:209,type:'spot',time:'11:25',title:'大正池バス停 下車（告知司機！）',desc:'1915年燒岳噴發形成，枯木倒影＋穗高連峰映湖面，九月底初秋色彩絕美。',note:''},
-       {k:'item',id:210,type:'spot',time:'11:30',title:'健行：大正池→田代池→河童橋（3km）',desc:'沿梓川河畔平坦步道，60–90分鐘。秋色漸起，空氣清透。',note:''},
-       {k:'item',id:211,type:'eat',time:'13:00',title:'必吃：帝国ホテル ローストビーフサンド（¥1,200）',desc:'全日本唯一，抵河童橋後先去帝国ホテルLounge排隊買，邊健行邊吃。',note:'⭐ 先去買再健行，不然可能賣完！'},
-       {k:'item',id:212,type:'shop',time:'13:45',title:'必買：上高地限定バッジ、帆布袋（¥300–500）',desc:'バスターミナル購買，全日本限定，唯一機會！',note:''},
-       {k:'item',id:213,type:'shop',time:'13:45',title:'上高地ビール（バスターミナル）',desc:'限地精釀啤酒，健行後喝最對味。',note:''},
-       {k:'tr',id:214,tool:'巴士',line:'上高地→平湯→高山 返程',dir:'河童橋→高山',dep:'14:30',arr:'16:00',dur:'1h30m',cost:'套票內含',note:'Silver Week排隊多，提早到バス停。14:30或15:00班次。'},
-       {k:'item',id:215,type:'tran',time:'16:10',title:'東急STAY 取代存行李',desc:'飯店代存行李通常到18:00，出發前確認時間。',note:''},
-       {k:'tr',id:216,tool:'JR',line:'特急ひだ（返程）',dir:'高山→名古屋',dep:'16:30',arr:'19:07',dur:'2h37m',cost:'¥5,610 指定席',note:'⚠ Silver Week尾日回程，指定席必訂！也可搭17:00班次。'},
-       {k:'item',id:217,type:'tran',time:'19:15',title:'名古屋駅 取コインロッカー行李',desc:'記好格號，取出大行李箱後前往飯店。',note:''},
-       {k:'item',id:218,type:'hotel',time:'19:30',title:'Check-in 名古屋錦威斯特',desc:'名古屋駅→飯店地下鉄約15分，或計程車 ¥1,000–1,200。',note:''},
-       {k:'item',id:219,type:'eat',time:'21:00',title:'宵夜：台湾ラーメン（味仙）or 手羽先（世界の山ちゃん）',desc:'趕路一天，隨意吃名古屋代表宵夜。附近有分店。',note:''}
+       {k:'item',id:201,type:'eat',time:'07:00',title:'飯店早餐（東急STAY）',desc:'07:00 開始，快速吃完出發。',note:''},
+       {k:'item',id:202,type:'spot',time:'07:50',title:'步行前往宮川朝市',desc:'約步行10分鐘，營業至12:00。',note:''},
+       {k:'item',id:203,type:'eat',time:'08:00',title:'必吃：みたらし団子',desc:'飛驒式現烤醬油口味，不甜。',note:''},
+       {k:'item',id:204,type:'eat',time:'08:20',title:'必吃：飛驒牛乳可樂餅',desc:'農家現炸香濃可樂餅。',note:''},
+       {k:'item',id:205,type:'shop',time:'08:40',title:'必買：農家手作漬物',desc:'辣蘿蔔、紫蘇漬，農家直售。',note:''},
+       {k:'item',id:206,type:'tran',time:'09:30',title:'回飯店取行李，Check-out',desc:'步行5分鐘到高山濃飛巴士中心。',note:''},
+       {k:'item',id:207,type:'tran',time:'09:45',title:'高山濃飛巴士中心 購票排隊',desc:'套票 ¥5,800/人（含平湯轉乘）。',note:''},
+       {k:'tr',id:208,tool:'巴士',line:'濃飛巴士 + Alpico',dir:'高山→平湯→上高地大正池',dep:'10:00',arr:'11:25',dur:'1h25m',cost:'套票內含',note:'在大正池下車健行。'},
+       {k:'item',id:209,type:'spot',time:'11:25',title:'大正池下車',desc:'枯木倒影＋穗高連峰，風景絕美。',note:''},
+       {k:'item',id:210,type:'spot',time:'11:30',title:'健行：大正池→田代池→河童橋',desc:'平坦自然步道，約 60–90 分鐘。',note:''},
+       {k:'item',id:211,type:'eat',time:'13:00',title:'必吃：河童橋附近帝國飯店牛肉三明治',desc:'健行終點美食點心。',note:''},
+       {k:'item',id:212,type:'shop',time:'13:45',title:'必買：上高地限定徽章、帆布袋',desc:'巴士總站販賣部購買。',note:''},
+       {k:'item',id:213,type:'shop',time:'13:45',title:'當地限定：上高地啤酒',desc:'健行完享用。',note:''},
+       {k:'tr',id:214,tool:'巴士',line:'上高地→平湯→高山',dir:'河童橋→高山',dep:'14:30',arr:'16:00',dur:'1h30m',cost:'套票內含',note:'提早去排隊。'},
+       {k:'item',id:215,type:'tran',time:'16:10',title:'東急STAY 取行李',desc:'拿取大行李準備回名古屋。',note:''},
+       {k:'tr',id:216,tool:'JR',line:'特急ひだ',dir:'高山→名古屋',dep:'16:30',arr:'19:07',dur:'2h37m',cost:'¥5,610 指定席',note:'連假末尾回程，指定席必訂。'},
+       {k:'item',id:217,type:'tran',time:'19:15',title:'名古屋駅 領取大型格行李',desc:'取出大行李箱前往飯店。',note:''},
+       {k:'item',id:218,type:'hotel',time:'19:30',title:'Check-in 名古屋錦威斯特飯店',desc:'搭地下鐵或搭計程車前往。',note:''},
+       {k:'item',id:219,type:'eat',time:'21:00',title:'宵夜：台灣拉麵（味仙）或手羽先',desc:'享用名古屋特色宵夜。',note:''}
      ]
     },
-    // ── DAY 2: 9/24 ──
     {date:'9/24',wd:'四',label:'名古屋市區精華遊',holiday:null,silverWeek:false,
      banners:[
-       {t:'blue',i:'🚇',msg:'交通：地下鉄 1日乗車券 ¥760（各站自動販売機）。錦→神宮西→市役所→上前津→名古屋。'}
+       {t:'blue',i:'🚇',msg:'交通：建議購買地下鐵 1日乘車券 ¥760。'}
      ],
      segments:[
-       {k:'item',id:301,type:'eat',time:'08:00',title:'早餐：名古屋モーニング（¥400–600）',desc:'點咖啡自動附小倉トースト＋水煮蛋，名古屋獨有早餐文化。推薦コメダ珈琲。',note:''},
-       {k:'tr',id:302,tool:'地下鉄',line:'名城線',dir:'錦→神宮西',dep:'',arr:'',dur:'約15分',cost:'¥260',note:''},
-       {k:'item',id:303,type:'spot',time:'09:30',title:'熱田神宮（免費，約1.5小時）',desc:'草薙神劍供奉地，6萬坪森林境內，24小時開放，莊嚴氣場。',note:''},
-       {k:'tr',id:304,tool:'地下鉄',line:'名城線',dir:'神宮西→市役所',dep:'',arr:'',dur:'約20分',cost:'¥270',note:''},
-       {k:'item',id:305,type:'spot',time:'11:00',title:'名古屋城 + 金シャチ横丁（¥500）',desc:'金シャチ横丁義直ゾーン可試吃名古屋各種名物，約2小時。',note:''},
-       {k:'item',id:306,type:'eat',time:'12:30',title:'午餐：矢場とん 味噌カツ（¥1,200–1,800）',desc:'愛知縣豆みそ淋炸豬排，濃郁鹹甜，名古屋最具代表性料理。',note:''},
-       {k:'tr',id:307,tool:'地下鉄',line:'名城線',dir:'市役所→上前津',dep:'',arr:'',dur:'約15分',cost:'¥260',note:''},
-       {k:'item',id:308,type:'spot',time:'14:00',title:'大須商店街（約2小時）',desc:'多元文化混搭街道，食べ歩き推薦：ケバブ ¥500、唐揚げ、たこ焼き。',note:''},
-       {k:'tr',id:309,tool:'地下鉄',line:'名城線',dir:'上前津→名古屋',dep:'',arr:'',dur:'約10分',cost:'¥260',note:''},
-       {k:'item',id:310,type:'shop',time:'17:00',title:'JR Gate Tower / 高島屋 B1–B2 採買',desc:'正式伴手禮掃貨主場，品項最齊。',note:''},
-       {k:'item',id:311,type:'shop',time:'17:10',title:'必買：坂角ゆかり、青柳ういろう、なごやん、守口漬',desc:'坂角ゆかり ¥1,200–2,000，ういろう ¥900–1,500，なごやん ¥1,000，守口漬 ¥800–1,500。',note:''},
-       {k:'item',id:312,type:'shop',time:'17:30',title:'酒類：醸し人九平次、金シャチビール、知多威士忌',desc:'醸し人九平次¥1,800–3,000，知多威士忌比台灣便宜約30%。',note:''},
-       {k:'item',id:313,type:'eat',time:'19:30',title:'晚餐：世界の山ちゃん 手羽先 + 金シャチビール',desc:'秘傳辣胡椒炸雞翅 ¥165/支，名駅周邊有多家分店。',note:''}
+       {k:'item',id:301,type:'eat',time:'08:00',title:'早餐：名古屋 Morning 文化',desc:'點咖啡送小倉紅豆吐司。推薦コメダ珈琲。',note:''},
+       {k:'tr',id:302,tool:'地下鉄',line:'名城線',dir:'錦→神宮西',dep:'',arr:'',dur:'15分',cost:'¥260',note:''},
+       {k:'item',id:303,type:'spot',time:'09:30',title:'熱田神宮',desc:'草薙神劍供奉地，莊嚴神聖。',note:''},
+       {k:'tr',id:304,tool:'地下鉄',line:'名城線',dir:'神宮西→市役所',dep:'',arr:'',dur:'20分',cost:'¥270',note:''},
+       {k:'item',id:305,type:'spot',time:'11:00',title:'名古屋城 + 金シャチ横丁',desc:'欣賞天守閣與金鯱。',note:''},
+       {k:'item',id:306,type:'eat',time:'12:30',title:'午餐：矢場とん 味噌豬排',desc:'鹹甜濃郁的經典味噌醬汁。',note:''},
+       {k:'tr',id:307,tool:'地下鉄',line:'名城線',dir:'市役所→上前津',dep:'',arr:'',dur:'15分',cost:'¥260',note:''},
+       {k:'item',id:308,type:'spot',time:'14:00',title:'大須商店街散策',desc:'老街與特色小吃聚集地。',note:''},
+       {k:'tr',id:309,tool:'地下鉄',line:'名城線',dir:'上前津→名古屋',dep:'',arr:'',dur:'10分',cost:'¥260',note:''},
+       {k:'item',id:310,type:'shop',time:'17:00',title:'JR Gate Tower / 高島屋百貨',desc:'正式伴手禮主要採購商場。',note:''},
+       {k:'item',id:311,type:'shop',time:'17:10',title:'必買：坂角ゆかり、青柳ういろう、なごやん',desc:'經典蝦餅與各式和菓子。',note:''},
+       {k:'item',id:312,type:'shop',time:'17:30',title:'酒類：釀し人九平次、知多威士忌',desc:'在地知名清酒與威士忌。',note:''},
+       {k:'item',id:313,type:'eat',time:'19:30',title:'晚餐：世界の山ちゃん 炸雞翅',desc:'胡椒香氣十足的招牌手羽先。',note:''}
      ]
     },
-    // ── DAY 3: 9/25 ──
     {date:'9/25',wd:'五',label:'犬山一日小旅行',holiday:null,silverWeek:false,
      banners:[
-       {t:'blue',i:'🚃',msg:'名鉄犬山線：名鉄名古屋 09:00 → 犬山遊園 09:35（¥570 單程）。回程：15:30 → 16:05。'}
+       {t:'blue',i:'🚃',msg:'名鐵犬山線：名鐵名古屋 09:00 → 犬山遊園 09:35（單程 ¥570）。'}
      ],
      segments:[
-       {k:'item',id:401,type:'eat',time:'08:00',title:'早餐：コメダ珈琲 モーニング',desc:'繼續享受名古屋獨有早餐文化，悠閒準備出發。',note:''},
-       {k:'tr',id:402,tool:'名鉄',line:'犬山線 急行/特急',dir:'名鉄名古屋→犬山遊園',dep:'09:00',arr:'09:35',dur:'35分',cost:'¥570',note:''},
-       {k:'item',id:403,type:'spot',time:'09:40',title:'犬山城（¥550）',desc:'日本5座國寶天守閣之一，木曾川河畔，360度絕景。',note:''},
-       {k:'item',id:404,type:'spot',time:'11:00',title:'城下町 本町通り 散策',desc:'江戶明治風情老街，各種名物小吃和工藝品店。',note:''},
-       {k:'item',id:405,type:'eat',time:'11:10',title:'必吃：みたらし団子（甜醬油版，¥150）',desc:'犬山版和高山版不同，甜醬油口味，城下町名物。甘酒、犬山カステラも試試。',note:''},
-       {k:'item',id:406,type:'eat',time:'12:30',title:'午餐：田楽（味噌燒豆腐串）or 鶏料理',desc:'犬山城下町名物，味噌燒豆腐串是必嘗。',note:''},
-       {k:'item',id:407,type:'spot',time:'14:00',title:'三光稲荷神社（心形繪馬，IG熱點）',desc:'戀愛神社，大量心形繪馬，氣氛浪漫。',note:''},
-       {k:'item',id:408,type:'shop',time:'14:30',title:'必買：犬山限定御朱印帳、御守',desc:'城下町各神社寺院限定朱印，紀念品首選。',note:''},
-       {k:'tr',id:409,tool:'名鉄',line:'犬山線',dir:'犬山遊園→名鉄名古屋',dep:'15:30',arr:'16:05',dur:'35分',cost:'¥570',note:''},
-       {k:'item',id:410,type:'shop',time:'16:00',title:'松坂屋名古屋店 B1 補漏購買',desc:'昨天有漏買的伴手禮，在此補齊。',note:''},
-       {k:'item',id:411,type:'eat',time:'19:00',title:'晚餐：味仙今池本店 台湾ラーメン（¥850）',desc:'名古屋原創辣肉醬拉麵，今池本店最正宗。',note:''}
+       {k:'item',id:401,type:'eat',time:'08:00',title:'早餐：悠閒連鎖咖啡廳',desc:'吃飽準備搭車前往犬山。',note:''},
+       {k:'tr',id:402,tool:'名鉄',line:'犬山線',dir:'名鐵名古屋→犬山遊園',dep:'09:00',arr:'09:35',dur:'35分',cost:'¥570',note:''},
+       {k:'item',id:403,type:'spot',time:'09:40',title:'國寶犬山城',desc:'日本五大國寶天守之一，高處風景絕佳。',note:''},
+       {k:'item',id:404,type:'spot',time:'11:00',title:'犬山城下町老街',desc:'江戶風情街道，吃散步美食。',note:''},
+       {k:'item',id:405,type:'eat',time:'11:10',title:'必吃：城下町甜醬油糰子',desc:'與高山醬油風味不同。',note:''},
+       {k:'item',id:406,type:'eat',time:'12:30',title:'午餐：田樂料理（味噌燒豆腐串）',desc:'當地傳統特色美食。',note:''},
+       {k:'item',id:407,type:'spot',time:'14:00',title:'三光稻荷神社',desc:'粉紅色心形繪馬，祈求良緣。',note:''},
+       {k:'item',id:408,type:'shop',time:'14:30',title:'必買：限定御守、朱印',desc:'各神社特色紀念品。',note:''},
+       {k:'tr',id:409,tool:'名鉄',line:'犬山線',dir:'犬山遊園→名鐵名古屋',dep:'15:30',arr:'16:05',dur:'35分',cost:'¥570',note:''},
+       {k:'item',id:410,type:'shop',time:'16:30',title:'榮町商圈 /百貨補貨',desc:'補齊藥妝或漏買零食。',note:''},
+       {k:'item',id:411,type:'eat',time:'19:00',title:'晚餐：味仙 台灣拉麵',desc:'招牌辛辣肉燥麵。',note:''}
      ]
     },
-    // ── DAY 4: 9/26 ──
     {date:'9/26',wd:'六',label:'名古屋→中部機場→返台',holiday:null,silverWeek:false,
      banners:[
-       {t:'red',i:'✈️',msg:'班機 <b>22:25</b> 起飛！建議搭 <b>19:33 μSky → 20:01 抵機場</b>（距起飛2h24m，最安心）。'}
+       {t:'red',i:'✈️',msg:'班機 <b>22:25</b> 起飛！最晚搭上 <b>19:33 μSky</b> 班次直達機場。'}
      ],
      segments:[
-       {k:'item',id:501,type:'eat',time:'09:00',title:'早餐：きしめん 住よし（JR名古屋月台，¥550–700）',desc:'站著吃完就能搭車，道地平價的名古屋告別早餐。',note:''},
-       {k:'item',id:502,type:'tran',time:'10:00',title:'Check-out，行李存飯店，輕裝出門',desc:'確認飯店代存時間（通常到晚間）。',note:''},
-       {k:'item',id:503,type:'shop',time:'10:30',title:'名古屋駅 JR Gate Tower 最終掃貨',desc:'機場品項少且貴5–15%，漏買的現在補，最後機會！',note:''},
-       {k:'item',id:504,type:'eat',time:'13:00',title:'午餐：ひつまぶし（蓬莱軒 or 備長，¥4,000–5,000）',desc:'三吃鰻魚飯：原味→加薬味→出汁泡飯，名古屋最高規格告別餐。',note:'午間前往，預約或早到排隊'},
-       {k:'item',id:505,type:'tran',time:'16:00',title:'取行李，前往名鉄名古屋駅',desc:'確認所有行李和採購品齊全，酒類全放托運。',note:''},
-       {k:'tr',id:506,tool:'名鉄',line:'μSky',dir:'名鉄名古屋→中部国際空港',dep:'19:33',arr:'20:01',dur:'28分',cost:'¥1,250',note:'20:01抵機場，距22:25起飛有2h24m，最安心。備用：20:03→20:31（略緊張）。'},
-       {k:'item',id:507,type:'shop',time:'20:05',title:'機場最後掃貨 + 免稅區',desc:'えびせんべい限定罐 ¥1,500、赤福 ¥900（保存2–3天）、味仙台湾ラーメン即食包 ¥800。免稅酒：知多威士忌、地酒。',note:'⚠ 台灣入境免稅酒 1公升/人，酒類全部放托運（托運無限量）'},
-       {k:'item',id:508,type:'tran',time:'22:25',title:'起飛 ✈️ 返台！',desc:'旅程結束，帶著飛驒牛、地酒和上高地的回憶飛回家。',note:''}
+       {k:'item',id:501,type:'eat',time:'09:00',title:'早餐：月台立食棊子麵（住よし）',desc:'道地平價的名古屋扁麵。',note:''},
+       {k:'item',id:502,type:'tran',time:'10:00',title:'Check-out 行李暫存飯店',desc:'輕裝出門進行最後採買。',note:''},
+       {k:'item',id:503,type:'shop',time:'10:30',title:'名古屋車站最後掃貨',desc:'市區品項比機場齊全，把握機會。',note:''},
+       {k:'item',id:504,type:'eat',time:'13:00',title:'午餐：蓬萊軒 鰻魚飯三吃',desc:'經典三種吃法，建議提早排隊。',note:''},
+       {k:'item',id:505,type:'tran',time:'16:00',title:'回飯店拿取行李前往車站',desc:'整理打包，酒類務必放托運行李。',note:''},
+       {k:'tr',id:506,tool:'名鉄',line:'μSky',dir:'名鐵名古屋→中部機場',dep:'19:33',arr:'20:01',dur:'28分',cost:'¥1,250',note:'保證提早兩小時前到機場。'},
+       {k:'item',id:507,type:'shop',time:'20:05',title:'機場免稅店最後衝刺',desc:'買赤福、蝦餅限定罐。免稅酒類。',note:'⚠ 入境台灣免稅酒類限1公升/人'},
+       {k:'item',id:508,type:'tran',time:'22:25',title:'起飛返台',desc:'搭機返回溫暖的家。',note:''}
      ]
     }
   ],
   shopping:{
     yenru:[
-      {id:601,cat:'高山',name:'飛驒牛みそ漬け（真空包）',price:'¥1,500–3,000',note:'重物先寄宅配',done:false},
-      {id:602,cat:'高山',name:'さるぼぼ 吉祥物',price:'¥500–1,500',note:'農家手工版',done:false},
-      {id:603,cat:'高山',name:'山車 日本酒（二木酒造）',price:'¥1,500–2,000',note:'試飲後購買',done:false},
-      {id:604,cat:'高山',name:'深山菊 日本酒（官方酒造）',price:'¥1,500–2,000',note:'可試飲',done:false},
-      {id:605,cat:'高山',name:'飛騨の雫 クラフトビール',price:'¥300–500/罐',note:'帶回喝',done:false},
-      {id:606,cat:'上高地',name:'上高地限定徽章',price:'¥300–500',note:'バスターミナル購買',done:false},
-      {id:607,cat:'上高地',name:'上高地帆布袋',price:'¥1,000–1,500',note:'全日本限定',done:false},
-      {id:608,cat:'上高地',name:'上高地ビール',price:'¥600–800',note:'限地商品',done:false},
-      {id:609,cat:'名古屋',name:'坂角ゆかり 蝦米薄餅',price:'¥1,200–2,000',note:'高島屋版最正宗',done:false},
-      {id:610,cat:'名古屋',name:'青柳ういろう（多口味）',price:'¥900–1,500',note:'',done:false},
-      {id:611,cat:'名古屋',name:'なごやん',price:'¥1,000',note:'名古屋金鯱包裝',done:false},
-      {id:612,cat:'名古屋',name:'守口漬（大和屋）',price:'¥800–1,500',note:'',done:false},
-      {id:613,cat:'名古屋',name:'醸し人九平次（日本酒）',price:'¥1,800–3,000',note:'法國米其林採用',done:false},
-      {id:614,cat:'名古屋',name:'知多 Single Grain Whisky',price:'市價約¥3,500',note:'比台灣便宜30%',done:false},
-      {id:615,cat:'機場',name:'えびせんべい 空港限定罐',price:'¥1,500–2,000',note:'機場限定包裝',done:false},
-      {id:616,cat:'機場',name:'赤福（伊勢銘菓）',price:'¥900',note:'保存僅2–3天，台灣買不到',done:false},
-      {id:617,cat:'機場',name:'味仙 台湾ラーメン 即食包',price:'¥800',note:'',done:false}
+      {id:601,cat:'高山',name:'飛驒牛みそ漬け（真空包）',price:'¥1,500–3,000',note:'',done:false},
+      {id:602,cat:'高山',name:'さるぼぼ 吉祥物',price:'¥500',note:'',done:false},
+      {id:603,cat:'高山',name:'山車 日本酒',price:'¥1,500',note:'',done:false},
+      {id:604,cat:'高山',name:'深山菊 日本酒',price:'¥1,500',note:'',done:false},
+      {id:605,cat:'高山',name:'飛驒精釀啤酒',price:'¥400',note:'',done:false},
+      {id:606,cat:'上高地',name:'上高地限定徽章',price:'¥400',note:'',done:false},
+      {id:607,cat:'上高地',name:'上高地紀念帆布袋',price:'¥1,200',note:'',done:false},
+      {id:608,cat:'上高地',name:'上高地限定啤酒',price:'¥600',note:'',done:false},
+      {id:609,cat:'名古屋',name:'坂角ゆかり 蝦餅',price:'¥1,500',note:'',done:false},
+      {id:610,cat:'名古屋',name:'青柳ういろう 外郎米糕',price:'¥1,000',note:'',done:false},
+      {id:611,cat:'名古屋',name:'なごやん 饅頭',price:'¥1,000',note:'',done:false},
+      {id:612,cat:'名古屋',name:'大和屋 守口漬',price:'¥1,000',note:'',done:false},
+      {id:613,cat:'名古屋',name:'釀し人九平次 清酒',price:'¥2,500',note:'',done:false},
+      {id:614,cat:'名古屋',name:'知多 單一穀物威士忌',price:'¥3,500',note:'',done:false},
+      {id:615,cat:'機場',name:'綜合蝦餅 機場限定罐',price:'¥1,500',note:'',done:false},
+      {id:616,cat:'機場',name:'赤福 紅豆年糕',price:'¥900',note:'',done:false},
+      {id:617,cat:'機場',name:'味仙 台灣拉麵即食包',price:'¥800',note:'',done:false}
     ],
     yueyun:[
-      {id:701,cat:'高山',name:'さるぼぼ 吉祥物',price:'¥500–1,500',note:'農家手工版',done:false},
-      {id:702,cat:'高山',name:'飛驒牛みそ漬け',price:'¥1,500–3,000',note:'真空包，可帶機',done:false},
-      {id:703,cat:'高山',name:'春慶塗 漆器小物',price:'¥1,000–3,000',note:'飛驒傳統工藝',done:false},
-      {id:704,cat:'上高地',name:'上高地限定徽章',price:'¥300–500',note:'',done:false},
-      {id:705,cat:'名古屋',name:'坂角ゆかり 蝦米薄餅',price:'¥1,200–2,000',note:'',done:false},
-      {id:706,cat:'名古屋',name:'青柳ういろう',price:'¥900–1,500',note:'抹茶、紅豆口味',done:false},
-      {id:707,cat:'名古屋',name:'なごやん + 守口漬',price:'¥1,800',note:'一起買',done:false},
-      {id:708,cat:'名古屋',name:'金シャチビール 限定罐',price:'¥500–800',note:'名古屋城市限定',done:false},
-      {id:709,cat:'機場',name:'赤福（伊勢銘菓）',price:'¥900',note:'保存僅2–3天',done:false},
-      {id:710,cat:'機場',name:'えびせんべい 限定罐',price:'¥1,500',note:'機場限定包裝',done:false}
+      {id:701,cat:'高山',name:'さるぼぼ 吉祥物',price:'¥500',note:'',done:false},
+      {id:702,cat:'高山',name:'飛驒牛みそ漬け 真空包',price:'¥1,500',note:'',done:false},
+      {id:703,cat:'高山',name:'春慶塗 漆器工藝小物',price:'¥1,500',note:'',done:false},
+      {id:704,cat:'上高地',name:'上高地限定徽章',price:'¥400',note:'',done:false},
+      {id:705,cat:'名古屋',name:'坂角ゆかり 蝦餅',price:'¥1,500',note:'',done:false},
+      {id:706,cat:'名古屋',name:'青柳ういろう',price:'¥1,000',note:'',done:false},
+      {id:707,cat:'名古屋',name:'なごやん和菓子',price:'¥1,000',note:'',done:false},
+      {id:708,cat:'名古屋',name:'金鯱啤酒 城市限定罐',price:'¥500',note:'',done:false},
+      {id:709,cat:'機場',name:'赤福 紅豆年糕',price:'¥900',note:'',done:false},
+      {id:710,cat:'機場',name:'蝦餅綜合包',price:'¥1,200',note:'',done:false}
     ]
   }
 };
 
-// ══════════════════════════════════════════════════════
-// STATE
-// ══════════════════════════════════════════════════════
 let S = {}; 
 let db = null;
 let saveTimer = null;
@@ -556,19 +545,15 @@ let sortables = {};
 let editCtx = null; 
 let confirmCb = null;
 
-// ══════════════════════════════════════════════════════
-// FIREBASE & LOCAL STORAGE LOGIC
-// ══════════════════════════════════════════════════════
+// Firebase & LocalStorage 同步機制
 function initFirebase(){
   const dot = document.getElementById('dbDot');
-  
   if(!FB_CONFIG.apiKey || FB_CONFIG.apiKey === ""){
-    dot.title='未填寫Firebase設定，使用本地預設行程';
+    dot.title='未填寫金鑰，使用本地快取模式';
     dot.style.background = '#6B7280'; 
     loadLocalWithDefault(); 
     return;
   }
-  
   try{
     firebase.initializeApp(FB_CONFIG);
     db = firebase.database();
@@ -577,24 +562,19 @@ function initFirebase(){
       if(val && val.days && val.days.length > 0){
         S = val;
         dot.className = 'db-dot ok';
-        dot.title = 'Firebase 已連線 ☁️';
+        dot.title = 'Firebase 雲端已連線 ☁️';
       } else {
-        console.log("雲端資料為空，正在初始化預設行程...");
         S = JSON.parse(JSON.stringify(D));
         db.ref('japan2026').set(S);
         dot.className = 'db-dot ok';
-        dot.title = 'Firebase 已連線(已初始化資料)';
       }
       try{ localStorage.setItem('japan2026', JSON.stringify(S)); }catch(e){}
       renderAll();
     }).catch(e=>{
-      console.warn('Firebase read failed', e);
       dot.className = 'db-dot err'; 
-      dot.title = 'Firebase 讀取失敗，使用本地儲存';
       loadLocalWithDefault();
     });
   }catch(e){
-    console.error(e);
     dot.className = 'db-dot err';
     loadLocalWithDefault();
   }
@@ -605,29 +585,20 @@ function loadLocalWithDefault(){
     const s = localStorage.getItem('japan2026');
     if(s){
       const parsed = JSON.parse(s);
-      if(parsed && parsed.days && parsed.days.length > 0){
-        S = parsed;
-      } else {
-        S = JSON.parse(JSON.stringify(D));
-        localStorage.setItem('japan2026', JSON.stringify(S));
-      }
-    } else {
-      S = JSON.parse(JSON.stringify(D));
-      localStorage.setItem('japan2026', JSON.stringify(S));
-    }
-  }catch(e){
-    S = JSON.parse(JSON.stringify(D));
-  }
+      if(parsed && parsed.days && parsed.days.length > 0){ S = parsed; } 
+      else { S = JSON.parse(JSON.stringify(D)); }
+    } else { S = JSON.parse(JSON.stringify(D)); }
+  }catch(e){ S = JSON.parse(JSON.stringify(D)); }
   renderAll();
 }
 
 function forceResetData(){
-  if(confirm("確定要清除目前所有修改，並將「本地與雲端資料」重置恢復到最原始的預設行程嗎？")){
+  if(confirm("確定要清除所有更動，重置回最初的預設行程嗎？")){
     S = JSON.parse(JSON.stringify(D));
     try{ localStorage.setItem('japan2026', JSON.stringify(S)); }catch(e){}
     if(db){
       db.ref('japan2026').set(S).then(()=>{
-        showToast('雲端與本地已同步重置 🚀');
+        showToast('雲端與本地已重置重啟 🚀');
         renderAll();
       });
     } else {
@@ -646,16 +617,13 @@ function doSave(){
   try{ localStorage.setItem('japan2026', JSON.stringify(S)); }catch(e){}
   if(db){
     db.ref('japan2026').set(S)
-      .then(()=>showToast('已同步到雲端 ☁️'))
-      .catch(e=>{console.warn('Firebase save err',e); showToast('僅本地儲存 💾');});
+      .then(()=>showToast('數據已同步至雲端 ☁️'))
+      .catch(e=>{ showToast('僅儲存於本地 💾'); });
   } else {
-    showToast('已存至本地瀏覽器 💾');
+    showToast('已存至本地快取 💾');
   }
 }
 
-// ══════════════════════════════════════════════════════
-// RENDER ALL
-// ══════════════════════════════════════════════════════
 function renderAll(){
   if(!S || !S.days) return;
   renderItinerary();
@@ -663,13 +631,9 @@ function renderAll(){
   updateNav();
 }
 
-// ══════════════════════════════════════════════════════
-// NAVIGATION
-// ══════════════════════════════════════════════════════
 function setPage(p){
   curPage = p;
   updateNav();
-  renderTopTabs();
 }
 
 function updateNav(){
@@ -689,7 +653,7 @@ function renderTopTabs(){
     S.days.forEach((d,i)=>{
       const el = document.createElement('div');
       el.className = 'dtab' + (i===curDay?' active':'') + (d.silverWeek?' holiday':'');
-      el.innerHTML = `<div class="dtab-date">${d.date}</div><div class="dtab-wd">${d.wd}${d.holiday?'・'+d.holiday.replace('国民の休日','國休'):''}`.slice(0,20)+'</div>';
+      el.innerHTML = `<div class="dtab-date">${d.date}</div><div class="dtab-wd">${d.wd}${d.holiday?'·假':''}</div>`;
       el.onclick = ()=>{ curDay=i; renderAll(); };
       dt.appendChild(el);
     });
@@ -703,12 +667,9 @@ function renderTopTabs(){
 
 function setPerson(p){ curPerson=p; renderAll(); }
 
-// ══════════════════════════════════════════════════════
-// ITINERARY RENDER
-// ══════════════════════════════════════════════════════
 function renderItinerary(){
   renderTopTabs();
-  const day = S.days ? S.days[curDay] : null;
+  const day = S.days[curDay];
   if(!day) return;
   const body = document.getElementById('itinerary-body');
 
@@ -731,8 +692,8 @@ function renderItinerary(){
   html += '</div>';
 
   html += `<div class="add-row">
-    <button class="add-btn" onclick="openAddItem(${curDay})">＋ 新增行程</button>
-    <button class="add-btn" onclick="openAddTr(${curDay})">＋ 新增交通</button>
+    <button class="add-btn" onclick="openAddItem(${curDay})">＋ 行程</button>
+    <button class="add-btn" onclick="openAddTr(${curDay})">＋ 交通</button>
   </div>`;
 
   body.innerHTML = html;
@@ -744,7 +705,7 @@ function renderItem(seg, di){
   return `<div class="seg-item" data-id="${seg.id}" data-k="item">
     <div class="item-card">
       <div class="ic-top">
-        <span class="drag-handle" title="拖曳排序">⠿</span>
+        <span class="drag-handle">⠿</span>
         <div class="ic-main">
           <div class="ic-meta">
             ${seg.time?`<span class="ic-time">${seg.time}</span>`:''}
@@ -771,7 +732,7 @@ function renderTr(seg, di){
      <span class="tr-time">${seg.arr||'—'}</span>` : '';
   return `<div class="seg-transport" data-id="${seg.id}" data-k="tr">
     <div class="transport-card">
-      <span class="tr-drag" title="拖曳排序">⠿</span>
+      <span class="tr-drag">⠿</span>
       <span class="tr-icon">${icon}</span>
       <div class="tr-body">
         <div class="tr-name">${esc(seg.tool)} ${esc(seg.line||'')}</div>
@@ -791,9 +752,6 @@ function renderTr(seg, di){
   </div>`;
 }
 
-// ══════════════════════════════════════════════════════
-// SORTABLE
-// ══════════════════════════════════════════════════════
 function initSortable(di){
   const el = document.getElementById('segments-'+di);
   if(!el) return;
@@ -801,7 +759,6 @@ function initSortable(di){
   sortables[di] = Sortable.create(el,{
     handle:'.drag-handle, .tr-drag',
     animation:180,
-    ghostClass:'sortable-ghost',
     onEnd(evt){
       const day = S.days[di];
       const moved = day.segments.splice(evt.oldIndex,1)[0];
@@ -811,9 +768,6 @@ function initSortable(di){
   });
 }
 
-// ══════════════════════════════════════════════════════
-// ITEM CRUD
-// ══════════════════════════════════════════════════════
 function openAddItem(di){
   editCtx = {mode:'item', dayIdx:di, id:null};
   document.getElementById('modalItemTitle').textContent='新增行程';
@@ -842,29 +796,22 @@ function saveItem(){
   const title = document.getElementById('iTitle').value.trim();
   if(!title){ alert('請輸入標題'); return; }
   const seg = {
-    k:'item',
-    id: editCtx.id || mkId(),
+    k:'item', id: editCtx.id || mkId(),
     type: document.getElementById('iType').value,
     time: document.getElementById('iTime').value.trim(),
-    title, 
-    desc: document.getElementById('iDesc').value.trim(),
+    title, desc: document.getElementById('iDesc').value.trim(),
     note: document.getElementById('iNote').value.trim()
   };
   const day = S.days[editCtx.dayIdx];
   if(editCtx.id){ 
     const idx = day.segments.findIndex(s=>s.id==editCtx.id);
     if(idx>=0) day.segments[idx]=seg;
-  } else {
-    day.segments.push(seg);
-  }
+  } else { day.segments.push(seg); }
   closeModal('modalItem');
   scheduleSave();
   renderItinerary();
 }
 
-// ══════════════════════════════════════════════════════
-// TRANSPORT CRUD
-// ══════════════════════════════════════════════════════
 function openAddTr(di){
   editCtx = {mode:'tr', dayIdx:di, id:null};
   document.getElementById('modalTrTitle').textContent='新增交通';
@@ -890,11 +837,9 @@ function openEditTr(di, id){
 }
 
 function saveTr(){
-  const tool = document.getElementById('tTool').value;
   const seg = {
-    k:'tr',
-    id: editCtx.id || mkId(),
-    tool,
+    k:'tr', id: editCtx.id || mkId(),
+    tool: document.getElementById('tTool').value,
     line: document.getElementById('tLine').value.trim(),
     dir:  document.getElementById('tDir').value.trim(),
     dep:  document.getElementById('tDep').value.trim(),
@@ -907,9 +852,7 @@ function saveTr(){
   if(editCtx.id){
     const idx = day.segments.findIndex(s=>s.id==editCtx.id);
     if(idx>=0) day.segments[idx]=seg;
-  } else {
-    day.segments.push(seg);
-  }
+  } else { day.segments.push(seg); }
   closeModal('modalTr');
   scheduleSave();
   renderItinerary();
@@ -921,9 +864,6 @@ function delSeg(di, id){
   renderItinerary();
 }
 
-// ══════════════════════════════════════════════════════
-// SHOPPING RENDER
-// ══════════════════════════════════════════════════════
 function renderShopping(){
   renderTopTabs();
   if(!S.shopping) S.shopping = { yenru:[], yueyun:[] };
@@ -936,7 +876,7 @@ function renderShopping(){
   const pct = total ? Math.round(done/total*100) : 0;
 
   let html = `<div style="padding:8px 4px 0">
-    <div class="shop-progress-text">${done} / ${total} 項已完成（${pct}%）</div>
+    <div class="shop-progress-text">${done} / ${total} 完成（${pct}%）</div>
     <div class="shop-progress"><div class="shop-progress-bar" style="width:${pct}%"></div></div>
   </div>`;
 
@@ -947,17 +887,13 @@ function renderShopping(){
     html += `<div class="shop-section">
       <div class="shop-cat-hdr">
         <span class="cat-pill" style="background:${cc}20;color:${cc}">📍 ${cat}</span>
-        <span style="font-size:12px;color:var(--sub)">${items.filter(i=>i.done).length}/${items.length}</span>
       </div>`;
     items.forEach(item=>{
       html += `<div class="sl-item${item.done?' done':''}" id="sl-${item.id}">
         <div class="sl-check" onclick="toggleShop('${curPerson}',${item.id})">${item.done?'✓':''}</div>
         <div class="sl-body">
           <div class="sl-name">${esc(item.name)}</div>
-          <div class="sl-meta">
-            ${item.price?`<span class="sl-price">${esc(item.price)}</span>`:''}
-            ${item.note?` · ${esc(item.note)}`:''}
-          </div>
+          <div class="sl-meta">${item.price?`<span class="sl-price">${esc(item.price)}</span>`:''}${item.note?` · ${esc(item.note)}`:''}</div>
         </div>
         <button class="sl-del" onclick="delShop('${curPerson}',${item.id})">✕</button>
       </div>`;
@@ -965,28 +901,10 @@ function renderShopping(){
     html += '</div>';
   });
 
-  const others = list.filter(i=>!cats.includes(i.cat));
-  if(others.length){
-    html += `<div class="shop-section"><div class="shop-cat-hdr">其他</div>`;
-    others.forEach(item=>{
-      html += `<div class="sl-item${item.done?' done':''}" id="sl-${item.id}">
-        <div class="sl-check" onclick="toggleShop('${curPerson}',${item.id})">${item.done?'✓':''}</div>
-        <div class="sl-body"><div class="sl-name">${esc(item.name)}</div>
-          <div class="sl-meta">${item.price?`<span class="sl-price">${esc(item.price)}</span>`:''}${item.note?` · ${esc(item.note)}`:''}</div>
-        </div>
-        <button class="sl-del" onclick="delShop('${curPerson}',${item.id})">✕</button>
-      </div>`;
-    });
-    html += '</div>';
-  }
-
-  html += `<button class="add-btn" onclick="openAddShop()" style="width:100%;margin-top:8px">＋ 新增購物項目</button>`;
+  html += `<button class="add-btn" onclick="openAddShop()" style="width:100%;margin-top:8px">＋ 新增物品</button>`;
   body.innerHTML = html;
 }
 
-// ══════════════════════════════════════════════════════
-// SHOPPING CRUD
-// ══════════════════════════════════════════════════════
 function openAddShop(){
   editCtx = {mode:'shop', person:curPerson};
   document.getElementById('modalShopTitle').textContent = (curPerson==='yenru'?'燕如':'月雲')+' 新增購物';
@@ -1001,12 +919,9 @@ function saveShopItem(){
   const name = document.getElementById('sName').value.trim();
   if(!name){ alert('請輸入商品名稱'); return; }
   const item = {
-    id: mkId(),
-    cat: document.getElementById('sCat').value,
-    name,
+    id: mkId(), cat: document.getElementById('sCat').value, name,
     price: document.getElementById('sPrice').value.trim(),
-    note: document.getElementById('sNote').value.trim(),
-    done: false
+    note: document.getElementById('sNote').value.trim(), done: false
   };
   if(!S.shopping[editCtx.person]) S.shopping[editCtx.person]=[];
   S.shopping[editCtx.person].push(item);
@@ -1028,9 +943,6 @@ function delShop(person, id){
   });
 }
 
-// ══════════════════════════════════════════════════════
-// MODALS & UTILS
-// ══════════════════════════════════════════════════════
 function openModal(id){ document.getElementById(id).classList.add('open'); }
 function closeModal(id){ document.getElementById(id).classList.remove('open'); }
 function closeModalOnBg(e,id){ if(e.target.id===id) closeModal(id); }
@@ -1057,9 +969,6 @@ function showToast(msg){
 
 function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-// ══════════════════════════════════════════════════════
-// INIT
-// ══════════════════════════════════════════════════════
 initFirebase();
 </script>
 </body>
