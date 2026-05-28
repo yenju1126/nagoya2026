@@ -25,7 +25,7 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
 .th-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .th-title{font-size:17px;font-weight:700;letter-spacing:.3px}
 .th-sub{font-size:11px;color:rgba(255,255,255,.55);margin-top:2px}
-.db-dot{width:8px;height:8px;border-radius:50%;background:#6B7280;flex-shrink:0;transition:background .3s}
+.db-dot{width:8px;height:8px;border-radius:50%;background:#6B7280;flex-shrink:0;transition:background .3s;cursor:pointer}
 .db-dot.ok{background:#22C55E}.db-dot.err{background:#EF4444}
 
 /* ── DAY TABS ── */
@@ -215,7 +215,7 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
       <div class="th-title">🗾 高山・上高地・名古屋 2026</div>
       <div class="th-sub">9/22（二）— 9/26（六）· 2026 銀色週</div>
     </div>
-    <div id="dbDot" class="db-dot" title="資料庫狀態"></div>
+    <div id="dbDot" class="db-dot" title="點擊強制還原預設行程資料" onclick="forceResetData()"></div>
   </div>
   <div id="topTabs"></div></div>
 
@@ -370,13 +370,11 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
 <script>
 // ══════════════════════════════════════════════════════
 // 🔥 FIREBASE CONFIG
-// 請到 https://console.firebase.google.com 建立專案
-// 選 Realtime Database → 取得設定碼填入下方
 // ══════════════════════════════════════════════════════
 const FB_CONFIG = {
   apiKey: "AIzaSyCYOotAZxuDqGYNRMejPJEo_ym89FVS0b4",
   authDomain: "nagoya2026-ca060.firebaseapp.com",
-  databaseURL: "https://nagoya2026-ca060-default-rtdb.asia-southeast1.firebasedatabase.app",   // 格式: https://xxx-default-rtdb.firebaseio.com
+  databaseURL: "https://nagoya2026-ca060-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "nagoya2026-ca060",
   storageBucket: "nagoya2026-ca060.firebasestorage.app",
   messagingSenderId: "29982428738",
@@ -442,13 +440,13 @@ const D={
        {k:'item',id:209,type:'spot',time:'11:25',title:'大正池バス停 下車（告知司機！）',desc:'1915年燒岳噴發形成，枯木倒影＋穗高連峰映湖面，九月底初秋色彩絕美。',note:''},
        {k:'item',id:210,type:'spot',time:'11:30',title:'健行：大正池→田代池→河童橋（3km）',desc:'沿梓川河畔平坦步道，60–90分鐘。秋色漸起，空氣清透。',note:''},
        {k:'item',id:211,type:'eat',time:'13:00',title:'必吃：帝国ホテル ローストビーフサンド（¥1,200）',desc:'全日本唯一，抵河童橋後先去帝国ホテルLounge排隊買，邊健行邊吃。',note:'⭐ 先去買再健行，不然可能賣完！'},
-       {k:'item',id:212,type:'shop',time:'13:45',title:'必買：上高地限定バッジ、帆布袋（¥300–500）',desc:'バスターミナル購買，全日本限定，唯一機會！',note:''},
+       {k:'item',id:212,type:'shop',time:'13:45',title:'必買：上高地限定バッジ、帆布袋（¥300–500）',desc:'バ幕ターミナル購買，全日本限定，唯一機會！',note:''},
        {k:'item',id:213,type:'shop',time:'13:45',title:'上高地ビール（バスターミナル）',desc:'限地精釀啤酒，健行後喝最對味。',note:''},
        {k:'tr',id:214,tool:'巴士',line:'上高地→平湯→高山 返程',dir:'河童橋→高山',dep:'14:30',arr:'16:00',dur:'1h30m',cost:'套票內含',note:'Silver Week排隊多，提早到バス停。14:30或15:00班次。'},
        {k:'item',id:215,type:'tran',time:'16:10',title:'東急STAY 取代存行李',desc:'飯店代存行李通常到18:00，出發前確認時間。',note:''},
        {k:'tr',id:216,tool:'JR',line:'特急ひだ（返程）',dir:'高山→名古屋',dep:'16:30',arr:'19:07',dur:'2h37m',cost:'¥5,610 指定席',note:'⚠ Silver Week尾日回程，指定席必訂！也可搭17:00班次。'},
        {k:'item',id:217,type:'tran',time:'19:15',title:'名古屋駅 取コインロッカー行李',desc:'記好格號，取出大行李箱後前往飯店。',note:''},
-       {k:'item',id:218,type:'hotel',time:'19:30',title:'Check-in 名古屋錦威斯特（Westin Nagoya Castle）',desc:'名古屋駅→飯店地下鉄約15分，或計程車 ¥1,000–1,200。',note:''},
+       {k:'item',id:218,type:'hotel',time:'19:30',title:'Check-in 名古屋錦威斯特',desc:'名古屋駅→飯店地下鉄約15分，或計程車 ¥1,000–1,200。',note:''},
        {k:'item',id:219,type:'eat',time:'21:00',title:'宵夜：台湾ラーメン（味仙）or 手羽先（世界の山ちゃん）',desc:'趕路一天，隨意吃名古屋代表宵夜。附近有分店。',note:''}
      ]
     },
@@ -470,7 +468,7 @@ const D={
        {k:'item',id:310,type:'shop',time:'17:00',title:'JR Gate Tower / 高島屋 B1–B2 採買',desc:'正式伴手禮掃貨主場，品項最齊。',note:''},
        {k:'item',id:311,type:'shop',time:'17:10',title:'必買：坂角ゆかり、青柳ういろう、なごやん、守口漬',desc:'坂角ゆかり ¥1,200–2,000，ういろう ¥900–1,500，なごやん ¥1,000，守口漬 ¥800–1,500。',note:''},
        {k:'item',id:312,type:'shop',time:'17:30',title:'酒類：醸し人九平次、金シャチビール、知多威士忌',desc:'醸し人九平次¥1,800–3,000，知多威士忌比台灣便宜約30%。',note:''},
-       {k:'item',id:313,type:'eat',time:'19:30',title:'晚餐：世界の山ちゃん 手羽先 + 金シャチビール',desc:'秘傳辣胡椒炸雞翅 ¥165/支，名駅周邊有多家分店。',note:'}
+       {k:'item',id:313,type:'eat',time:'19:30',title:'晚餐：世界の山ちゃん 手羽先 + 金シャチビール',desc:'秘傳辣胡椒炸雞翅 ¥165/支，名駅周邊有多家分店。',note:''}
      ]
     },
     // ── DAY 3: 9/25 ──
@@ -484,12 +482,12 @@ const D={
        {k:'item',id:403,type:'spot',time:'09:40',title:'犬山城（¥550）',desc:'日本5座國寶天守閣之一，木曾川河畔，360度絕景。',note:''},
        {k:'item',id:404,type:'spot',time:'11:00',title:'城下町 本町通り 散策',desc:'江戶明治風情老街，各種名物小吃和工藝品店。',note:''},
        {k:'item',id:405,type:'eat',time:'11:10',title:'必吃：みたらし団子（甜醬油版，¥150）',desc:'犬山版和高山版不同，甜醬油口味，城下町名物。甘酒、犬山カステラも試試。',note:''},
-       {k:'item',id:406,type:'eat',time:'12:30',title:'午餐：田楽（味噌燒豆腐串）or 鶏料理',desc:'犬山城下町名物，味噌燒豆腐串是必嘗.。',note:''},
+       {k:'item',id:406,type:'eat',time:'12:30',title:'午餐：田楽（味噌燒豆腐串）or 鶏料理',desc:'犬山城下町名物，味噌燒豆腐串是必嘗。',note:''},
        {k:'item',id:407,type:'spot',time:'14:00',title:'三光稲荷神社（心形繪馬，IG熱點）',desc:'戀愛神社，大量心形繪馬，氣氛浪漫。',note:''},
        {k:'item',id:408,type:'shop',time:'14:30',title:'必買：犬山限定御朱印帳、御守',desc:'城下町各神社寺院限定朱印，紀念品首選。',note:''},
        {k:'tr',id:409,tool:'名鉄',line:'犬山線',dir:'犬山遊園→名鉄名古屋',dep:'15:30',arr:'16:05',dur:'35分',cost:'¥570',note:''},
        {k:'item',id:410,type:'shop',time:'16:00',title:'松坂屋名古屋店 B1 補漏購買',desc:'昨天有漏買的伴手禮，在此補齊。',note:''},
-       {k:'item',id:411,type:'eat',time:'19:00',title:'晚餐：味仙今池本店 台湾ラーメン（¥850）',desc:'名古屋原創辣肉醬拉麵，今池本店最正宗。',note:''}
+       {k:'item',id:411,type:'eat',time:'19:00',title:'晚餐：味仙今池本店 台湾ラーメン（¥850）',desc:'名古屋原創辣肉醬拉麵，今池本店最正宗。',note:'}
      ]
     },
     // ── DAY 4: 9/26 ──
@@ -554,7 +552,7 @@ let curPage = 'itinerary';
 let curDay  = 0;
 let curPerson = 'yenru';
 let sortables = {};
-let editCtx = null; // {mode:'item'|'tr'|'shop', dayIdx, id, person}
+let editCtx = null;
 let confirmCb = null;
 
 // ══════════════════════════════════════════════════════
@@ -570,9 +568,18 @@ function initFirebase(){
     firebase.initializeApp(FB_CONFIG);
     db = firebase.database();
     db.ref('japan2026').once('value').then(snap=>{
-      if(snap.val()) S = snap.val();
+      const val = snap.val();
+      // ✨ 關鍵修正：如果雲端沒資料、或者資料裡面的 days 不存在/長度為0，就自動將預設資料同步寫入雲端
+      if(val && val.days && val.days.length > 0) {
+        S = val;
+        showToast('已同步雲端行程 ☁️');
+      } else {
+        S = JSON.parse(stringifyData(D));
+        db.ref('japan2026').set(S);
+        showToast('初始化雲端資料庫 🚀');
+      }
       dot.classList.add('ok');
-      dot.title='Firebase 已連線';
+      dot.title='Firebase 已連線 (點擊可還原預設資料)';
       renderAll();
     }).catch(e=>{
       console.warn('Firebase read failed',e);
@@ -585,14 +592,35 @@ function initFirebase(){
   }
 }
 
+// 用來輔助深拷貝與排除例外
+function stringifyData(obj) {
+  return JSON.stringify(obj, (key, value) => value === undefined ? null : value);
+}
+
+// 💥 隱藏功能：萬一以後想要徹底清空、重創預設行程，可以點擊右上角的圓點
+function forceResetData() {
+  if(confirm("確定要清除所有修改，並將「雲端與本地資料」恢復到最原始的預設行程嗎？")) {
+    S = JSON.parse(stringifyData(D));
+    if(db) {
+      db.ref('japan2026').set(S).then(() => {
+        showToast('已強制還原預設資料 🔄');
+        renderAll();
+      });
+    } else {
+      localStorage.setItem('japan2026', stringifyData(S));
+      showToast('已還原本地預設資料 🔄');
+      renderAll();
+    }
+  }
+}
+
 function scheduleSave(){
   clearTimeout(saveTimer);
   saveTimer = setTimeout(doSave, 800);
 }
 
 function doSave(){
-  // Always backup locally
-  try{ localStorage.setItem('japan2026', JSON.stringify(S)); }catch(e){}
+  try{ localStorage.setItem('japan2026', stringifyData(S)); }catch(e){}
   if(db){
     db.ref('japan2026').set(S)
       .then(()=>showToast('已儲存 ☁️'))
@@ -679,7 +707,7 @@ function renderItinerary(){
   });
 
   html += `<div class="segments" id="segments-${curDay}">`;
-  day.segments.forEach(seg=>{
+  (day.segments||[]).forEach(seg=>{
     if(seg.k==='item') html += renderItem(seg, curDay);
     else html += renderTr(seg, curDay);
   });
@@ -806,6 +834,7 @@ function saveItem(){
     note: document.getElementById('iNote').value.trim()
   };
   const day = S.days[editCtx.dayIdx];
+  if(!day.segments) day.segments = [];
   if(editCtx.id){ 
     const idx = day.segments.findIndex(s=>s.id==editCtx.id);
     if(idx>=0) day.segments[idx]=seg;
@@ -859,6 +888,7 @@ function saveTr(){
     note: document.getElementById('tNote').value.trim()
   };
   const day = S.days[editCtx.dayIdx];
+  if(!day.segments) day.segments = [];
   if(editCtx.id){
     const idx = day.segments.findIndex(s=>s.id==editCtx.id);
     if(idx>=0) day.segments[idx]=seg;
@@ -881,6 +911,7 @@ function delSeg(di, id){
 // ══════════════════════════════════════════════════════
 function renderShopping(){
   renderTopTabs();
+  if(!S.shopping) S.shopping = { yenru: [], yueyun: [] };
   const list = S.shopping[curPerson] || [];
   const cats = ['高山','上高地','名古屋','機場','其他'];
   const body = document.getElementById('shopping-body');
@@ -963,6 +994,7 @@ function saveShopItem(){
     note: document.getElementById('sNote').value.trim(),
     done: false
   };
+  if(!S.shopping) S.shopping = { yenru: [], yueyun: [] };
   if(!S.shopping[editCtx.person]) S.shopping[editCtx.person]=[];
   S.shopping[editCtx.person].push(item);
   closeModal('modalShop');
