@@ -1073,7 +1073,20 @@ function renderShopping(){
     html += '</div>';
   });
 
-  html += `<button class="add-btn" onclick="openAddShop()" style="width:100%;margin-top:8px">＋ 新增物品</button>`;
+ // ... (前段購物清單渲染程式碼保持不變)
+
+  // 購物清單的懸浮新增按鈕區塊
+  html += `
+  <div style="position:fixed; bottom:75px; left:0; width:100%; pointer-events:none; z-index:100;">
+    <div style="padding:0 20px; pointer-events:auto; max-width:480px; margin:0 auto;">
+      <button class="add-btn" 
+              style="width:100%; background:rgba(22,163,74,0.9); color:#fff; border:none; 
+                     box-shadow:0 4px 12px rgba(22,163,74,0.3); padding:14px; border-radius:25px; 
+                     font-weight:700; font-size:14px; backdrop-filter:blur(5px);" 
+              onclick="openAddShop()">＋ 新增購物項目</button>
+    </div>
+  </div>`;
+
   body.innerHTML = html;
 }
 
