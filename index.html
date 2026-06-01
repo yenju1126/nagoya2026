@@ -386,6 +386,15 @@ body{
       <div class="fg"><label class="flabel">預算</label><input class="finput" id="sPrice" placeholder="¥1,500"></div>
     </div>
     <div class="fg"><label class="flabel">備註</label><input class="finput" id="sNote" placeholder="數量、規格..."></div>
+    <div class="fg">
+      <label class="flabel">照片（選填）</label>
+      <div id="sPhotoArea" onclick="triggerModalPhoto()" style="border:1.5px dashed var(--border);border-radius:9px;min-height:72px;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;background:#FAFAFA;position:relative;">
+        <span id="sPhotoHint" style="font-size:13px;color:var(--sub)">📷 點擊拍照或選圖</span>
+        <img id="sPhotoPreview" src="" style="display:none;width:100%;max-height:160px;object-fit:cover;border-radius:7px;">
+        <button id="sPhotoClear" onclick="clearModalPhoto(event)" style="display:none;position:absolute;top:6px;right:6px;background:rgba(0,0,0,.5);color:#fff;border:none;border-radius:50%;width:22px;height:22px;font-size:12px;cursor:pointer;line-height:1;">✕</button>
+      </div>
+      <input type="file" id="sPhotoInput" accept="image/*" capture="environment" style="display:none" onchange="handleModalPhoto(event)">
+    </div>
     <div class="mactions">
       <button class="btn-cancel" onclick="closeModal('modalShop')">取消</button>
       <button class="btn-save" onclick="saveShopItem()">新增</button>
@@ -908,14 +917,18 @@ function openAddShop(){
   document.getElementById('sCat').value='高山';
   document.getElementById('sPrice').value='';
   document.getElementById('sNote').value='';
+  clearModalPhoto();
   openModal('modalShop');
 }
 function saveShopItem(){
   const name=document.getElementById('sName').value.trim();
   if(!name){alert('請輸入商品名稱');return;}
+  const preview=document.getElementById('sPhotoPreview');
+  const photoUrl=(preview.style.display!=='none'&&preview.src)?preview.src:'';
   const item={id:mkId(),cat:document.getElementById('sCat').value,name,
     price:document.getElementById('sPrice').value.trim(),
     note:document.getElementById('sNote').value.trim(),done:false};
+  if(photoUrl)item.photoUrl=photoUrl;
   if(!S.shopping[editCtx.person])S.shopping[editCtx.person]=[];
   S.shopping[editCtx.person].push(item);
   closeModal('modalShop');scheduleSave();renderShopping();
@@ -932,6 +945,32 @@ function delShop(person,id){
 }
 
 /* ── 📷 照片功能（直接壓縮存 Database，不用 Storage）── */
+function triggerModalPhoto(){
+  document.getElementById('sPhotoInput').click();
+}
+function handleModalPhoto(event){
+  const file=event.target.files[0];
+  if(!file)return;
+  compressImage(file,800,0.65,dataUrl=>{
+    const preview=document.getElementById('sPhotoPreview');
+    const hint=document.getElementById('sPhotoHint');
+    const clear=document.getElementById('sPhotoClear');
+    preview.src=dataUrl;
+    preview.style.display='block';
+    hint.style.display='none';
+    clear.style.display='flex';
+  });
+}
+function clearModalPhoto(e){
+  if(e)e.stopPropagation();
+  const preview=document.getElementById('sPhotoPreview');
+  const hint=document.getElementById('sPhotoHint');
+  const clear=document.getElementById('sPhotoClear');
+  if(!preview)return;
+  preview.src='';preview.style.display='none';
+  hint.style.display='';clear.style.display='none';
+  document.getElementById('sPhotoInput').value='';
+}
 function triggerPhotoUpload(person,id){
   photoUploadCtx={person,id};
   const input=document.getElementById('photoInput');
