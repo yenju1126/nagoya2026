@@ -6,9 +6,6 @@
 <title>🗾 日本行程 2026</title>
 
 <style>
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 變數設定：統一管理網頁的主題顏色、陰影、間距 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 :root{
   --red:#C8392B;--navy:#0F2040;--cream:#F7F5F0;--card:#fff;
   --border:#E5E0D8;--text:#1A1A1A;--sub:#888;--radius:14px;
@@ -18,10 +15,6 @@
   --shadow:0 2px 8px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.05);
   --bnav:60px;
 }
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 基本重設：取消瀏覽器預設邊距，防止手機點擊時出現藍色高亮 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden}
 body{
@@ -29,30 +22,20 @@ body{
   background:var(--cream);color:var(--text);font-size:15px;line-height:1.5;
   max-width:480px;margin:0 auto;display:flex;flex-direction:column
 }
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 頂部標題列 (Header) */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .top-header{
   background:var(--navy);color:#fff;padding:14px 16px 0;flex-shrink:0;z-index:50;width:100%
 }
 .th-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .th-title{font-size:17px;font-weight:700;letter-spacing:.3px}
 .th-sub{font-size:11px;color:rgba(255,255,255,.55);margin-top:2px}
-/* Firebase 狀態連線小圓點 */
 .db-dot{
   width:10px;height:10px;border-radius:50%;background:#6B7280;flex-shrink:0;
   transition:background .3s;cursor:pointer
 }
 .db-dot.ok{background:#22C55E}
 .db-dot.err{background:#EF4444}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 日期切換頁籤 (Day Tabs) 與購物成員頁籤 (Person Tabs) */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .day-tabs{display:flex;overflow-x:auto;gap:6px;padding:0 14px 10px;scroll-snap-type:x mandatory}
 .day-tabs::-webkit-scrollbar{display:none}
-
 .dtab,.ptab{
   flex-shrink:0;border:1.5px solid rgba(255,255,255,.2);border-radius:20px;
   padding:4px 13px;font-size:12px;font-weight:600;color:rgba(255,255,255,.65);
@@ -65,46 +48,22 @@ body{
 .dtab .dtab-wd{font-size:10px;opacity:.8}
 .dtab.holiday{border-color:#F59E0B}
 .dtab.active.holiday{background:#D97706;border-color:#D97706}
-
-/* 統一風格：與行程頁籤高度完全對齊 */
-.person-tabs {
-  display: flex;
-  gap: 8px;           /* 按鈕間距 */
-  padding: 0 14px 12px; /* 與日期分頁的 padding 完全一致 */
-  background: var(--navy); /* 背景色與 Header 一致 */
+.person-tabs{
+  display:flex;gap:8px;padding:0 14px 12px;background:var(--navy)
 }
-
-.ptab {
-  flex: 1;            /* 平分寬度，看起來最舒服 */
-  height: 42px;       /* 固定高度，與日期分頁視覺對齊 */
-  border-radius: 20px;
-  background: rgba(255,255,255,0.1); 
-  color: rgba(255,255,255,0.6);
-  font-size: 14px;
-  font-weight: 600;
-  border: 1px solid rgba(255,255,255,0.2);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
+.ptab{
+  flex:1;height:42px;border-radius:20px;
+  background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);
+  font-size:14px;font-weight:600;border:1px solid rgba(255,255,255,0.2);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s
 }
-
-.ptab.active {
-  background: var(--red); /* 選中變紅，與行程一致 */
-  color: #fff;
-  border-color: var(--red);
-}
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 頁面主體與底部導覽列 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.ptab.active{background:var(--red);color:#fff;border-color:var(--red)}
 .page{display:none;flex-direction:column;flex:1;overflow:hidden}
 .page.active{display:flex}
 .page-body{
   flex:1;overflow-y:auto;padding:12px 14px calc(var(--bnav)+20px);
   -webkit-overflow-scrolling:touch
 }
-
 .bottom-nav{
   position:fixed;bottom:0;left:50%;transform:translateX(-50%);
   width:100%;max-width:480px;height:var(--bnav);
@@ -118,10 +77,6 @@ body{
 }
 .nav-btn .ni{font-size:22px;line-height:1}
 .nav-btn.active{color:var(--red)}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 每日行程的大標題區與 Banner 提示 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .day-hdr{padding:14px 4px 8px;display:none}
 .day-hdr-title{font-size:20px;font-weight:800;color:var(--navy)}
 .day-hdr-sub{font-size:12px;color:var(--sub);margin-top:2px}
@@ -131,7 +86,6 @@ body{
   margin-left:6px;vertical-align:2px
 }
 .holiday-badge.sw{background:#D97706}
-
 .banner{
   border-radius:10px;padding:9px 12px;margin:8px 0;font-size:12px;
   line-height:1.6;display:flex;gap:8px;align-items:flex-start;border:1px solid;display:none
@@ -140,16 +94,8 @@ body{
 .b-red{background:#FEE2E2;border-color:#FCA5A5;color:#7F1D1D}
 .b-warn{background:#FEF3C7;border-color:#FCD34D;color:#78350F}
 .b-blue{background:#EFF6FF;border-color:#93C5FD;color:#1E3A8A}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 行程卡片樣式（含景點、美食、購物、住宿、交通等類型） */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.segments{position:relative;
-  padding-bottom:100px;
-  padding-left: 16px;  /* 新增：左邊距 */
-  padding-right: 16px; /* 新增：右邊距 */}
+.segments{position:relative;padding-bottom:100px;padding-left:16px;padding-right:16px}
 .seg-item{margin:6px 0;position:relative}
-
 .item-card{
   background:var(--card);border-radius:var(--radius);padding:14px;
   box-shadow:var(--shadow);border:1px solid var(--border);position:relative;
@@ -173,7 +119,6 @@ body{
   border-radius:0 8px 8px 0;padding:7px 10px;margin-top:8px;
   font-size:11px;color:var(--note-text);line-height:1.6
 }
-
 .ic-actions{position:absolute;top:10px;right:10px;display:flex;gap:4px}
 .btn-sm{
   border:none;border-radius:6px;padding:4px 8px;font-size:11px;
@@ -181,8 +126,6 @@ body{
 }
 .btn-edit{background:#F3F4F6;color:#374151}
 .btn-del{background:#FEE2E2;color:#B91C1C}
-
-/* 行程各類型的專屬顏色背景 */
 .spot-c{background:#EDE9FE;color:#6D28D9}
 .spot-d{background:var(--spot)}
 .eat-c{background:#FEE2E2;color:#B91C1C}
@@ -193,10 +136,6 @@ body{
 .hotel-d{background:var(--hotel)}
 .tran-c{background:#DBEAFE;color:#1D4ED8}
 .tran-d{background:var(--tran)}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 交通連接線型卡片樣式 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .seg-transport{margin:0;position:relative}
 .transport-card{
   background:var(--transport-bg);border-left:3px solid var(--transport-border);
@@ -213,16 +152,11 @@ body{
 .tr-dur{font-size:11px;font-weight:600;color:#374151;background:#E0E7FF;padding:1px 7px;border-radius:10px}
 .tr-cost{font-size:12px;color:var(--sub)}
 .tr-note{background:#fff;border-radius:6px;padding:5px 8px;margin-top:6px;font-size:13px;color:var(--note-text);border:1px solid var(--note-border)}
-
 .tr-actions{position:absolute;top:8px;right:8px;display:flex;gap:4px}
 .tr-drag{
   font-size:16px;color:#B0B8D1;cursor:grab;flex-shrink:0;padding:0 2px;
   touch-action:none;user-select:none;margin-top:2px
 }
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 新增按鈕 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .add-row{display:flex;gap:8px;margin:10px 0 4px}
 .add-btn{
   flex:1;display:flex;align-items:center;justify-content:center;gap:5px;
@@ -231,29 +165,16 @@ body{
 }
 .add-btn:active{background:var(--border)}
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 購物清單專屬樣式 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ── 購物清單 ── */
 .shop-section{margin-bottom:16px}
 .shop-cat-hdr{display:flex;align-items:center;gap:8px;padding:10px 16px 6px 16px;font-size:13px;font-weight:700;color:var(--navy)}
 .cat-pill{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600}
-
 .sl-item{
- background: var(--card);
-  border-radius: 10px;
-  padding: 12px 16px; /* 增加內部邊距，讓內容不擠壓 */
-  margin-bottom: 8px;
-  margin-left: 16px;  /* 強制設定左側邊距 */
-  margin-right: 16px; /* 強制設定右側邊距 */
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  position: relative;
-  /* 如果原本有寫 width，請檢查是否設為 100% 或 auto */
-  width: calc(100% - 32px); /* 強制計算寬度：總寬減去左右邊距 */
-  box-sizing: border-box;   /* 確保 padding 不會把容器撐開 */
+  background:var(--card);border-radius:10px;padding:12px 16px;
+  margin-bottom:8px;margin-left:16px;margin-right:16px;
+  box-shadow:var(--shadow);border:1px solid var(--border);
+  display:flex;align-items:flex-start;gap:10px;position:relative;
+  width:calc(100% - 32px);box-sizing:border-box
 }
 .sl-check{
   width:22px;height:22px;border:2px solid var(--border);border-radius:6px;
@@ -266,15 +187,42 @@ body{
 .sl-name{font-size:15px;font-weight:500;line-height:1.4}
 .sl-meta{font-size:11px;color:var(--sub);margin-top:2px}
 .sl-price{font-size:13px;color:var(--shop);font-weight:600}
-.sl-del{border:none;background:#FEE2E2;color:#B91C1C;border-radius:6px;padding:4px 8px;font-size:11px;cursor:pointer;flex-shrink:0;align-self:flex-start}
+.sl-actions{display:flex;flex-direction:column;gap:4px;flex-shrink:0;align-self:flex-start}
+.sl-del{border:none;background:#FEE2E2;color:#B91C1C;border-radius:6px;padding:4px 8px;font-size:11px;cursor:pointer}
+/* 📷 照片相關 */
+.sl-photo-btn{
+  border:none;background:#EFF6FF;color:#1E40AF;border-radius:6px;
+  padding:4px 8px;font-size:11px;cursor:pointer
+}
+.sl-photo-thumb{
+  width:100%;border-radius:8px;margin-top:8px;max-height:160px;
+  object-fit:cover;cursor:pointer;border:1px solid var(--border);display:block
+}
+.sl-photo-del{
+  position:absolute;top:4px;right:4px;background:rgba(0,0,0,.55);
+  color:#fff;border:none;border-radius:50%;width:20px;height:20px;
+  font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center
+}
+.sl-photo-wrap{position:relative;margin-top:8px}
+.upload-progress{font-size:11px;color:var(--sub);margin-top:4px;display:none}
+/* 燈箱 */
+.photo-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:500;
+  display:none;align-items:center;justify-content:center;padding:20px
+}
+.photo-overlay.open{display:flex}
+.photo-overlay img{max-width:100%;max-height:90vh;border-radius:12px}
+.photo-overlay-close{
+  position:absolute;top:20px;right:20px;background:rgba(255,255,255,.2);
+  border:none;color:#fff;font-size:18px;border-radius:50%;
+  width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center
+}
 
 .shop-progress{background:var(--border);border-radius:10px;height:4px;margin:4px 0 10px}
 .shop-progress-bar{height:4px;border-radius:10px;background:var(--shop);transition:width .3s}
 .shop-progress-text{font-size:11px;color:var(--sub);margin-bottom:6px}
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 彈出輸入視窗 (Modal) */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ── Modal ── */
 .modal-overlay{
   position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;
   display:none;align-items:flex-end;justify-content:center
@@ -287,7 +235,6 @@ body{
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 .modal-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 14px}
 .modal-title{font-size:16px;font-weight:700;margin-bottom:14px;color:var(--navy)}
-
 .fg{margin-bottom:12px}
 .flabel{font-size:12px;font-weight:600;color:var(--sub);margin-bottom:4px;display:block}
 .finput,.fselect,.ftextarea{
@@ -299,7 +246,6 @@ body{
 .ftextarea{min-height:72px;resize:vertical}
 .frow{display:flex;gap:10px}
 .frow .fg{flex:1}
-
 .mactions{display:flex;gap:10px;margin-top:14px}
 .btn-save,.btn-cancel{
   flex:1;border:none;border-radius:10px;padding:14px;
@@ -308,9 +254,7 @@ body{
 .btn-save{background:var(--red);color:#fff}
 .btn-cancel{background:var(--border);color:var(--text)}
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 確認刪除提示視窗 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ── 確認刪除 ── */
 .confirm-overlay{
   position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:300;
   display:none;align-items:center;justify-content:center;padding:20px
@@ -320,16 +264,11 @@ body{
 .confirm-title{font-size:15px;font-weight:600;margin-bottom:8px}
 .confirm-sub{font-size:13px;color:var(--sub);margin-bottom:16px}
 .confirm-btns{display:flex;gap:10px}
-.conf-ok,.conf-no{
-  flex:1;border:none;border-radius:8px;padding:10px;
-  font-size:14px;font-weight:600;cursor:pointer
-}
+.conf-ok,.conf-no{flex:1;border:none;border-radius:8px;padding:10px;font-size:14px;font-weight:600;cursor:pointer}
 .conf-ok{background:var(--red);color:#fff}
 .conf-no{background:var(--border);color:var(--text)}
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 全域 Toast 提示 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ── Toast ── */
 .toast{
   position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
   background:#1A1A1A;color:#fff;padding:8px 18px;border-radius:20px;
@@ -337,7 +276,6 @@ body{
   z-index:400;white-space:nowrap
 }
 .toast.show{opacity:1}
-
 </style>
 </head>
 <body>
@@ -370,19 +308,13 @@ body{
   </button>
 </nav>
 
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-<!-- 行程項目編輯視窗 -->
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- 行程 Modal -->
 <div class="modal-overlay" id="modalItem" onclick="closeModalOnBg(event,'modalItem')">
   <div class="modal">
     <div class="modal-handle"></div>
     <div class="modal-title" id="modalItemTitle">新增行程</div>
-    <div class="fg">
-      <label class="flabel">時間</label>
-      <input class="finput" id="iTime" placeholder="例：09:30" maxlength="5">
-    </div>
-    <div class="fg">
-      <label class="flabel">類型</label>
+    <div class="fg"><label class="flabel">時間</label><input class="finput" id="iTime" placeholder="例：09:30" maxlength="5"></div>
+    <div class="fg"><label class="flabel">類型</label>
       <select class="fselect" id="iType">
         <option value="spot">🏙️ 景點</option>
         <option value="eat">🍽️ 美食</option>
@@ -391,18 +323,9 @@ body{
         <option value="tran">🚌 交通</option>
       </select>
     </div>
-    <div class="fg">
-      <label class="flabel">標題</label>
-      <input class="finput" id="iTitle" placeholder="行程名稱">
-    </div>
-    <div class="fg">
-      <label class="flabel">說明</label>
-      <textarea class="ftextarea" id="iDesc" placeholder="細節、費用..."></textarea>
-    </div>
-    <div class="fg">
-      <label class="flabel">備註（色塊顯示）</label>
-      <textarea class="ftextarea" id="iNote" placeholder="特別提醒..." style="min-height:56px"></textarea>
-    </div>
+    <div class="fg"><label class="flabel">標題</label><input class="finput" id="iTitle" placeholder="行程名稱"></div>
+    <div class="fg"><label class="flabel">說明</label><textarea class="ftextarea" id="iDesc" placeholder="細節、費用..."></textarea></div>
+    <div class="fg"><label class="flabel">備註（色塊顯示）</label><textarea class="ftextarea" id="iNote" placeholder="特別提醒..." style="min-height:56px"></textarea></div>
     <div class="mactions">
       <button class="btn-cancel" onclick="closeModal('modalItem')">取消</button>
       <button class="btn-save" onclick="saveItem()">儲存</button>
@@ -410,15 +333,12 @@ body{
   </div>
 </div>
 
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-<!-- 交通編輯視窗 -->
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- 交通 Modal -->
 <div class="modal-overlay" id="modalTr" onclick="closeModalOnBg(event,'modalTr')">
   <div class="modal">
     <div class="modal-handle"></div>
     <div class="modal-title" id="modalTrTitle">新增交通</div>
-    <div class="fg">
-      <label class="flabel">交通工具</label>
+    <div class="fg"><label class="flabel">交通工具</label>
       <select class="fselect" id="tTool">
         <option value="JR">🚆 JR</option>
         <option value="名鉄">🚃 名鉄</option>
@@ -429,14 +349,8 @@ body{
         <option value="飛機">✈️ 飛機</option>
       </select>
     </div>
-    <div class="fg">
-      <label class="flabel">路線／班次名稱</label>
-      <input class="finput" id="tLine" placeholder="例：特急ひだ3号">
-    </div>
-    <div class="fg">
-      <label class="flabel">行駛方向</label>
-      <input class="finput" id="tDir" placeholder="例：名古屋→高山">
-    </div>
+    <div class="fg"><label class="flabel">路線／班次名稱</label><input class="finput" id="tLine" placeholder="例：特急ひだ3号"></div>
+    <div class="fg"><label class="flabel">行駛方向</label><input class="finput" id="tDir" placeholder="例：名古屋→高山"></div>
     <div class="frow">
       <div class="fg"><label class="flabel">出發時間</label><input class="finput" id="tDep" placeholder="08:43" maxlength="5"></div>
       <div class="fg"><label class="flabel">抵達時間</label><input class="finput" id="tArr" placeholder="11:20" maxlength="5"></div>
@@ -445,10 +359,7 @@ body{
       <div class="fg"><label class="flabel">所需時間</label><input class="finput" id="tDur" placeholder="2h37m"></div>
       <div class="fg"><label class="flabel">費用</label><input class="finput" id="tCost" placeholder="¥5,610"></div>
     </div>
-    <div class="fg">
-      <label class="flabel">備註</label>
-      <textarea class="ftextarea" id="tNote" placeholder="注意事項..." style="min-height:56px"></textarea>
-    </div>
+    <div class="fg"><label class="flabel">備註</label><textarea class="ftextarea" id="tNote" placeholder="注意事項..." style="min-height:56px"></textarea></div>
     <div class="mactions">
       <button class="btn-cancel" onclick="closeModal('modalTr')">取消</button>
       <button class="btn-save" onclick="saveTr()">儲存</button>
@@ -456,20 +367,14 @@ body{
   </div>
 </div>
 
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-<!-- 購物項目編輯視窗 -->
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- 購物 Modal -->
 <div class="modal-overlay" id="modalShop" onclick="closeModalOnBg(event,'modalShop')">
   <div class="modal">
     <div class="modal-handle"></div>
     <div class="modal-title" id="modalShopTitle">新增購物項目</div>
-    <div class="fg">
-      <label class="flabel">商品名稱</label>
-      <input class="finput" id="sName" placeholder="商品名稱">
-    </div>
+    <div class="fg"><label class="flabel">商品名稱</label><input class="finput" id="sName" placeholder="商品名稱"></div>
     <div class="frow">
-      <div class="fg">
-        <label class="flabel">購買地點</label>
+      <div class="fg"><label class="flabel">購買地點</label>
         <select class="fselect" id="sCat">
           <option value="高山">高山</option>
           <option value="上高地">上高地</option>
@@ -478,15 +383,9 @@ body{
           <option value="其他">其他</option>
         </select>
       </div>
-      <div class="fg">
-        <label class="flabel">預算</label>
-        <input class="finput" id="sPrice" placeholder="¥1,500">
-      </div>
+      <div class="fg"><label class="flabel">預算</label><input class="finput" id="sPrice" placeholder="¥1,500"></div>
     </div>
-    <div class="fg">
-      <label class="flabel">備註</label>
-      <input class="finput" id="sNote" placeholder="數量、規格...">
-    </div>
+    <div class="fg"><label class="flabel">備註</label><input class="finput" id="sNote" placeholder="數量、規格..."></div>
     <div class="mactions">
       <button class="btn-cancel" onclick="closeModal('modalShop')">取消</button>
       <button class="btn-save" onclick="saveShopItem()">新增</button>
@@ -494,9 +393,7 @@ body{
   </div>
 </div>
 
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-<!-- 確認刪除對話框 -->
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- 確認刪除 -->
 <div class="confirm-overlay" id="confirmOverlay">
   <div class="confirm-box">
     <div class="confirm-title">確認刪除</div>
@@ -508,30 +405,33 @@ body{
   </div>
 </div>
 
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-<!-- 提示訊息 Toast -->
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- 照片燈箱 -->
+<div class="photo-overlay" id="photoOverlay" onclick="closePhotoOverlay(event)">
+  <button class="photo-overlay-close" onclick="document.getElementById('photoOverlay').classList.remove('open')">✕</button>
+  <img id="photoOverlayImg" src="" alt="商品照片">
+</div>
+
+<!-- 隱藏的檔案選擇器 -->
+<input type="file" id="photoInput" accept="image/*" capture="environment" style="display:none" onchange="handlePhotoUpload(event)">
+
 <div class="toast" id="toast"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
 <script>
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* Firebase 雲端設定與資料常數 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 const FB_CONFIG = {
   apiKey:            "AIzaSyCYOotAZxuDqGYNRMejPJEo_ym89FVS0b4",
   authDomain:        "nagoya2026-ca060.firebaseapp.com",
-  databaseURL:       "https://nagoya2026-ca060-default-rtdb.asia-southeast1.firebasedatabase.app",   
+  databaseURL:       "https://nagoya2026-ca060-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId:         "nagoya2026-ca060",
   storageBucket:     "nagoya2026-ca060.firebasestorage.app",
   messagingSenderId: "29982428738",
   appId: "1:29982428738:web:0d818fd9589217f8a467db"
 };
 
-/* 行程類型對應的標籤與顏色 */
 const TC = {
   spot:  {label:'🏙️ 景點', badge:'spot-c', dot:'spot-d'},
   eat:   {label:'🍽️ 美食', badge:'eat-c',  dot:'eat-d'},
@@ -539,22 +439,12 @@ const TC = {
   hotel: {label:'🏨 住宿', badge:'hotel-c',dot:'hotel-d'},
   tran:  {label:'🚌 交通', badge:'tran-c', dot:'tran-d'}
 };
-
-/* 交通工具對應的 emoji 圖示 */
 const TOOL_ICON = {JR:'🚆',名鉄:'🚃',巴士:'🚌',地下鉄:'🚇',計程車:'🚕',步行:'🚶',飛機:'✈️'};
-
-/* 購物地點對應的顏色 */
 const CAT_COLOR = {高山:'#DC2626',上高地:'#7C3AED',名古屋:'#D97706',機場:'#2563EB',其他:'#6B7280'};
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 工具函式：生成唯一 ID、HTML 轉義 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 function mkId(){return Date.now()+Math.floor(Math.random()*10000)}
-function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 預設核心資料庫（完整的日本行程與購物清單） */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 const D={
   days:[
     {date:'9/22',wd:'二',holiday:'国民の休日',silverWeek:true,
@@ -602,9 +492,7 @@ const D={
      ]
     },
     {date:'9/24',wd:'四',label:'名古屋市區精華遊',holiday:null,silverWeek:false,
-     banners:[
-       {t:'blue',i:'🚇',msg:'交通：建議購買地下鐵 1日乘車券 ¥760。'}
-     ],
+     banners:[{t:'blue',i:'🚇',msg:'交通：建議購買地下鐵 1日乘車券 ¥760。'}],
      segments:[
        {k:'item',id:301,type:'eat',time:'08:00',title:'早餐：名古屋 Morning 文化',desc:'點咖啡送小倉紅豆吐司。推薦コメダ珈琲。',note:''},
        {k:'tr',id:302,tool:'地下鉄',line:'名城線',dir:'錦→神宮西',dep:'',arr:'',dur:'15分',cost:'¥260',note:''},
@@ -622,9 +510,7 @@ const D={
      ]
     },
     {date:'9/25',wd:'五',label:'犬山一日小旅行',holiday:null,silverWeek:false,
-     banners:[
-       {t:'blue',i:'🚃',msg:'名鐵犬山線：名鐵名古屋 09:00 → 犬山遊園 09:35（單程 ¥570）。'}
-     ],
+     banners:[{t:'blue',i:'🚃',msg:'名鐵犬山線：名鐵名古屋 09:00 → 犬山遊園 09:35（單程 ¥570）。'}],
      segments:[
        {k:'item',id:401,type:'eat',time:'08:00',title:'早餐：悠閒連鎖咖啡廳',desc:'吃飽準備搭車前往犬山。',note:''},
        {k:'tr',id:402,tool:'名鉄',line:'犬山線',dir:'名鐵名古屋→犬山遊園',dep:'09:00',arr:'09:35',dur:'35分',cost:'¥570',note:''},
@@ -640,9 +526,7 @@ const D={
      ]
     },
     {date:'9/26',wd:'六',label:'名古屋→中部機場→返台',holiday:null,silverWeek:false,
-     banners:[
-       {t:'red',i:'✈️',msg:'班機 <b>22:25</b> 起飛！最晚搭上 <b>19:33 μSky</b> 班次直達機場。'}
-     ],
+     banners:[{t:'red',i:'✈️',msg:'班機 <b>22:25</b> 起飛！最晚搭上 <b>19:33 μSky</b> 班次直達機場。'}],
      segments:[
        {k:'item',id:501,type:'eat',time:'09:00',title:'早餐：月台立食棊子麵（住よし）',desc:'道地平價的名古屋扁麵。',note:''},
        {k:'item',id:502,type:'tran',time:'10:00',title:'Check-out 行李暫存飯店',desc:'輕裝出門進行最後採買。',note:''},
@@ -690,197 +574,143 @@ const D={
   }
 };
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 全域狀態變數 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-let S = {}; 
-let db = null;
-let saveTimer = null;
-let curPage = 'itinerary';
-let curDay  = 0;
-let curPerson = 'yenru';
-let sortables = {};
-let editCtx = null; 
-let confirmCb = null;
-let toastTimer = null;
+let S={};
+let db=null;
+let saveTimer=null;
+let curPage='itinerary';
+let curDay=0;
+let curPerson='yenru';
+let sortables={};
+let editCtx=null;
+let confirmCb=null;
+let toastTimer=null;
+let photoUploadCtx=null;
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* Firebase 初始化與本地儲存同步 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ── Firebase 初始化 ── */
 function initFirebase(){
-  const dot = document.getElementById('dbDot');
-  if(!FB_CONFIG.apiKey || FB_CONFIG.apiKey === ""){
-    dot.title='未填寫金鑰，使用本地快取模式';
-    dot.style.background = '#6B7280'; 
-    loadLocalWithDefault(); 
-    return;
-  }
+  const dot=document.getElementById('dbDot');
+  if(!FB_CONFIG.apiKey){dot.style.background='#6B7280';loadLocalWithDefault();return;}
   try{
     firebase.initializeApp(FB_CONFIG);
-    db = firebase.database();
+    db=firebase.database();
     db.ref('japan2026').once('value').then(snap=>{
-      const val = snap.val();
-      if(val && val.days && val.days.length > 0){
-        S = val;
-        dot.className = 'db-dot ok';
-        dot.title = 'Firebase 雲端已連線 ☁️';
-      } else {
-        S = JSON.parse(JSON.stringify(D));
-        db.ref('japan2026').set(S);
-        dot.className = 'db-dot ok';
-      }
-      try{ localStorage.setItem('japan2026', JSON.stringify(S)); }catch(e){}
+      const val=snap.val();
+      if(val&&val.days&&val.days.length>0){S=val;}
+      else{S=JSON.parse(JSON.stringify(D));db.ref('japan2026').set(S);}
+      dot.className='db-dot ok';dot.title='Firebase 雲端已連線 ☁️';
+      try{localStorage.setItem('japan2026',JSON.stringify(S));}catch(e){}
       renderAll();
-    }).catch(e=>{
-      dot.className = 'db-dot err'; 
-      loadLocalWithDefault();
-    });
-  }catch(e){
-    dot.className = 'db-dot err';
-    loadLocalWithDefault();
-  }
+    }).catch(()=>{dot.className='db-dot err';loadLocalWithDefault();});
+  }catch(e){dot.className='db-dot err';loadLocalWithDefault();}
 }
 
 function loadLocalWithDefault(){
   try{
-    const s = localStorage.getItem('japan2026');
-    if(s){
-      const parsed = JSON.parse(s);
-      if(parsed && parsed.days && parsed.days.length > 0){ S = parsed; } 
-      else { S = JSON.parse(JSON.stringify(D)); }
-    } else { S = JSON.parse(JSON.stringify(D)); }
-  }catch(e){ S = JSON.parse(JSON.stringify(D)); }
+    const s=localStorage.getItem('japan2026');
+    if(s){const p=JSON.parse(s);if(p&&p.days&&p.days.length>0){S=p;}else{S=JSON.parse(JSON.stringify(D));}}
+    else{S=JSON.parse(JSON.stringify(D));}
+  }catch(e){S=JSON.parse(JSON.stringify(D));}
   renderAll();
 }
 
 function forceResetData(){
   if(confirm("確定要清除所有更動，重置回最初的預設行程嗎？")){
-    S = JSON.parse(JSON.stringify(D));
-    try{ localStorage.setItem('japan2026', JSON.stringify(S)); }catch(e){}
-    if(db){
-      db.ref('japan2026').set(S).then(()=>{
-        showToast('雲端與本地已重置重啟 🚀');
-        renderAll();
-      });
-    } else {
-      showToast('本地快取已成功重置 💾');
-      renderAll();
-    }
+    S=JSON.parse(JSON.stringify(D));
+    try{localStorage.setItem('japan2026',JSON.stringify(S));}catch(e){}
+    if(db){db.ref('japan2026').set(S).then(()=>{showToast('雲端與本地已重置 🚀');renderAll();});}
+    else{showToast('本地快取已重置 💾');renderAll();}
   }
 }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 資料儲存：本地與雲端同步 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 function scheduleSave(){
   clearTimeout(saveTimer);
-  saveTimer = setTimeout(doSave, 800);
+  saveTimer=setTimeout(doSave,800);
 }
 
 function doSave(){
-  try{ localStorage.setItem('japan2026', JSON.stringify(S)); }catch(e){}
+  try{localStorage.setItem('japan2026',JSON.stringify(S));}catch(e){}
   if(db){
     db.ref('japan2026').set(S)
-      .then(()=>showToast('數據已同步至雲端 ☁️'))
-      .catch(e=>{ showToast('僅儲存於本地 💾'); });
-  } else {
-    showToast('已存至本地快取 💾');
-  }
+      .then(()=>showToast('已同步至雲端 ☁️'))
+      .catch(()=>showToast('僅儲存於本地 💾'));
+  }else{showToast('已存至本地 💾');}
 }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* UI 渲染：頁面更新主流程 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ── 渲染主流程 ── */
 function renderAll(){
-  if(!S || !S.days) return;
+  if(!S||!S.days)return;
   renderItinerary();
   renderShopping();
   updateNav();
 }
 
-function setPage(p){
-  curPage = p;
-  updateNav();
-}
+function setPage(p){curPage=p;updateNav();}
 
 function updateNav(){
-  document.getElementById('page-itinerary').classList.toggle('active', curPage==='itinerary');
-  document.getElementById('page-shopping').classList.toggle('active', curPage==='shopping');
-  document.getElementById('nav-itinerary').classList.toggle('active', curPage==='itinerary');
-  document.getElementById('nav-shopping').classList.toggle('active', curPage==='shopping');
+  document.getElementById('page-itinerary').classList.toggle('active',curPage==='itinerary');
+  document.getElementById('page-shopping').classList.toggle('active',curPage==='shopping');
+  document.getElementById('nav-itinerary').classList.toggle('active',curPage==='itinerary');
+  document.getElementById('nav-shopping').classList.toggle('active',curPage==='shopping');
   renderTopTabs();
 }
 
 function renderTopTabs(){
-  const c = document.getElementById('topTabs');
-  if(!c || !S || !S.days) return;
+  const c=document.getElementById('topTabs');
+  if(!c||!S||!S.days)return;
   if(curPage==='itinerary'){
-    c.innerHTML = '<div class="day-tabs" id="day-tabs-inner"></div>';
-    const dt = document.getElementById('day-tabs-inner');
+    c.innerHTML='<div class="day-tabs" id="day-tabs-inner"></div>';
+    const dt=document.getElementById('day-tabs-inner');
     S.days.forEach((d,i)=>{
-      const el = document.createElement('div');
-      el.className = 'dtab' + (i===curDay?' active':'') + (d.silverWeek?' holiday':'');
-      el.innerHTML = `<div class="dtab-date">${d.date}</div><div class="dtab-wd">${d.wd}${d.holiday?'·假':''}</div>`;
-      el.onclick = ()=>{ curDay=i; renderAll(); };
+      const el=document.createElement('div');
+      el.className='dtab'+(i===curDay?' active':'')+(d.silverWeek?' holiday':'');
+      el.innerHTML=`<div class="dtab-date">${d.date}</div><div class="dtab-wd">${d.wd}${d.holiday?'·假':''}</div>`;
+      el.onclick=()=>{curDay=i;renderAll();};
       dt.appendChild(el);
     });
-  } else {
-    c.innerHTML = `<div class="person-tabs">
+  }else{
+    c.innerHTML=`<div class="person-tabs">
       <button class="ptab${curPerson==='yenru'?' active':''}" onclick="setPerson('yenru')">燕如</button>
       <button class="ptab${curPerson==='yueyun'?' active':''}" onclick="setPerson('yueyun')">月雲</button>
     </div>`;
   }
 }
 
-function setPerson(p){ curPerson=p; renderAll(); }
+function setPerson(p){curPerson=p;renderAll();}
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 行程頁面渲染 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ── 行程渲染 ── */
 function renderItinerary(){
   renderTopTabs();
-  const day = S.days[curDay];
-  if(!day) return;
-  const body = document.getElementById('itinerary-body');
-
-  let html = `<div class="day-hdr">
+  const day=S.days[curDay];
+  if(!day)return;
+  const body=document.getElementById('itinerary-body');
+  let html=`<div class="day-hdr">
     <div class="day-hdr-title">${day.date}（${day.wd}）
       ${day.holiday?`<span class="holiday-badge${day.silverWeek?' sw':''}">${day.holiday}</span>`:''}
     </div>
-    <div class="day-hdr-sub">${day.label}</div>
+    <div class="day-hdr-sub">${day.label||''}</div>
   </div>`;
-
   (day.banners||[]).forEach(b=>{
-    html += `<div class="banner b-${b.t}"><span class="bi">${b.i}</span><div>${b.msg}</div></div>`;
+    html+=`<div class="banner b-${b.t}"><span class="bi">${b.i}</span><div>${b.msg}</div></div>`;
   });
-
-  html += `<div class="segments" id="segments-${curDay}">`;
+  html+=`<div class="segments" id="segments-${curDay}">`;
   (day.segments||[]).forEach(seg=>{
-    if(seg.k==='item') html += renderItem(seg, curDay);
-    else html += renderTr(seg, curDay);
+    if(seg.k==='item')html+=renderItem(seg,curDay);
+    else html+=renderTr(seg,curDay);
   });
-  html += '</div>';
-
- // 修改後的 renderItinerary 區塊
-  html += `
-  <div style="position:fixed; bottom:75px; left:0; width:100%; pointer-events:none; z-index:100;">
-    <div style="display:flex; gap:10px; padding:0 20px; pointer-events:auto; max-width:480px; margin:0 auto;">
-      <button class="add-btn" 
-              style="flex:1; background:rgba(200,57,43,0.9); color:#fff; border:none; box-shadow:0 4px 12px rgba(0,0,0,0.2); padding:14px; border-radius:25px; font-weight:700; font-size:14px; backdrop-filter:blur(5px);" 
-              onclick="openAddItem(${curDay})">＋ 新增行程</button>
-      <button class="add-btn" 
-              style="flex:1; background:rgba(15,32,64,0.9); color:#fff; border:none; box-shadow:0 4px 12px rgba(0,0,0,0.2); padding:14px; border-radius:25px; font-weight:700; font-size:14px; backdrop-filter:blur(5px);" 
-              onclick="openAddTr(${curDay})">＋ 新增交通</button>
+  html+='</div>';
+  html+=`<div style="position:fixed;bottom:75px;left:0;width:100%;pointer-events:none;z-index:100;">
+    <div style="display:flex;gap:10px;padding:0 20px;pointer-events:auto;max-width:480px;margin:0 auto;">
+      <button class="add-btn" style="flex:1;background:rgba(200,57,43,0.9);color:#fff;border:none;box-shadow:0 4px 12px rgba(0,0,0,0.2);padding:14px;border-radius:25px;font-weight:700;font-size:14px;" onclick="openAddItem(${curDay})">＋ 新增行程</button>
+      <button class="add-btn" style="flex:1;background:rgba(15,32,64,0.9);color:#fff;border:none;box-shadow:0 4px 12px rgba(0,0,0,0.2);padding:14px;border-radius:25px;font-weight:700;font-size:14px;" onclick="openAddTr(${curDay})">＋ 新增交通</button>
     </div>
   </div>`;
-  html += `<div style="height: 120px; width: 100%;"></div>`;
-
-  body.innerHTML = html;
+  html+=`<div style="height:120px;width:100%;"></div>`;
+  body.innerHTML=html;
   initSortable(curDay);
 }
 
-function renderItem(seg, di){
-  const tc = TC[seg.type] || TC.spot;
+function renderItem(seg,di){
+  const tc=TC[seg.type]||TC.spot;
   return `<div class="seg-item" data-id="${seg.id}" data-k="item">
     <div class="item-card">
       <div class="ic-top">
@@ -903,12 +733,10 @@ function renderItem(seg, di){
   </div>`;
 }
 
-function renderTr(seg, di){
-  const icon = TOOL_ICON[seg.tool] || '🚌';
-  const timeRow = (seg.dep||seg.arr) ?
-    `<span class="tr-time">${seg.dep||'—'}</span>
-     <span class="tr-arrow">→</span>
-     <span class="tr-time">${seg.arr||'—'}</span>` : '';
+function renderTr(seg,di){
+  const icon=TOOL_ICON[seg.tool]||'🚌';
+  const timeRow=(seg.dep||seg.arr)?
+    `<span class="tr-time">${seg.dep||'—'}</span><span class="tr-arrow">→</span><span class="tr-time">${seg.arr||'—'}</span>`:'';
   return `<div class="seg-transport" data-id="${seg.id}" data-k="tr">
     <div class="transport-card">
       <span class="tr-drag">⠿</span>
@@ -932,39 +760,32 @@ function renderTr(seg, di){
 }
 
 function initSortable(di){
-  const el = document.getElementById('segments-'+di);
-  if(!el) return;
-  if(sortables[di]) try{ sortables[di].destroy(); }catch(e){}
-  sortables[di] = Sortable.create(el,{
-    handle:'.drag-handle, .tr-drag',
-    animation:180,
+  const el=document.getElementById('segments-'+di);
+  if(!el)return;
+  if(sortables[di])try{sortables[di].destroy();}catch(e){}
+  sortables[di]=Sortable.create(el,{
+    handle:'.drag-handle, .tr-drag',animation:180,
     onEnd(evt){
-      const day = S.days[di];
-      const moved = day.segments.splice(evt.oldIndex,1)[0];
+      const day=S.days[di];
+      const moved=day.segments.splice(evt.oldIndex,1)[0];
       day.segments.splice(evt.newIndex,0,moved);
       scheduleSave();
     }
   });
 }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 行程項目編輯邏輯：新增、編輯、刪除 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ── 行程 CRUD ── */
 function openAddItem(di){
-  editCtx = {mode:'item', dayIdx:di, id:null};
+  editCtx={mode:'item',dayIdx:di,id:null};
   document.getElementById('modalItemTitle').textContent='新增行程';
-  document.getElementById('iTime').value='';
+  ['iTime','iTitle','iDesc','iNote'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('iType').value='spot';
-  document.getElementById('iTitle').value='';
-  document.getElementById('iDesc').value='';
-  document.getElementById('iNote').value='';
   openModal('modalItem');
 }
-
-function openEditItem(di, id){
-  const seg = S.days[di].segments.find(s=>s.id==id);
-  if(!seg) return;
-  editCtx = {mode:'item', dayIdx:di, id:seg.id};
+function openEditItem(di,id){
+  const seg=S.days[di].segments.find(s=>s.id==id);
+  if(!seg)return;
+  editCtx={mode:'item',dayIdx:di,id:seg.id};
   document.getElementById('modalItemTitle').textContent='編輯行程';
   document.getElementById('iTime').value=seg.time||'';
   document.getElementById('iType').value=seg.type||'spot';
@@ -973,48 +794,34 @@ function openEditItem(di, id){
   document.getElementById('iNote').value=seg.note||'';
   openModal('modalItem');
 }
-
 function saveItem(){
-  const title = document.getElementById('iTitle').value.trim();
-  if(!title){ alert('請輸入標題'); return; }
-  const seg = {
-    k:'item', id: editCtx.id || mkId(),
-    type: document.getElementById('iType').value,
-    time: document.getElementById('iTime').value.trim(),
-    title, desc: document.getElementById('iDesc').value.trim(),
-    note: document.getElementById('iNote').value.trim()
-  };
-  const day = S.days[editCtx.dayIdx];
-  if(editCtx.id){ 
-    const idx = day.segments.findIndex(s=>s.id==editCtx.id);
-    if(idx>=0) day.segments[idx]=seg;
-  } else { day.segments.push(seg); }
-  closeModal('modalItem');
-  scheduleSave();
-  renderItinerary();
+  const title=document.getElementById('iTitle').value.trim();
+  if(!title){alert('請輸入標題');return;}
+  const seg={k:'item',id:editCtx.id||mkId(),type:document.getElementById('iType').value,
+    time:document.getElementById('iTime').value.trim(),title,
+    desc:document.getElementById('iDesc').value.trim(),note:document.getElementById('iNote').value.trim()};
+  const day=S.days[editCtx.dayIdx];
+  if(editCtx.id){const idx=day.segments.findIndex(s=>s.id==editCtx.id);if(idx>=0)day.segments[idx]=seg;}
+  else{day.segments.push(seg);}
+  closeModal('modalItem');scheduleSave();renderItinerary();
+}
+function delSeg(di,id){
+  S.days[di].segments=S.days[di].segments.filter(s=>s.id!=id);
+  scheduleSave();renderItinerary();
 }
 
-function delSeg(di, id){
-  S.days[di].segments = S.days[di].segments.filter(s=>s.id!=id);
-  scheduleSave();
-  renderItinerary();
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 交通編輯邏輯：新增、編輯 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ── 交通 CRUD ── */
 function openAddTr(di){
-  editCtx = {mode:'tr', dayIdx:di, id:null};
+  editCtx={mode:'tr',dayIdx:di,id:null};
   document.getElementById('modalTrTitle').textContent='新增交通';
-  ['tTool','tLine','tDir','tDep','tArr','tDur','tCost','tNote'].forEach(id=>{ document.getElementById(id).value=''; });
+  ['tTool','tLine','tDir','tDep','tArr','tDur','tCost','tNote'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('tTool').value='JR';
   openModal('modalTr');
 }
-
-function openEditTr(di, id){
-  const seg = S.days[di].segments.find(s=>s.id==id);
-  if(!seg) return;
-  editCtx = {mode:'tr', dayIdx:di, id:seg.id};
+function openEditTr(di,id){
+  const seg=S.days[di].segments.find(s=>s.id==id);
+  if(!seg)return;
+  editCtx={mode:'tr',dayIdx:di,id:seg.id};
   document.getElementById('modalTrTitle').textContent='編輯交通';
   document.getElementById('tTool').value=seg.tool||'JR';
   document.getElementById('tLine').value=seg.line||'';
@@ -1026,162 +833,185 @@ function openEditTr(di, id){
   document.getElementById('tNote').value=seg.note||'';
   openModal('modalTr');
 }
-
 function saveTr(){
-  const seg = {
-    k:'tr', id: editCtx.id || mkId(),
-    tool: document.getElementById('tTool').value,
-    line: document.getElementById('tLine').value.trim(),
-    dir:  document.getElementById('tDir').value.trim(),
-    dep:  document.getElementById('tDep').value.trim(),
-    arr:  document.getElementById('tArr').value.trim(),
-    dur:  document.getElementById('tDur').value.trim(),
-    cost: document.getElementById('tCost').value.trim(),
-    note: document.getElementById('tNote').value.trim()
-  };
-  const day = S.days[editCtx.dayIdx];
-  if(editCtx.id){
-    const idx = day.segments.findIndex(s=>s.id==editCtx.id);
-    if(idx>=0) day.segments[idx]=seg;
-  } else { day.segments.push(seg); }
-  closeModal('modalTr');
-  scheduleSave();
-  renderItinerary();
+  const seg={k:'tr',id:editCtx.id||mkId(),tool:document.getElementById('tTool').value,
+    line:document.getElementById('tLine').value.trim(),dir:document.getElementById('tDir').value.trim(),
+    dep:document.getElementById('tDep').value.trim(),arr:document.getElementById('tArr').value.trim(),
+    dur:document.getElementById('tDur').value.trim(),cost:document.getElementById('tCost').value.trim(),
+    note:document.getElementById('tNote').value.trim()};
+  const day=S.days[editCtx.dayIdx];
+  if(editCtx.id){const idx=day.segments.findIndex(s=>s.id==editCtx.id);if(idx>=0)day.segments[idx]=seg;}
+  else{day.segments.push(seg);}
+  closeModal('modalTr');scheduleSave();renderItinerary();
 }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 購物清單頁面渲染 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ── 購物清單渲染 ── */
 function renderShopping(){
   renderTopTabs();
-  if(!S.shopping) S.shopping = { yenru:[], yueyun:[] };
-  const list = S.shopping[curPerson] || [];
-  const cats = ['高山','上高地','名古屋','機場','其他'];
-  const body = document.getElementById('shopping-body');
+  if(!S.shopping)S.shopping={yenru:[],yueyun:[]};
+  const list=S.shopping[curPerson]||[];
+  const cats=['高山','上高地','名古屋','機場','其他'];
+  const body=document.getElementById('shopping-body');
+  const total=list.length;
+  const done=list.filter(i=>i.done).length;
+  const pct=total?Math.round(done/total*100):0;
 
-  const total = list.length;
-  const done = list.filter(i=>i.done).length;
-  const pct = total ? Math.round(done/total*100) : 0;
-
- let html = `<div style="padding:8px 16px 10px 16px;">
-    <div class="shop-progress-text" style="margin-bottom:6px;">${done} / ${total} 完成（${pct}%）</div>
-    <div class="shop-progress" style="margin:0;"><div class="shop-progress-bar" style="width:${pct}%"></div></div>
+  let html=`<div style="padding:8px 16px 10px 16px;">
+    <div class="shop-progress-text">${done} / ${total} 完成（${pct}%）</div>
+    <div class="shop-progress"><div class="shop-progress-bar" style="width:${pct}%"></div></div>
   </div>`;
 
   cats.forEach(cat=>{
-    const items = list.filter(i=>i.cat===cat);
-    if(!items.length) return;
-    const cc = CAT_COLOR[cat]||'#6B7280';
-    html += `<div class="shop-section">
-      <div class="shop-cat-hdr">
-        <span class="cat-pill" style="background:${cc}20;color:${cc}">📍 ${cat}</span>
-      </div>`;
+    const items=list.filter(i=>i.cat===cat);
+    if(!items.length)return;
+    const cc=CAT_COLOR[cat]||'#6B7280';
+    html+=`<div class="shop-section">
+      <div class="shop-cat-hdr"><span class="cat-pill" style="background:${cc}20;color:${cc}">📍 ${cat}</span></div>`;
     items.forEach(item=>{
-      html += `<div class="sl-item${item.done?' done':''}" id="sl-${item.id}">
+      const photoHtml=item.photoUrl
+        ?`<div class="sl-photo-wrap">
+            <img class="sl-photo-thumb" src="${item.photoUrl}" onclick="openPhotoOverlay('${item.photoUrl}')" alt="商品照片">
+            <button class="sl-photo-del" onclick="removePhoto('${curPerson}',${item.id})" title="刪除照片">✕</button>
+          </div>`
+        :'';
+      html+=`<div class="sl-item${item.done?' done':''}" id="sl-${item.id}">
         <div class="sl-check" onclick="toggleShop('${curPerson}',${item.id})">${item.done?'✓':''}</div>
         <div class="sl-body">
           <div class="sl-name">${esc(item.name)}</div>
           <div class="sl-meta">${item.price?`<span class="sl-price">${esc(item.price)}</span>`:''}${item.note?` · ${esc(item.note)}`:''}</div>
+          <div class="upload-progress" id="prog-${item.id}"></div>
+          ${photoHtml}
         </div>
-        <button class="sl-del" onclick="delShop('${curPerson}',${item.id})">✕</button>
+        <div class="sl-actions">
+          <button class="sl-photo-btn" onclick="triggerPhotoUpload('${curPerson}',${item.id})">📷</button>
+          <button class="sl-del" onclick="delShop('${curPerson}',${item.id})">✕</button>
+        </div>
       </div>`;
     });
-    html += '</div>';
+    html+='</div>';
   });
 
- // ... (前段購物清單渲染程式碼保持不變)
-
-  // 購物清單的懸浮新增按鈕區塊
-  html += `
-  <div style="position:fixed; bottom:75px; left:0; width:100%; pointer-events:none; z-index:100;">
-    <div style="padding:0 20px; pointer-events:auto; max-width:480px; margin:0 auto;">
-      <button class="add-btn" 
-              style="width:100%; background:rgba(22,163,74,0.9); color:#fff; border:none; 
-                     box-shadow:0 4px 12px rgba(22,163,74,0.3); padding:14px; border-radius:25px; 
-                     font-weight:700; font-size:14px; backdrop-filter:blur(5px);" 
-              onclick="openAddShop()">＋ 新增購物項目</button>
+  html+=`<div style="position:fixed;bottom:75px;left:0;width:100%;pointer-events:none;z-index:100;">
+    <div style="padding:0 20px;pointer-events:auto;max-width:480px;margin:0 auto;">
+      <button class="add-btn" style="width:100%;background:rgba(22,163,74,0.9);color:#fff;border:none;box-shadow:0 4px 12px rgba(22,163,74,0.3);padding:14px;border-radius:25px;font-weight:700;font-size:14px;" onclick="openAddShop()">＋ 新增購物項目</button>
     </div>
   </div>`;
-  html += `<div style="height: 120px; width: 100%;"></div>`;
-
-  body.innerHTML = html;
+  html+=`<div style="height:120px;width:100%;"></div>`;
+  body.innerHTML=html;
 }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 購物項目編輯邏輯：新增、勾選、刪除 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ── 購物 CRUD ── */
 function openAddShop(){
-  editCtx = {mode:'shop', person:curPerson};
-  document.getElementById('modalShopTitle').textContent = (curPerson==='yenru'?'燕如':'月雲')+' 新增購物';
+  editCtx={mode:'shop',person:curPerson};
+  document.getElementById('modalShopTitle').textContent=(curPerson==='yenru'?'燕如':'月雲')+' 新增購物';
   document.getElementById('sName').value='';
   document.getElementById('sCat').value='高山';
   document.getElementById('sPrice').value='';
   document.getElementById('sNote').value='';
   openModal('modalShop');
 }
-
 function saveShopItem(){
-  const name = document.getElementById('sName').value.trim();
-  if(!name){ alert('請輸入商品名稱'); return; }
-  const item = {
-    id: mkId(), cat: document.getElementById('sCat').value, name,
-    price: document.getElementById('sPrice').value.trim(),
-    note: document.getElementById('sNote').value.trim(), done: false
-  };
-  if(!S.shopping[editCtx.person]) S.shopping[editCtx.person]=[];
+  const name=document.getElementById('sName').value.trim();
+  if(!name){alert('請輸入商品名稱');return;}
+  const item={id:mkId(),cat:document.getElementById('sCat').value,name,
+    price:document.getElementById('sPrice').value.trim(),
+    note:document.getElementById('sNote').value.trim(),done:false};
+  if(!S.shopping[editCtx.person])S.shopping[editCtx.person]=[];
   S.shopping[editCtx.person].push(item);
-  closeModal('modalShop');
-  scheduleSave();
-  renderShopping();
+  closeModal('modalShop');scheduleSave();renderShopping();
 }
-
-function toggleShop(person, id){
-  const item = (S.shopping[person]||[]).find(i=>i.id==id);
-  if(item){ item.done=!item.done; scheduleSave(); renderShopping(); }
+function toggleShop(person,id){
+  const item=(S.shopping[person]||[]).find(i=>i.id==id);
+  if(item){item.done=!item.done;scheduleSave();renderShopping();}
 }
-
-function delShop(person, id){
+function delShop(person,id){
   confirmDel(()=>{
-    S.shopping[person] = (S.shopping[person]||[]).filter(i=>i.id!=id);
-    scheduleSave();
-    renderShopping();
+    S.shopping[person]=(S.shopping[person]||[]).filter(i=>i.id!=id);
+    scheduleSave();renderShopping();
   });
 }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* Modal 與確認對話框控制 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-function openModal(id){ document.getElementById(id).classList.add('open'); }
-function closeModal(id){ document.getElementById(id).classList.remove('open'); }
-function closeModalOnBg(e,id){ if(e.target.id===id) closeModal(id); }
+/* ── 📷 照片功能（直接壓縮存 Database，不用 Storage）── */
+function triggerPhotoUpload(person,id){
+  photoUploadCtx={person,id};
+  const input=document.getElementById('photoInput');
+  input.value='';
+  input.click();
+}
+
+function handlePhotoUpload(event){
+  const file=event.target.files[0];
+  if(!file||!photoUploadCtx)return;
+  const {person,id}=photoUploadCtx;
+  const progEl=document.getElementById('prog-'+id);
+  if(progEl){progEl.style.display='block';progEl.textContent='壓縮中...';}
+  compressImage(file,800,0.65,dataUrl=>{
+    const item=(S.shopping[person]||[]).find(i=>i.id==id);
+    if(item){
+      item.photoUrl=dataUrl;
+      if(progEl)progEl.style.display='none';
+      scheduleSave();renderShopping();showToast('照片已儲存 📷');
+    }
+  });
+}
+
+function compressImage(file,maxPx,quality,cb){
+  const img=new Image();
+  const url=URL.createObjectURL(file);
+  img.onload=()=>{
+    URL.revokeObjectURL(url);
+    let w=img.width,h=img.height;
+    if(w>maxPx||h>maxPx){
+      if(w>h){h=Math.round(h*maxPx/w);w=maxPx;}
+      else{w=Math.round(w*maxPx/h);h=maxPx;}
+    }
+    const canvas=document.createElement('canvas');
+    canvas.width=w;canvas.height=h;
+    canvas.getContext('2d').drawImage(img,0,0,w,h);
+    cb(canvas.toDataURL('image/jpeg',quality));
+  };
+  img.src=url;
+}
+
+function removePhoto(person,id){
+  const item=(S.shopping[person]||[]).find(i=>i.id==id);
+  if(item){delete item.photoUrl;scheduleSave();renderShopping();showToast('照片已刪除');}
+}
+
+function openPhotoOverlay(url){
+  document.getElementById('photoOverlayImg').src=url;
+  document.getElementById('photoOverlay').classList.add('open');
+}
+
+function closePhotoOverlay(e){
+  if(e.target.id==='photoOverlay')document.getElementById('photoOverlay').classList.remove('open');
+}
+
+/* ── Modal 控制 ── */
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+function closeModalOnBg(e,id){if(e.target.id===id)closeModal(id);}
 
 function confirmDel(cb){
-  confirmCb = cb;
+  confirmCb=cb;
   document.getElementById('confirmOverlay').classList.add('open');
 }
 function closeConfirm(yes){
   document.getElementById('confirmOverlay').classList.remove('open');
-  if(yes && confirmCb) confirmCb();
-  confirmCb = null;
+  if(yes&&confirmCb)confirmCb();
+  confirmCb=null;
 }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* Toast 提示訊息 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ── Toast ── */
 function showToast(msg){
-  const t = document.getElementById('toast');
-  if(!t) return;
-  t.textContent = msg;
-  t.classList.add('show');
+  const t=document.getElementById('toast');
+  if(!t)return;
+  t.textContent=msg;t.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=>t.classList.remove('show'), 2000);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),2000);
 }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* 頁面初始化：應用啟動時執行 */
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-window.addEventListener('DOMContentLoaded', initFirebase);
-
+window.addEventListener('DOMContentLoaded',initFirebase);
 </script>
 </body>
 </html>
