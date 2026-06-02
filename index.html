@@ -165,46 +165,95 @@ body{
 }
 .add-btn:active{background:var(--border)}
 
-/* ── 購物清單 ── */
-.shop-section{margin-bottom:16px}
-.shop-cat-hdr{display:flex;align-items:center;gap:8px;padding:10px 16px 6px 16px;font-size:13px;font-weight:700;color:var(--navy)}
-.cat-pill{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600}
-.sl-item{
-  background:var(--card);border-radius:10px;padding:12px 16px;
-  margin-bottom:8px;margin-left:16px;margin-right:16px;
-  box-shadow:var(--shadow);border:1px solid var(--border);
-  display:flex;align-items:flex-start;gap:10px;position:relative;
-  width:calc(100% - 32px);box-sizing:border-box
+/* ── 購物清單 重新設計 ── */
+.shop-progress-wrap{padding:10px 14px 6px}
+.shop-progress-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.shop-progress-label{font-size:13px;font-weight:600;color:var(--navy)}
+.shop-progress-pct{font-size:12px;color:var(--sub)}
+.shop-progress{background:var(--border);border-radius:10px;height:5px}
+.shop-progress-bar{height:5px;border-radius:10px;background:var(--shop);transition:width .4s}
+
+.shop-cat-section{margin-bottom:8px}
+.shop-cat-hdr{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 14px 6px;font-size:12px;font-weight:700;
+  color:var(--sub);letter-spacing:.5px;text-transform:uppercase
 }
-.sl-check{
-  width:22px;height:22px;border:2px solid var(--border);border-radius:6px;
-  flex-shrink:0;display:flex;align-items:center;justify-content:center;
-  cursor:pointer;transition:all .2s;font-size:13px;margin-top:1px
+.cat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* 雙欄網格 */
+.sl-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+  padding:0 14px
 }
-.sl-item.done .sl-check{background:var(--shop);border-color:var(--shop);color:#fff}
-.sl-item.done .sl-name{text-decoration:line-through;color:var(--sub)}
-.sl-body{flex:1;min-width:0}
-.sl-name{font-size:15px;font-weight:500;line-height:1.4}
-.sl-meta{font-size:11px;color:var(--sub);margin-top:2px}
-.sl-price{font-size:13px;color:var(--shop);font-weight:600}
-.sl-actions{display:flex;flex-direction:column;gap:4px;flex-shrink:0;align-self:flex-start}
-.sl-del{border:none;background:#FEE2E2;color:#B91C1C;border-radius:6px;padding:4px 8px;font-size:11px;cursor:pointer}
-/* 📷 照片相關 */
-.sl-photo-btn{
-  border:none;background:#EFF6FF;color:#1E40AF;border-radius:6px;
-  padding:4px 8px;font-size:11px;cursor:pointer
+.sl-card{
+  background:var(--card);border-radius:12px;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  overflow:hidden;position:relative;
+  display:flex;flex-direction:column;
+  transition:opacity .2s
 }
-.sl-photo-thumb{
-  width:100%;border-radius:8px;margin-top:8px;max-height:160px;
-  object-fit:cover;cursor:pointer;border:1px solid var(--border);display:block
+.sl-card.done{opacity:.6}
+.sl-card.done .sl-card-name{text-decoration:line-through;color:var(--sub)}
+
+/* 正方形照片區 */
+.sl-photo-area{
+  width:100%;aspect-ratio:1/1;
+  background:#F3F4F6;position:relative;overflow:hidden;flex-shrink:0
 }
-.sl-photo-del{
-  position:absolute;top:4px;right:4px;background:rgba(0,0,0,.55);
-  color:#fff;border:none;border-radius:50%;width:20px;height:20px;
-  font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center
+.sl-photo-area.no-photo{
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  gap:4px;cursor:pointer;
 }
-.sl-photo-wrap{position:relative;margin-top:8px}
-.upload-progress{font-size:11px;color:var(--sub);margin-top:4px;display:none}
+.sl-photo-area.no-photo:active{background:#E9EAEC}
+.sl-photo-placeholder{font-size:24px}
+.sl-photo-placeholder-txt{font-size:10px;color:var(--sub)}
+.sl-photo-img{
+  width:100%;height:100%;object-fit:cover;
+  cursor:pointer;display:block
+}
+.sl-photo-del-btn{
+  position:absolute;top:5px;right:5px;
+  background:rgba(0,0,0,.55);color:#fff;
+  border:none;border-radius:50%;width:22px;height:22px;
+  font-size:11px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;line-height:1
+}
+.sl-photo-add-btn{
+  position:absolute;top:5px;right:5px;
+  background:rgba(255,255,255,.85);color:#374151;
+  border:none;border-radius:50%;width:22px;height:22px;
+  font-size:13px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;line-height:1;
+  box-shadow:0 1px 3px rgba(0,0,0,.2)
+}
+
+/* 卡片內容區 */
+.sl-card-body{padding:8px 9px 9px;flex:1;display:flex;flex-direction:column}
+.sl-card-name{font-size:13px;font-weight:600;line-height:1.35;color:var(--text);margin-bottom:3px}
+.sl-card-price{font-size:12px;color:var(--shop);font-weight:600}
+.sl-card-note{font-size:11px;color:var(--sub);margin-top:2px}
+
+/* 打勾按鈕 */
+.sl-check-btn{
+  position:absolute;bottom:8px;right:8px;
+  width:22px;height:22px;border-radius:50%;
+  border:2px solid var(--border);background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:11px;transition:all .15s;flex-shrink:0
+}
+.sl-card.done .sl-check-btn{background:var(--shop);border-color:var(--shop);color:#fff}
+
+/* 刪除按鈕 */
+.sl-del-btn{
+  position:absolute;top:5px;left:5px;
+  background:rgba(0,0,0,.45);color:#fff;
+  border:none;border-radius:50%;width:20px;height:20px;
+  font-size:10px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+
 /* 燈箱 */
 .photo-overlay{
   position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:500;
@@ -217,10 +266,6 @@ body{
   border:none;color:#fff;font-size:18px;border-radius:50%;
   width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center
 }
-
-.shop-progress{background:var(--border);border-radius:10px;height:4px;margin:4px 0 10px}
-.shop-progress-bar{height:4px;border-radius:10px;background:var(--shop);transition:width .3s}
-.shop-progress-text{font-size:11px;color:var(--sub);margin-bottom:6px}
 
 /* ── Modal ── */
 .modal-overlay{
@@ -254,7 +299,7 @@ body{
 .btn-save{background:var(--red);color:#fff}
 .btn-cancel{background:var(--border);color:var(--text)}
 
-/* ── 確認刪除 ── */
+/* 確認刪除 */
 .confirm-overlay{
   position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:300;
   display:none;align-items:center;justify-content:center;padding:20px
@@ -268,7 +313,7 @@ body{
 .conf-ok{background:var(--red);color:#fff}
 .conf-no{background:var(--border);color:var(--text)}
 
-/* ── Toast ── */
+/* Toast */
 .toast{
   position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
   background:#1A1A1A;color:#fff;padding:8px 18px;border-radius:20px;
@@ -276,6 +321,14 @@ body{
   z-index:400;white-space:nowrap
 }
 .toast.show{opacity:1}
+
+/* Modal 購物照片預覽 */
+.modal-photo-area{
+  border:1.5px dashed var(--border);border-radius:9px;min-height:80px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;overflow:hidden;background:#FAFAFA;position:relative
+}
+.modal-photo-area img{width:100%;max-height:180px;object-fit:cover;border-radius:7px;display:block}
 </style>
 </head>
 <body>
@@ -388,12 +441,13 @@ body{
     <div class="fg"><label class="flabel">備註</label><input class="finput" id="sNote" placeholder="數量、規格..."></div>
     <div class="fg">
       <label class="flabel">照片（選填）</label>
-      <div id="sPhotoArea" onclick="triggerModalPhoto()" style="border:1.5px dashed var(--border);border-radius:9px;min-height:72px;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;background:#FAFAFA;position:relative;">
-        <span id="sPhotoHint" style="font-size:13px;color:var(--sub)">📷 點擊拍照或選圖</span>
+      <div class="modal-photo-area" id="sPhotoArea" onclick="triggerModalPhoto()">
+        <span id="sPhotoHint" style="font-size:13px;color:var(--sub)">📷 點擊選取照片或拍照</span>
         <img id="sPhotoPreview" src="" style="display:none;width:100%;max-height:160px;object-fit:cover;border-radius:7px;">
         <button id="sPhotoClear" onclick="clearModalPhoto(event)" style="display:none;position:absolute;top:6px;right:6px;background:rgba(0,0,0,.5);color:#fff;border:none;border-radius:50%;width:22px;height:22px;font-size:12px;cursor:pointer;line-height:1;">✕</button>
       </div>
-      <input type="file" id="sPhotoInput" accept="image/*" capture="environment" style="display:none" onchange="handleModalPhoto(event)">
+      <!-- 移除 capture="environment"，讓用戶可選相簿或拍照 -->
+      <input type="file" id="sPhotoInput" accept="image/*" style="display:none" onchange="handleModalPhoto(event)">
     </div>
     <div class="mactions">
       <button class="btn-cancel" onclick="closeModal('modalShop')">取消</button>
@@ -420,8 +474,8 @@ body{
   <img id="photoOverlayImg" src="" alt="商品照片">
 </div>
 
-<!-- 隱藏的檔案選擇器 -->
-<input type="file" id="photoInput" accept="image/*" capture="environment" style="display:none" onchange="handlePhotoUpload(event)">
+<!-- 隱藏檔案選擇器（相簿+拍照，無 capture 限制） -->
+<input type="file" id="photoInput" accept="image/*" style="display:none" onchange="handlePhotoUpload(event)">
 
 <div class="toast" id="toast"></div>
 
@@ -854,7 +908,7 @@ function saveTr(){
   closeModal('modalTr');scheduleSave();renderItinerary();
 }
 
-/* ── 購物清單渲染 ── */
+/* ── 購物清單渲染（雙欄卡片）── */
 function renderShopping(){
   renderTopTabs();
   if(!S.shopping)S.shopping={yenru:[],yueyun:[]};
@@ -865,8 +919,11 @@ function renderShopping(){
   const done=list.filter(i=>i.done).length;
   const pct=total?Math.round(done/total*100):0;
 
-  let html=`<div style="padding:8px 16px 10px 16px;">
-    <div class="shop-progress-text">${done} / ${total} 完成（${pct}%）</div>
+  let html=`<div class="shop-progress-wrap">
+    <div class="shop-progress-top">
+      <span class="shop-progress-label">購物進度</span>
+      <span class="shop-progress-pct">${done} / ${total}（${pct}%）</span>
+    </div>
     <div class="shop-progress"><div class="shop-progress-bar" style="width:${pct}%"></div></div>
   </div>`;
 
@@ -874,30 +931,42 @@ function renderShopping(){
     const items=list.filter(i=>i.cat===cat);
     if(!items.length)return;
     const cc=CAT_COLOR[cat]||'#6B7280';
-    html+=`<div class="shop-section">
-      <div class="shop-cat-hdr"><span class="cat-pill" style="background:${cc}20;color:${cc}">📍 ${cat}</span></div>`;
+
+    html+=`<div class="shop-cat-section">
+      <div class="shop-cat-hdr">
+        <span class="cat-dot" style="background:${cc}"></span>
+        <span style="color:${cc}">${cat}</span>
+      </div>
+      <div class="sl-grid">`;
+
     items.forEach(item=>{
-      const photoHtml=item.photoUrl
-        ?`<div class="sl-photo-wrap">
-            <img class="sl-photo-thumb" src="${item.photoUrl}" onclick="openPhotoOverlay('${item.photoUrl}')" alt="商品照片">
-            <button class="sl-photo-del" onclick="removePhoto('${curPerson}',${item.id})" title="刪除照片">✕</button>
+      const hasPhoto=!!item.photoUrl;
+      // 照片區：有圖顯示圖、無圖顯示點擊拍照佔位
+      const photoSection=hasPhoto
+        ?`<div class="sl-photo-area" style="cursor:pointer;" onclick="openPhotoOverlay('${item.photoUrl}')">
+            <img class="sl-photo-img" src="${item.photoUrl}" alt="商品照片">
+            <button class="sl-photo-del-btn" onclick="event.stopPropagation();removePhoto('${curPerson}',${item.id})" title="刪除照片">✕</button>
           </div>`
-        :'';
-      html+=`<div class="sl-item${item.done?' done':''}" id="sl-${item.id}">
-        <div class="sl-check" onclick="toggleShop('${curPerson}',${item.id})">${item.done?'✓':''}</div>
-        <div class="sl-body">
-          <div class="sl-name">${esc(item.name)}</div>
-          <div class="sl-meta">${item.price?`<span class="sl-price">${esc(item.price)}</span>`:''}${item.note?` · ${esc(item.note)}`:''}</div>
-          <div class="upload-progress" id="prog-${item.id}"></div>
-          ${photoHtml}
-        </div>
-        <div class="sl-actions">
-          <button class="sl-photo-btn" onclick="triggerPhotoUpload('${curPerson}',${item.id})">📷</button>
-          <button class="sl-del" onclick="delShop('${curPerson}',${item.id})">✕</button>
+        :`<div class="sl-photo-area no-photo" onclick="triggerPhotoUpload('${curPerson}',${item.id})">
+            <span class="sl-photo-placeholder">📷</span>
+            <span class="sl-photo-placeholder-txt">加入照片</span>
+          </div>`;
+
+      html+=`<div class="sl-card${item.done?' done':''}" id="sl-${item.id}">
+        ${photoSection}
+        <div class="sl-card-body">
+          <div class="sl-card-name">${esc(item.name)}</div>
+          ${item.price?`<div class="sl-card-price">${esc(item.price)}</div>`:''}
+          ${item.note?`<div class="sl-card-note">${esc(item.note)}</div>`:''}
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px;">
+            <button onclick="delShop('${curPerson}',${item.id})" style="border:none;background:#FEE2E2;color:#B91C1C;border-radius:6px;padding:3px 8px;font-size:11px;cursor:pointer;">✕ 刪除</button>
+            <button class="sl-check-btn" onclick="toggleShop('${curPerson}',${item.id})">${item.done?'✓':''}</button>
+          </div>
         </div>
       </div>`;
     });
-    html+='</div>';
+
+    html+=`</div></div>`;
   });
 
   html+=`<div style="position:fixed;bottom:75px;left:0;width:100%;pointer-events:none;z-index:100;">
@@ -944,7 +1013,7 @@ function delShop(person,id){
   });
 }
 
-/* ── 📷 照片功能（直接壓縮存 Database，不用 Storage）── */
+/* ── 照片功能（直接壓縮存 Database）── */
 function triggerModalPhoto(){
   document.getElementById('sPhotoInput').click();
 }
@@ -982,13 +1051,10 @@ function handlePhotoUpload(event){
   const file=event.target.files[0];
   if(!file||!photoUploadCtx)return;
   const {person,id}=photoUploadCtx;
-  const progEl=document.getElementById('prog-'+id);
-  if(progEl){progEl.style.display='block';progEl.textContent='壓縮中...';}
   compressImage(file,800,0.65,dataUrl=>{
     const item=(S.shopping[person]||[]).find(i=>i.id==id);
     if(item){
       item.photoUrl=dataUrl;
-      if(progEl)progEl.style.display='none';
       scheduleSave();renderShopping();showToast('照片已儲存 📷');
     }
   });
