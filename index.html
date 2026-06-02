@@ -173,13 +173,13 @@ body{
 .shop-progress{background:var(--border);border-radius:10px;height:5px}
 .shop-progress-bar{height:5px;border-radius:10px;background:var(--shop);transition:width .4s}
 
-.shop-cat-section{margin-bottom:8px}
+.shop-cat-section{margin-bottom:6px}
 .shop-cat-hdr{
   display:flex;align-items:center;gap:8px;
-  padding:10px 14px 6px;font-size:12px;font-weight:700;
-  color:var(--sub);letter-spacing:.5px;text-transform:uppercase
+  padding:12px 14px 6px 18px;font-size:14px;font-weight:700;
+  color:var(--text);letter-spacing:0
 }
-.cat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
 
 /* 雙欄網格 */
 .sl-grid{
@@ -927,15 +927,14 @@ function renderShopping(){
     <div class="shop-progress"><div class="shop-progress-bar" style="width:${pct}%"></div></div>
   </div>`;
 
-  cats.forEach(cat=>{
+  cats.forEach((cat,catIdx)=>{
     const items=list.filter(i=>i.cat===cat);
     if(!items.length)return;
     const cc=CAT_COLOR[cat]||'#6B7280';
 
-    html+=`<div class="shop-cat-section">
+    html+=`<div class="shop-cat-section" style="margin-top:${catIdx>0?'20px':'0'}">
       <div class="shop-cat-hdr">
-        <span class="cat-dot" style="background:${cc}"></span>
-        <span style="color:${cc}">${cat}</span>
+        <span style="color:${cc};border-left:3px solid ${cc};padding-left:8px;line-height:1;padding-top:2px;padding-bottom:2px;">${cat}</span>
       </div>
       <div class="sl-grid">`;
 
