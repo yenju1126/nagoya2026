@@ -959,7 +959,10 @@ function renderShopping(){
           ${item.price?`<div class="sl-card-price">${esc(item.price)}</div>`:''}
           ${item.note?`<div class="sl-card-note">${esc(item.note)}</div>`:''}
           <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px;">
-            <button onclick="delShop('${curPerson}',${item.id})" style="border:none;background:#FEE2E2;color:#B91C1C;border-radius:6px;padding:3px 8px;font-size:11px;cursor:pointer;">✕ 刪除</button>
+            <div style="display:flex;gap:4px;">
+              <button onclick="openEditShop('${curPerson}',${item.id})" style="border:none;background:#F3F4F6;color:#374151;border-radius:6px;padding:3px 8px;font-size:11px;cursor:pointer;">✏️</button>
+              <button onclick="delShop('${curPerson}',${item.id})" style="border:none;background:#FEE2E2;color:#B91C1C;border-radius:6px;padding:3px 8px;font-size:11px;cursor:pointer;">✕</button>
+            </div>
             <button class="sl-check-btn" onclick="toggleShop('${curPerson}',${item.id})">${item.done?'✓':''}</button>
           </div>
         </div>
@@ -980,13 +983,33 @@ function renderShopping(){
 
 /* ── 購物 CRUD ── */
 function openAddShop(){
-  editCtx={mode:'shop',person:curPerson};
+  editCtx={mode:'shop',person:curPerson,id:null};
   document.getElementById('modalShopTitle').textContent=(curPerson==='yenru'?'燕如':'月雲')+' 新增購物';
   document.getElementById('sName').value='';
   document.getElementById('sCat').value='高山';
   document.getElementById('sPrice').value='';
   document.getElementById('sNote').value='';
+  document.getElementById('modalShop').querySelector('.btn-save').textContent='新增';
   clearModalPhoto();
+  openModal('modalShop');
+}
+function openEditShop(person,id){
+  const item=(S.shopping[person]||[]).find(i=>i.id==id);
+  if(!item)return;
+  editCtx={mode:'shop',person,id};
+  document.getElementById('modalShopTitle').textContent='編輯購物項目';
+  document.getElementById('sName').value=item.name||'';
+  document.getElementById('sCat').value=item.cat||'高山';
+  document.getElementById('sPrice').value=item.price||'';
+  document.getElementById('sNote').value=item.note||'';
+  document.getElementById('modalShop').querySelector('.btn-save').textContent='儲存';
+  const preview=document.getElementById('sPhotoPreview');
+  const hint=document.getElementById('sPhotoHint');
+  const clear=document.getElementById('sPhotoClear');
+  if(item.photoUrl){
+    preview.src=item.photoUrl;preview.style.display='block';
+    hint.style.display='none';clear.style.display='flex';
+  }else{clearModalPhoto();}
   openModal('modalShop');
 }
 function saveShopItem(){
@@ -994,12 +1017,25 @@ function saveShopItem(){
   if(!name){alert('請輸入商品名稱');return;}
   const preview=document.getElementById('sPhotoPreview');
   const photoUrl=(preview.style.display!=='none'&&preview.src)?preview.src:'';
-  const item={id:mkId(),cat:document.getElementById('sCat').value,name,
-    price:document.getElementById('sPrice').value.trim(),
-    note:document.getElementById('sNote').value.trim(),done:false};
-  if(photoUrl)item.photoUrl=photoUrl;
   if(!S.shopping[editCtx.person])S.shopping[editCtx.person]=[];
-  S.shopping[editCtx.person].push(item);
+  if(editCtx.id){
+    const idx=S.shopping[editCtx.person].findIndex(i=>i.id==editCtx.id);
+    if(idx>=0){
+      const old=S.shopping[editCtx.person][idx];
+      const updated={...old,cat:document.getElementById('sCat').value,name,
+        price:document.getElementById('sPrice').value.trim(),
+        note:document.getElementById('sNote').value.trim()};
+      if(photoUrl)updated.photoUrl=photoUrl;
+      else delete updated.photoUrl;
+      S.shopping[editCtx.person][idx]=updated;
+    }
+  }else{
+    const item={id:mkId(),cat:document.getElementById('sCat').value,name,
+      price:document.getElementById('sPrice').value.trim(),
+      note:document.getElementById('sNote').value.trim(),done:false};
+    if(photoUrl)item.photoUrl=photoUrl;
+    S.shopping[editCtx.person].push(item);
+  }
   closeModal('modalShop');scheduleSave();renderShopping();
 }
 function toggleShop(person,id){
