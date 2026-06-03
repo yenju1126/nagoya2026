@@ -113,12 +113,15 @@ body{
 .type-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .type-badge{font-size:11px;font-weight:600;padding:1px 7px;border-radius:5px;white-space:nowrap}
 .ic-title{font-size:16px;font-weight:700;line-height:1.4;color:var(--text)}
-.ic-desc{font-size:14px;color:var(--sub);line-height:1.6;margin-top:3px}
+.ic-desc{font-size:14px;color:var(--sub);line-height:1.6;margin-top:3px;white-space:pre-wrap}
 .ic-note{
   background:var(--note-bg);border-left:3px solid var(--note-border);
   border-radius:0 8px 8px 0;padding:7px 10px;margin-top:8px;
-  font-size:11px;color:var(--note-text);line-height:1.6
+  font-size:11px;color:var(--note-text);line-height:1.6;
+  display:flex;gap:5px;align-items:flex-start
 }
+.ic-note-icon{flex-shrink:0;line-height:1.6}
+.ic-note-text{white-space:pre-wrap;flex:1;min-width:0}
 .ic-actions{position:absolute;top:10px;right:10px;display:flex;gap:4px}
 .btn-sm{
   border:none;border-radius:6px;padding:4px 8px;font-size:11px;
@@ -151,7 +154,9 @@ body{
 .tr-arrow{font-size:11px;color:var(--sub)}
 .tr-dur{font-size:11px;font-weight:600;color:#374151;background:#E0E7FF;padding:1px 7px;border-radius:10px}
 .tr-cost{font-size:12px;color:var(--sub)}
-.tr-note{background:#fff;border-radius:6px;padding:5px 8px;margin-top:6px;font-size:13px;color:var(--note-text);border:1px solid var(--note-border)}
+.tr-note{background:#fff;border-radius:6px;padding:5px 8px;margin-top:6px;font-size:13px;color:var(--note-text);border:1px solid var(--note-border);display:flex;gap:5px;align-items:flex-start}
+.tr-note-icon{flex-shrink:0;line-height:1.6}
+.tr-note-text{white-space:pre-wrap;flex:1;min-width:0}
 .tr-actions{position:absolute;top:8px;right:8px;display:flex;gap:4px}
 .tr-drag{
   font-size:16px;color:#B0B8D1;cursor:grab;flex-shrink:0;padding:0 2px;
@@ -446,7 +451,6 @@ body{
         <img id="sPhotoPreview" src="" style="display:none;width:100%;max-height:160px;object-fit:cover;border-radius:7px;">
         <button id="sPhotoClear" onclick="clearModalPhoto(event)" style="display:none;position:absolute;top:6px;right:6px;background:rgba(0,0,0,.5);color:#fff;border:none;border-radius:50%;width:22px;height:22px;font-size:12px;cursor:pointer;line-height:1;">✕</button>
       </div>
-      <!-- 移除 capture="environment"，讓用戶可選相簿或拍照 -->
       <input type="file" id="sPhotoInput" accept="image/*" style="display:none" onchange="handleModalPhoto(event)">
     </div>
     <div class="mactions">
@@ -474,7 +478,7 @@ body{
   <img id="photoOverlayImg" src="" alt="商品照片">
 </div>
 
-<!-- 隱藏檔案選擇器（相簿+拍照，無 capture 限制） -->
+<!-- 隱藏檔案選擇器 -->
 <input type="file" id="photoInput" accept="image/*" style="display:none" onchange="handlePhotoUpload(event)">
 
 <div class="toast" id="toast"></div>
@@ -785,7 +789,7 @@ function renderItem(seg,di){
           </div>
           <div class="ic-title">${esc(seg.title)}</div>
           ${seg.desc?`<div class="ic-desc">${esc(seg.desc)}</div>`:''}
-          ${seg.note?`<div class="ic-note">📌 ${esc(seg.note)}</div>`:''}
+          ${seg.note?`<div class="ic-note"><span class="ic-note-icon">📌</span><span class="ic-note-text">${esc(seg.note)}</span></div>`:''}
         </div>
       </div>
       <div class="ic-actions">
@@ -812,7 +816,7 @@ function renderTr(seg,di){
           ${seg.dur?`<span class="tr-dur">${esc(seg.dur)}</span>`:''}
           ${seg.cost?`<span class="tr-cost">${esc(seg.cost)}</span>`:''}
         </div>
-        ${seg.note?`<div class="tr-note">📌 ${esc(seg.note)}</div>`:''}
+        ${seg.note?`<div class="tr-note"><span class="tr-note-icon">📌</span><span class="tr-note-text">${esc(seg.note)}</span></div>`:''}
       </div>
       <div class="tr-actions">
         <button class="btn-sm btn-edit" onclick="openEditTr(${di},'${seg.id}')">✏️</button>
@@ -940,7 +944,6 @@ function renderShopping(){
 
     items.forEach(item=>{
       const hasPhoto=!!item.photoUrl;
-      // 照片區：有圖顯示圖、無圖顯示點擊拍照佔位
       const photoSection=hasPhoto
         ?`<div class="sl-photo-area" style="cursor:pointer;" onclick="openPhotoOverlay('${item.photoUrl}')">
             <img class="sl-photo-img" src="${item.photoUrl}" alt="商品照片">
@@ -1048,7 +1051,7 @@ function delShop(person,id){
   });
 }
 
-/* ── 照片功能（直接壓縮存 Database）── */
+/* ── 照片功能 ── */
 function triggerModalPhoto(){
   document.getElementById('sPhotoInput').click();
 }
