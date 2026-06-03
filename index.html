@@ -511,6 +511,9 @@ const CAT_COLOR = {高山:'#DC2626',上高地:'#7C3AED',名古屋:'#D97706',機�
 
 function mkId(){return Date.now()+Math.floor(Math.random()*10000)}
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function linkify(s){
+  return esc(s).replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener" onclick="event.stopPropagation();window.open(this.href,\'_blank\');return false;" style="color:inherit;text-decoration:underline;word-break:break-all;cursor:pointer;">$1</a>')
+}
 
 const D={
   days:[
@@ -788,8 +791,8 @@ function renderItem(seg,di){
             <span class="type-badge ${tc.badge}">${tc.label}</span>
           </div>
           <div class="ic-title">${esc(seg.title)}</div>
-          ${seg.desc?`<div class="ic-desc">${esc(seg.desc)}</div>`:''}
-          ${seg.note?`<div class="ic-note"><span class="ic-note-icon">📌</span><span class="ic-note-text">${esc(seg.note)}</span></div>`:''}
+          ${seg.desc?`<div class="ic-desc">${linkify(seg.desc)}</div>`:''}
+          ${seg.note?`<div class="ic-note"><span class="ic-note-icon">📌</span><span class="ic-note-text">${linkify(seg.note)}</span></div>`:''}
         </div>
       </div>
       <div class="ic-actions">
@@ -816,7 +819,7 @@ function renderTr(seg,di){
           ${seg.dur?`<span class="tr-dur">${esc(seg.dur)}</span>`:''}
           ${seg.cost?`<span class="tr-cost">${esc(seg.cost)}</span>`:''}
         </div>
-        ${seg.note?`<div class="tr-note"><span class="tr-note-icon">📌</span><span class="tr-note-text">${esc(seg.note)}</span></div>`:''}
+        ${seg.note?`<div class="tr-note"><span class="tr-note-icon">📌</span><span class="tr-note-text">${linkify(seg.note)}</span></div>`:''}
       </div>
       <div class="tr-actions">
         <button class="btn-sm btn-edit" onclick="openEditTr(${di},'${seg.id}')">✏️</button>
@@ -1155,6 +1158,16 @@ function showToast(msg){
 }
 
 window.addEventListener('DOMContentLoaded',initFirebase);
+
+/* 讓 Sortable 內的連結在 touch 裝置也能點擊 */
+document.addEventListener('touchend',function(e){
+  const a=e.target.closest('a[href]');
+  if(a){
+    e.preventDefault();
+    e.stopPropagation();
+    a.dispatchEvent(new MouseEvent('click',{bubbles:false,cancelable:true}));
+  }
+},{passive:false});
 </script>
 </body>
 </html>
