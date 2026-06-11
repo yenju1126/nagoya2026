@@ -865,15 +865,46 @@ function openEditItem(di,id){
   openModal('modalItem');
 }
 function saveItem(){
+
   const title=document.getElementById('iTitle').value.trim();
-  if(!title){alert('請輸入標題');return;}
-  const seg={k:'item',id:editCtx.id||mkId(),type:document.getElementById('iType').value,
-    time:document.getElementById('iTime').value.trim(),title,
-    desc:document.getElementById('iDesc').value.trim(),note:document.getElementById('iNote').value.trim()};
+
+  if(!title){
+    alert('請輸入標題');
+    return;
+  }
+
+  const seg={
+    k:'item',
+    id:editCtx.id || mkId(),
+    type:document.getElementById('iType').value,
+    time:document.getElementById('iTime').value.trim(),
+    title:title,
+    desc:document.getElementById('iDesc').value.trim(),
+    note:document.getElementById('iNote').value.trim()
+  };
+
   const day=S.days[editCtx.dayIdx];
-  if(editCtx.id){const idx=day.segments.findIndex(s=>s.id==editCtx.id);if(idx>=0)day.segments[idx]=seg;}
-  else{day.segments.push(seg);}
-  closeModal('modalItem');scheduleSave();renderItinerary();
+
+  // 修復 segments 遺失問題
+  if(!Array.isArray(day.segments)){
+    day.segments=[];
+  }
+
+  if(editCtx.id){
+    const idx=day.segments.findIndex(s=>s.id==editCtx.id);
+
+    if(idx>=0){
+      day.segments[idx]=seg;
+    }else{
+      day.segments.push(seg);
+    }
+  }else{
+    day.segments.push(seg);
+  }
+
+  closeModal('modalItem');
+  scheduleSave();
+  renderItinerary();
 }
 function delSeg(di,id){
   S.days[di].segments=S.days[di].segments.filter(s=>s.id!=id);
@@ -904,15 +935,42 @@ function openEditTr(di,id){
   openModal('modalTr');
 }
 function saveTr(){
-  const seg={k:'tr',id:editCtx.id||mkId(),tool:document.getElementById('tTool').value,
-    line:document.getElementById('tLine').value.trim(),dir:document.getElementById('tDir').value.trim(),
-    dep:document.getElementById('tDep').value.trim(),arr:document.getElementById('tArr').value.trim(),
-    dur:document.getElementById('tDur').value.trim(),cost:document.getElementById('tCost').value.trim(),
-    note:document.getElementById('tNote').value.trim()};
+
+  const seg={
+    k:'tr',
+    id:editCtx.id || mkId(),
+    tool:document.getElementById('tTool').value,
+    line:document.getElementById('tLine').value.trim(),
+    dir:document.getElementById('tDir').value.trim(),
+    dep:document.getElementById('tDep').value.trim(),
+    arr:document.getElementById('tArr').value.trim(),
+    dur:document.getElementById('tDur').value.trim(),
+    cost:document.getElementById('tCost').value.trim(),
+    note:document.getElementById('tNote').value.trim()
+  };
+
   const day=S.days[editCtx.dayIdx];
-  if(editCtx.id){const idx=day.segments.findIndex(s=>s.id==editCtx.id);if(idx>=0)day.segments[idx]=seg;}
-  else{day.segments.push(seg);}
-  closeModal('modalTr');scheduleSave();renderItinerary();
+
+  // 修復 segments 遺失問題
+  if(!Array.isArray(day.segments)){
+    day.segments=[];
+  }
+
+  if(editCtx.id){
+    const idx=day.segments.findIndex(s=>s.id==editCtx.id);
+
+    if(idx>=0){
+      day.segments[idx]=seg;
+    }else{
+      day.segments.push(seg);
+    }
+  }else{
+    day.segments.push(seg);
+  }
+
+  closeModal('modalTr');
+  scheduleSave();
+  renderItinerary();
 }
 
 /* ── 購物清單渲染（雙欄卡片）── */
