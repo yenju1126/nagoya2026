@@ -400,6 +400,7 @@ body{
       <select class="fselect" id="tTool">
         <option value="JR">🚆 JR</option>
         <option value="名鉄">🚃 名鉄</option>
+        <option value="近鉄">🚄 近鉄</option>
         <option value="巴士">🚌 巴士</option>
         <option value="地下鉄">🚇 地下鉄</option>
         <option value="計程車">🚕 計程車</option>
@@ -506,7 +507,7 @@ const TC = {
   hotel: {label:'🏨 住宿', badge:'hotel-c',dot:'hotel-d'},
   tran:  {label:'🚌 交通', badge:'tran-c', dot:'tran-d'}
 };
-const TOOL_ICON = {JR:'🚆',名鉄:'🚃',巴士:'🚌',地下鉄:'🚇',計程車:'🚕',步行:'🚶',飛機:'✈️'};
+const TOOL_ICON = {JR:'🚆',名鉄:'🚃',近鉄:'🚄',巴士:'🚌',地下鉄:'🚇',計程車:'🚕',步行:'🚶',飛機:'✈️'};
 const CAT_COLOR = {高山:'#DC2626',上高地:'#7C3AED',名古屋:'#D97706',機場:'#2563EB',其他:'#6B7280'};
 
 function mkId(){return Date.now()+Math.floor(Math.random()*10000)}
