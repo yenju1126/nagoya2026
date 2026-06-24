@@ -225,15 +225,15 @@ body{
   padding:10px 14px;
 }
 .comm-card{
-  background:var(--card);border-radius:14px;padding:14px 12px;
+  background:var(--card);border-radius:14px;padding:12px 11px 10px;
   box-shadow:var(--shadow);border:1px solid var(--border);
   cursor:pointer;transition:transform .1s,box-shadow .1s;
-  display:flex;flex-direction:column;gap:5px;position:relative;min-height:90px
+  display:flex;flex-direction:column;gap:4px;position:relative;min-height:80px
 }
 .comm-card:active{transform:scale(.97);box-shadow:none}
-.comm-card-emoji{font-size:22px;line-height:1;margin-bottom:2px}
-.comm-card-zh{font-size:13px;font-weight:700;color:var(--text);line-height:1.4}
-.comm-card-ja{font-size:11px;color:var(--sub);line-height:1.5;margin-top:1px}
+.comm-card-emoji{font-size:20px;line-height:1;margin-bottom:4px}
+.comm-card-ja{font-size:13px;font-weight:700;color:var(--text);line-height:1.45}
+.comm-card-zh{font-size:11px;color:var(--sub);line-height:1.4;margin-top:2px}
 .comm-card-del{
   position:absolute;top:6px;right:6px;
   background:#FEE2E2;color:#B91C1C;border:none;border-radius:50%;
@@ -260,14 +260,14 @@ body{
   font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
   color:var(--sub);margin-bottom:16px
 }
-.comm-display-emoji{font-size:64px;line-height:1;margin-bottom:20px}
-.comm-display-zh{
-  font-size:28px;font-weight:800;color:var(--navy);text-align:center;
-  line-height:1.4;margin-bottom:16px;letter-spacing:.5px
-}
+.comm-display-emoji{font-size:48px;line-height:1;margin-bottom:16px}
 .comm-display-ja{
-  font-size:22px;font-weight:700;color:var(--red);text-align:center;
-  line-height:1.6;border-top:2px solid var(--border);padding-top:16px;
+  font-size:30px;font-weight:800;color:var(--text);text-align:center;
+  line-height:1.5;margin-bottom:16px;letter-spacing:.3px;width:100%
+}
+.comm-display-zh{
+  font-size:16px;color:var(--sub);text-align:center;
+  line-height:1.5;border-top:1.5px solid var(--border);padding-top:14px;
   width:100%
 }
 .comm-display-hint{
@@ -504,11 +504,14 @@ body{
 <!-- 溝通小卡展示 overlay -->
 <div class="comm-display-overlay" id="commDisplayOverlay">
   <button class="comm-display-close" onclick="closeCommDisplay()">✕</button>
+
   <div class="comm-display-scene" id="commDisplayScene"></div>
+
   <div class="comm-display-emoji" id="commDisplayEmoji"></div>
-  <div class="comm-display-zh" id="commDisplayZh"></div>
+
   <div class="comm-display-ja" id="commDisplayJa"></div>
-  <div class="comm-display-hint">👆 指給對方看</div>
+
+  <div class="comm-display-zh" id="commDisplayZh"></div>
 </div>
 
 <!-- 確認刪除 -->
@@ -709,6 +712,16 @@ function renderTopTabs(){
       <button class="ptab${curPerson==='yenru'?' active':''}" onclick="setPerson('yenru')">燕如</button>
       <button class="ptab${curPerson==='yueyun'?' active':''}" onclick="setPerson('yueyun')">月雲</button>
     </div>`;
+  }else if(curPage==='comm'){
+    c.innerHTML='<div class="day-tabs" id="comm-tabs-inner"></div>';
+    const ct=document.getElementById('comm-tabs-inner');
+    COMM_SCENES.forEach(sc=>{
+      const el=document.createElement('div');
+      el.className='dtab'+(sc===curCommScene?' active':'');
+      el.innerHTML=`<div class="dtab-date">${sc}</div><div class="dtab-wd">${COMM_SCENE_ICON[sc]||''}</div>`;
+      el.onclick=()=>{curCommScene=sc;renderComm();renderTopTabs();};
+      ct.appendChild(el);
+    });
   }else{
     c.innerHTML='';
   }
@@ -1034,14 +1047,7 @@ function renderComm(){
   const allCards=getAllCommCards();
   const sceneCards=allCards.filter(c=>c.scene===curCommScene);
 
-  let html=`<div class="comm-scene-tabs">`;
-  COMM_SCENES.forEach(sc=>{
-    const cnt=allCards.filter(c=>c.scene===sc).length;
-    html+=`<div class="comm-scene-tab${sc===curCommScene?' active':''}" onclick="setCommScene('${sc}')">
-      ${COMM_SCENE_ICON[sc]||''} ${sc} <span style="font-size:10px;opacity:.6">${cnt}</span>
-    </div>`;
-  });
-  html+='</div>';
+  let html='';
 
   if(sceneCards.length===0){
     html+=`<div style="text-align:center;padding:40px 20px;color:var(--sub)">
@@ -1055,8 +1061,8 @@ function renderComm(){
       const isCustom=!card.preset;
       html+=`<div class="comm-card${isCustom?' custom':''}" onclick="showCommCard(${card.id})">
         <div class="comm-card-emoji">${card.emoji||'💬'}</div>
-        <div class="comm-card-zh">${esc(card.zh)}</div>
         <div class="comm-card-ja">${esc(card.ja)}</div>
+        <div class="comm-card-zh">${esc(card.zh)}</div>
         ${isCustom?`<button class="comm-card-del" onclick="event.stopPropagation();delCommCard(${card.id})">✕</button>`:''}
       </div>`;
     });
