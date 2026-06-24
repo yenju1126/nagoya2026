@@ -525,7 +525,7 @@ body{
       <input class="finput" id="cZh" placeholder="例：請給我一杯熱茶">
     </div>
     <div class="fg">
-      <label class="flabel">日文（展示給店員看）</label>
+     
       <textarea class="ftextarea" id="cJa" placeholder="例：お茶を一杯いただけますか？" style="min-height:72px;font-size:16px"></textarea>
     </div>
     <div class="fg">
@@ -608,42 +608,7 @@ const TOOL_ICON = {JR:'🚆',名鉄:'🚃',近鉄:'🚄',巴士:'🚌',地下鉄
 const CAT_COLOR = {高山:'#DC2626',上高地:'#7C3AED',名古屋:'#D97706',機場:'#2563EB',其他:'#6B7280'};
 
 /* ── 溝通小卡預設資料 ── */
-const DEFAULT_COMM_CARDS = [
-  // 餐廳
-  {id:9001,scene:'餐廳',emoji:'🍽️',zh:'請問有英文菜單嗎？',ja:'英語のメニューはありますか？',preset:true},
-  {id:9002,scene:'餐廳',emoji:'🥢',zh:'不吃牛肉',ja:'牛肉は食べられません',preset:true},
-  {id:9003,scene:'餐廳',emoji:'🌿',zh:'不吃豬肉',ja:'豚肉は食べられません',preset:true},
-  {id:9004,scene:'餐廳',emoji:'🦐',zh:'對海鮮過敏',ja:'海鮮アレルギーがあります',preset:true},
-  {id:9005,scene:'餐廳',emoji:'🚭',zh:'請給我禁菸座位',ja:'禁煙席をお願いします',preset:true},
-  {id:9006,scene:'餐廳',emoji:'♨️',zh:'請問可以加熱嗎？',ja:'温めていただけますか？',preset:true},
-  {id:9007,scene:'餐廳',emoji:'🧾',zh:'請給我收據',ja:'領収書をいただけますか？',preset:true},
-  {id:9008,scene:'餐廳',emoji:'💳',zh:'可以刷卡嗎？',ja:'カードで支払えますか？',preset:true},
-  // 交通
-  {id:9101,scene:'交通',emoji:'🚆',zh:'請問這班車去高山嗎？',ja:'この電車は高山行きですか？',preset:true},
-  {id:9102,scene:'交通',emoji:'🎫',zh:'我需要買對號座',ja:'指定席券が必要です',preset:true},
-  {id:9103,scene:'交通',emoji:'🧳',zh:'行李可以放哪裡？',ja:'荷物はどこに置けますか？',preset:true},
-  {id:9104,scene:'交通',emoji:'🔄',zh:'我需要換乘，請問在哪裡？',ja:'乗り換えはどこですか？',preset:true},
-  {id:9105,scene:'交通',emoji:'⏰',zh:'下一班幾點？',ja:'次の便は何時ですか？',preset:true},
-  {id:9106,scene:'交通',emoji:'🗺️',zh:'請問上高地巴士在哪裡搭？',ja:'上高地行きのバス乗り場はどこですか？',preset:true},
-  // 住宿
-  {id:9201,scene:'住宿',emoji:'🛎️',zh:'我有預約，姓名是…',ja:'予約しています。名前は…',preset:true},
-  {id:9202,scene:'住宿',emoji:'🔑',zh:'可以幫我存放行李嗎？',ja:'荷物を預かっていただけますか？',preset:true},
-  {id:9203,scene:'住宿',emoji:'🛁',zh:'浴衣怎麼穿？',ja:'浴衣の着方を教えていただけますか？',preset:true},
-  {id:9204,scene:'住宿',emoji:'🍱',zh:'幾點可以用早餐？',ja:'朝食は何時からですか？',preset:true},
-  {id:9205,scene:'住宿',emoji:'🕙',zh:'退房時間是幾點？',ja:'チェックアウトは何時ですか？',preset:true},
-  // 購物
-  {id:9301,scene:'購物',emoji:'🔍',zh:'請問有沒有…',ja:'…はありますか？',preset:true},
-  {id:9302,scene:'購物',emoji:'🎁',zh:'請幫我包成禮品',ja:'ギフト包装をお願いします',preset:true},
-  {id:9303,scene:'購物',emoji:'🧾',zh:'可以退稅嗎？',ja:'免税はできますか？',preset:true},
-  {id:9304,scene:'購物',emoji:'📦',zh:'有更大的尺寸嗎？',ja:'もっと大きいサイズはありますか？',preset:true},
-  {id:9305,scene:'購物',emoji:'💴',zh:'這個多少錢？',ja:'これはいくらですか？',preset:true},
-  // 緊急
-  {id:9401,scene:'緊急',emoji:'🆘',zh:'請幫我叫救護車',ja:'救急車を呼んでください',preset:true},
-  {id:9402,scene:'緊急',emoji:'🏥',zh:'最近的醫院在哪裡？',ja:'近くの病院はどこですか？',preset:true},
-  {id:9403,scene:'緊急',emoji:'💊',zh:'我需要藥局',ja:'薬局が必要です',preset:true},
-  {id:9404,scene:'緊急',emoji:'👮',zh:'請幫我報警',ja:'警察を呼んでください',preset:true},
-  {id:9405,scene:'緊急',emoji:'📞',zh:'請問可以借我電話嗎？',ja:'電話を貸していただけますか？',preset:true},
-];
+const DEFAULT_COMM_CARDS = [];
 
 const COMM_SCENES = ['餐廳','交通','住宿','購物','緊急','其他'];
 const COMM_SCENE_ICON = {餐廳:'🍽️',交通:'🚆',住宿:'🏨',購物:'🛒',緊急:'🆘',其他:'💡'};
@@ -668,7 +633,7 @@ let confirmCb=null;
 let toastTimer=null;
 let photoUploadCtx=null;
 
-/* ── Firebase ── */
+/* ── Firebase ── */0
 function initFirebase(){
   const dot=document.getElementById('dbDot');
   if(!FB_CONFIG.apiKey){dot.style.background='#6B7280';loadLocalWithDefault();return;}
