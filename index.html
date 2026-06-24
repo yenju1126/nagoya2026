@@ -220,30 +220,75 @@ body{
 .comm-scene-tab.active{
   background:var(--navy);border-color:var(--navy);color:#fff
 }
-.comm-cards-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:10px;
-  padding:10px 14px;
+.comm-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 10px 14px;
 }
-.comm-card{
-  background:var(--card);border-radius:14px;padding:12px 11px 10px;
-  box-shadow:var(--shadow);border:1px solid var(--border);
-  cursor:pointer;transition:transform .1s,box-shadow .1s;
-  display:flex;flex-direction:column;gap:4px;position:relative;min-height:80px
+
+.comm-card {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 12px 11px 10px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform .1s, box-shadow .1s;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  min-height: 80px;
 }
 .comm-card:active{transform:scale(.97);box-shadow:none}
-.comm-card-emoji{font-size:20px;line-height:1;margin-bottom:4px}
-.comm-card-ja{font-size:13px;font-weight:700;color:var(--text);line-height:1.45}
-.comm-card-zh{font-size:11px;color:var(--sub);line-height:1.4;margin-top:2px}
-.comm-card-del{
-  position:absolute;top:6px;right:6px;
-  background:#FEE2E2;color:#B91C1C;border:none;border-radius:50%;
-  width:18px;height:18px;font-size:9px;cursor:pointer;
-  display:none;align-items:center;justify-content:center;
+.comm-card.custom {
+  background: var(--card);
+  border-color: var(--border);
 }
-.comm-card:hover .comm-card-del{display:flex}
-/* 用於自訂卡片 */
-.comm-card.custom{border-color:#E0E7FF;background:#F5F7FF}
 
+.comm-card-emoji {
+  font-size: 20px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.comm-card-zh {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.45;
+  order: 1;
+}
+
+.comm-card-ja {
+  font-size: 11px;
+  color: var(--sub);
+  line-height: 1.4;
+  margin-top: 2px;
+  order: 2;
+}
+
+.comm-card-del {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: #FEE2E2;
+  color: #B91C1C;
+  border: none;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 9px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.comm-card:hover .comm-card-del {
+  display: flex;
+}
 /* 展示模式 overlay */
 .comm-display-overlay{
   position:fixed;inset:0;background:#fff;z-index:600;
