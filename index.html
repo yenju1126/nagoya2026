@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>🌸 關西之旅 2026</title>
+<title>🗾 日本行程 2026</title>
+
 <style>
 :root{
   --red:#C8392B;--navy:#0F2040;--cream:#F7F5F0;--card:#fff;
@@ -16,7 +17,11 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden}
-body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;background:var(--cream);color:var(--text);font-size:15px;line-height:1.5;max-width:480px;margin:0 auto;display:flex;flex-direction:column}
+body{
+  font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
+  background:var(--cream);color:var(--text);font-size:15px;line-height:1.5;
+  max-width:480px;margin:0 auto;display:flex;flex-direction:column
+}
 .top-header{background:var(--navy);color:#fff;padding:14px 16px 0;flex-shrink:0;z-index:50;width:100%}
 .th-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .th-title{font-size:17px;font-weight:700;letter-spacing:.3px}
@@ -31,6 +36,8 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;backgroun
 .dtab{scroll-snap-align:start}
 .dtab .dtab-date{font-size:13px;font-weight:700}
 .dtab .dtab-wd{font-size:10px;opacity:.8}
+.dtab.holiday{border-color:#F59E0B}
+.dtab.active.holiday{background:#D97706;border-color:#D97706}
 .person-tabs{display:flex;gap:8px;padding:0 14px 12px;background:var(--navy)}
 .ptab{flex:1;height:42px;border-radius:20px;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);font-size:14px;font-weight:600;border:1px solid rgba(255,255,255,0.2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
 .ptab.active{background:var(--red);color:#fff;border-color:var(--red)}
@@ -41,6 +48,16 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;backgroun
 .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:none;background:transparent;color:var(--sub);font-size:12px;font-weight:500;cursor:pointer;transition:color .15s}
 .nav-btn .ni{font-size:22px;line-height:1}
 .nav-btn.active{color:var(--red)}
+.day-hdr{padding:14px 4px 8px;display:none}
+.day-hdr-title{font-size:20px;font-weight:800;color:var(--navy)}
+.day-hdr-sub{font-size:12px;color:var(--sub);margin-top:2px}
+.holiday-badge{display:inline-block;background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:4px;margin-left:6px;vertical-align:2px}
+.holiday-badge.sw{background:#D97706}
+.banner{border-radius:10px;padding:9px 12px;margin:8px 0;font-size:12px;line-height:1.6;display:flex;gap:8px;align-items:flex-start;border:1px solid;display:none}
+.bi{font-size:15px;flex-shrink:0}
+.b-red{background:#FEE2E2;border-color:#FCA5A5;color:#7F1D1D}
+.b-warn{background:#FEF3C7;border-color:#FCD34D;color:#78350F}
+.b-blue{background:#EFF6FF;border-color:#93C5FD;color:#1E3A8A}
 .segments{position:relative;padding-bottom:100px;padding-left:16px;padding-right:16px}
 .seg-item{margin:6px 0;position:relative}
 .item-card{background:var(--card);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow);border:1px solid var(--border);position:relative;margin-bottom:12px}
@@ -50,6 +67,7 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;backgroun
 .ic-main{flex:1;min-width:0}
 .ic-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px}
 .ic-time{font-size:15px;font-weight:700;color:var(--sub)}
+.type-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .type-badge{font-size:11px;font-weight:600;padding:1px 7px;border-radius:5px;white-space:nowrap}
 .ic-title{font-size:16px;font-weight:700;line-height:1.4;color:var(--text)}
 .ic-desc{font-size:14px;color:var(--sub);line-height:1.6;margin-top:3px;white-space:pre-wrap}
@@ -60,11 +78,11 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;backgroun
 .btn-sm{border:none;border-radius:6px;padding:4px 8px;font-size:11px;cursor:pointer;font-weight:500;line-height:1}
 .btn-edit{background:#F3F4F6;color:#374151}
 .btn-del{background:#FEE2E2;color:#B91C1C}
-.spot-c{background:#EDE9FE;color:#6D28D9}
-.eat-c{background:#FEE2E2;color:#B91C1C}
-.shop-c{background:#DCFCE7;color:#15803D}
-.hotel-c{background:#DBEAFE;color:#1E40AF}
-.tran-c{background:#DBEAFE;color:#1D4ED8}
+.spot-c{background:#EDE9FE;color:#6D28D9}.spot-d{background:var(--spot)}
+.eat-c{background:#FEE2E2;color:#B91C1C}.eat-d{background:var(--eat)}
+.shop-c{background:#DCFCE7;color:#15803D}.shop-d{background:var(--shop)}
+.hotel-c{background:#DBEAFE;color:#1E40AF}.hotel-d{background:var(--hotel)}
+.tran-c{background:#DBEAFE;color:#1D4ED8}.tran-d{background:var(--tran)}
 .seg-transport{margin:0;position:relative}
 .transport-card{background:var(--transport-bg);border-left:3px solid var(--transport-border);border-radius:0 10px 10px 0;margin:0 0 12px 16px;padding:9px 12px;display:flex;align-items:flex-start;gap:8px}
 .tr-icon{font-size:18px;flex-shrink:0;margin-top:1px}
@@ -83,6 +101,8 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;backgroun
 .tr-drag{font-size:16px;color:#B0B8D1;cursor:grab;flex-shrink:0;padding:0 2px;touch-action:none;user-select:none;margin-top:2px}
 .add-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:10px;border:1.5px dashed var(--border);border-radius:10px;background:transparent;color:var(--sub);font-size:12px;cursor:pointer;font-weight:500;transition:background .1s}
 .add-btn:active{background:var(--border)}
+
+/* 購物清單 */
 .shop-progress-wrap{padding:10px 14px 6px}
 .shop-progress-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
 .shop-progress-label{font-size:13px;font-weight:600;color:var(--navy)}
@@ -90,13 +110,13 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;backgroun
 .shop-progress{background:var(--border);border-radius:10px;height:5px}
 .shop-progress-bar{height:5px;border-radius:10px;background:var(--shop);transition:width .4s}
 .shop-cat-section{margin-bottom:6px}
-.shop-cat-hdr{display:flex;align-items:center;gap:8px;padding:12px 14px 6px 18px;font-size:14px;font-weight:700;color:var(--text)}
+.shop-cat-hdr{display:flex;align-items:center;gap:8px;padding:12px 14px 6px 18px;font-size:14px;font-weight:700;color:var(--text);letter-spacing:0}
 .sl-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 14px}
 .sl-card{background:var(--card);border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;position:relative;display:flex;flex-direction:column;transition:opacity .2s}
 .sl-card.done{opacity:.6}
 .sl-card.done .sl-card-name{text-decoration:line-through;color:var(--sub)}
 .sl-photo-area{width:100%;aspect-ratio:1/1;background:#F3F4F6;position:relative;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.sl-photo-area.no-photo{cursor:pointer}
+.sl-photo-area.no-photo{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;cursor:pointer;}
 .sl-photo-area.no-photo:active{background:#E9EAEC}
 .sl-photo-placeholder{font-size:24px}
 .sl-photo-placeholder-txt{font-size:10px;color:var(--sub)}
@@ -108,10 +128,14 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;backgroun
 .sl-card-note{font-size:11px;color:var(--sub);margin-top:2px}
 .sl-check-btn{position:absolute;bottom:8px;right:8px;width:22px;height:22px;border-radius:50%;border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .sl-card.done .sl-check-btn{background:var(--shop);border-color:var(--shop);color:#fff}
+
+/* 燈箱 */
 .photo-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:500;display:none;align-items:center;justify-content:center;padding:20px}
 .photo-overlay.open{display:flex}
 .photo-overlay img{max-width:100%;max-height:90vh;border-radius:12px}
 .photo-overlay-close{position:absolute;top:20px;right:20px;background:rgba(255,255,255,.2);border:none;color:#fff;font-size:18px;border-radius:50%;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+
+/* 溝通小卡 */
 .comm-cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px 14px}
 .comm-card{background:var(--card);border-radius:14px;padding:12px 11px 10px;box-shadow:var(--shadow);border:1px solid var(--border);cursor:pointer;transition:transform .1s,box-shadow .1s;display:flex;flex-direction:column;gap:4px;position:relative;min-height:80px}
 .comm-card:active{transform:scale(.97);box-shadow:none}
@@ -132,6 +156,8 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;backgroun
 .comm-add-fab{position:fixed;bottom:75px;left:0;width:100%;pointer-events:none;z-index:100}
 .comm-add-fab-inner{padding:0 20px;pointer-events:auto;max-width:480px;margin:0 auto}
 .comm-add-fab-btn{width:100%;background:rgba(15,32,64,0.92);color:#fff;border:none;box-shadow:0 4px 12px rgba(0,0,0,0.2);padding:14px;border-radius:25px;font-weight:700;font-size:14px;cursor:pointer}
+
+/* Modal */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:flex-end;justify-content:center}
 .modal-overlay.open{display:flex}
 .modal{background:var(--card);border-radius:20px 20px 0 0;padding:18px 16px 40px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;animation:slideUp .22s ease}
@@ -165,20 +191,6 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;backgroun
 .emoji-pick{display:flex;flex-wrap:wrap;gap:6px;padding:4px 0}
 .emoji-pick span{font-size:22px;cursor:pointer;padding:4px;border-radius:8px;transition:background .1s;user-select:none}
 .emoji-pick span:active{background:var(--border)}
-.custom-select{position:relative;width:100%}
-.custom-select-trigger{width:100%;border:1.5px solid var(--border);border-radius:9px;padding:10px 36px 10px 12px;font-size:14px;font-family:inherit;color:var(--text);background:#FAFAFA;cursor:pointer;display:flex;align-items:center;gap:10px;user-select:none;transition:border-color .2s;box-sizing:border-box}
-.custom-select.open .custom-select-trigger{border-color:var(--red)}
-.custom-select-emoji{font-size:18px;flex-shrink:0;width:26px;text-align:center}
-.custom-select-label{flex:1;text-align:left}
-.custom-select-arrow{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:10px;color:var(--sub);pointer-events:none;transition:transform .15s}
-.custom-select.open .custom-select-arrow{transform:translateY(-50%) rotate(180deg)}
-.custom-select-dropdown{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--card);border:1.5px solid var(--border);border-radius:9px;box-shadow:0 4px 16px rgba(0,0,0,.12);z-index:999;overflow:hidden;display:none}
-.custom-select.open .custom-select-dropdown{display:block}
-.custom-select-option{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;transition:background .1s}
-.custom-select-option:active{background:var(--cream)}
-.custom-select-option.selected{background:#FEF2F2}
-.custom-select-option-emoji{font-size:18px;width:26px;text-align:center;flex-shrink:0}
-.custom-select-option-label{font-size:14px;color:var(--text)}
 </style>
 </head>
 <body>
@@ -186,8 +198,8 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;backgroun
 <div class="top-header" id="topHeader">
   <div class="th-row">
     <div>
-      <div class="th-title">🌸 關西之旅 2026</div>
-      <div class="th-sub">11/24（二）— 11/28（六）</div>
+      <div class="th-title">🗾 高山・上高地・名古屋 2026</div>
+      <div class="th-sub">9/22（二）— 9/26（六）· 銀色週</div>
     </div>
     <div id="dbDot" class="db-dot" title="點擊強制恢復出廠預設行程" onclick="forceResetData()"></div>
   </div>
@@ -249,22 +261,24 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;backgroun
     <div class="fg"><label class="flabel">交通工具</label>
       <select class="fselect" id="tTool">
         <option value="JR">🚆 JR</option>
-        <option value="地鐵">🚇 地鐵</option>
+        <option value="名鉄">🚃 名鉄</option>
+        <option value="近鉄">🚄 近鉄</option>
         <option value="巴士">🚌 巴士</option>
+        <option value="地下鉄">🚇 地下鉄</option>
         <option value="計程車">🚕 計程車</option>
         <option value="步行">🚶 步行</option>
         <option value="飛機">✈️ 飛機</option>
       </select>
     </div>
-    <div class="fg"><label class="flabel">路線／班次名稱</label><input class="finput" id="tLine" placeholder="例：特急はるか"></div>
-    <div class="fg"><label class="flabel">行駛方向</label><input class="finput" id="tDir" placeholder="例：大阪→京都"></div>
+    <div class="fg"><label class="flabel">路線／班次名稱</label><input class="finput" id="tLine" placeholder="例：特急ひだ3号"></div>
+    <div class="fg"><label class="flabel">行駛方向</label><input class="finput" id="tDir" placeholder="例：名古屋→高山"></div>
     <div class="frow">
       <div class="fg"><label class="flabel">出發時間</label><input class="finput" id="tDep" placeholder="08:43" maxlength="5"></div>
       <div class="fg"><label class="flabel">抵達時間</label><input class="finput" id="tArr" placeholder="11:20" maxlength="5"></div>
     </div>
     <div class="frow">
-      <div class="fg"><label class="flabel">所需時間</label><input class="finput" id="tDur" placeholder="35m"></div>
-      <div class="fg"><label class="flabel">費用</label><input class="finput" id="tCost" placeholder="¥580"></div>
+      <div class="fg"><label class="flabel">所需時間</label><input class="finput" id="tDur" placeholder="2h37m"></div>
+      <div class="fg"><label class="flabel">費用</label><input class="finput" id="tCost" placeholder="¥5,610"></div>
     </div>
     <div class="fg"><label class="flabel">備註</label><textarea class="ftextarea" id="tNote" placeholder="注意事項..." style="min-height:56px"></textarea></div>
     <div class="mactions">
@@ -283,11 +297,9 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;backgroun
     <div class="frow">
       <div class="fg"><label class="flabel">購買地點</label>
         <select class="fselect" id="sCat">
-          <option value="大阪">大阪</option>
-          <option value="京都">京都</option>
-          <option value="廣島">廣島</option>
-          <option value="鳥取">鳥取</option>
-          <option value="和歌山">和歌山</option>
+          <option value="高山">高山</option>
+          <option value="上高地">上高地</option>
+          <option value="名古屋">名古屋</option>
           <option value="機場">機場</option>
           <option value="其他">其他</option>
         </select>
@@ -300,7 +312,7 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;backgroun
       <div class="modal-photo-area" id="sPhotoArea" onclick="triggerModalPhoto()">
         <span id="sPhotoHint" style="font-size:13px;color:var(--sub)">📷 點擊選取照片或拍照</span>
         <img id="sPhotoPreview" src="" style="display:none;width:100%;max-height:160px;object-fit:cover;border-radius:7px;">
-        <button id="sPhotoClear" onclick="clearModalPhoto(event)" style="display:none;position:absolute;top:6px;right:6px;background:rgba(0,0,0,.5);color:#fff;border:none;border-radius:50%;width:22px;height:22px;font-size:11px;cursor:pointer;align-items:center;justify-content:center;">✕</button>
+        <button id="sPhotoClear" onclick="clearModalPhoto(event)" style="display:none;position:absolute;top:6px;right:6px;background:rgba(0,0,0,.5);color:#fff;border:none;border-radius:50%;width:22px;height:22px;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
       </div>
       <input type="file" id="sPhotoInput" accept="image/*" style="display:none" onchange="handleModalPhoto(event)">
     </div>
@@ -311,7 +323,7 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;backgroun
   </div>
 </div>
 
-<!-- 溝通小卡 Modal -->
+<!-- 溝通小卡 新增／編輯 Modal -->
 <div class="modal-overlay" id="modalComm" onclick="closeModalOnBg(event,'modalComm')">
   <div class="modal">
     <div class="modal-handle"></div>
@@ -380,44 +392,39 @@ body{font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;backgroun
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
-const FB_CONFIG={apiKey:"AIzaSyBUUmzCfV09XuQPpVajG6IBklE0j_gvBEM",authDomain:"osaka2026-8c9c8.firebaseapp.com",databaseURL:"https://osaka2026-8c9c8-default-rtdb.firebaseio.com",projectId:"osaka2026-8c9c8",storageBucket:"osaka2026-8c9c8.firebasestorage.app",messagingSenderId:"934492646949",appId:"1:934492646949:web:42fda94021708584cc59cc"};
+const FB_CONFIG={apiKey:"AIzaSyCYOotAZxuDqGYNRMejPJEo_ym89FVS0b4",authDomain:"nagoya2026-ca060.firebaseapp.com",databaseURL:"https://nagoya2026-ca060-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"nagoya2026-ca060",storageBucket:"nagoya2026-ca060.firebasestorage.app",messagingSenderId:"29982428738",appId:"1:29982428738:web:0d818fd9589217f8a467db"};
 
-const TC={spot:{label:'🏙️ 景點',badge:'spot-c'},eat:{label:'🍽️ 美食',badge:'eat-c'},shop:{label:'🛒 購物',badge:'shop-c'},hotel:{label:'🏨 住宿',badge:'hotel-c'},tran:{label:'🚌 交通',badge:'tran-c'}};
-const TOOL_ICON={JR:'🚆',地鐵:'🚇',巴士:'🚌',計程車:'🚕',步行:'🚶',飛機:'✈️'};
-const CAT_COLOR={大阪:'#DC2626',京都:'#7C3AED',廣島:'#0369A1',鳥取:'#16A34A',和歌山:'#EA580C',機場:'#2563EB',其他:'#6B7280'};
+const TC={spot:{label:'🏙️ 景點',badge:'spot-c',dot:'spot-d'},eat:{label:'🍽️ 美食',badge:'eat-c',dot:'eat-d'},shop:{label:'🛒 購物',badge:'shop-c',dot:'shop-d'},hotel:{label:'🏨 住宿',badge:'hotel-c',dot:'hotel-d'},tran:{label:'🚌 交通',badge:'tran-c',dot:'tran-d'}};
+const TOOL_ICON={JR:'🚆',名鉄:'🚃',近鉄:'🚄',巴士:'🚌',地下鉄:'🚇',計程車:'🚕',步行:'🚶',飛機:'✈️'};
+const CAT_COLOR={高山:'#DC2626',上高地:'#7C3AED',名古屋:'#D97706',機場:'#2563EB',其他:'#6B7280'};
 const COMM_SCENES=['餐廳','交通','住宿','購物','緊急','其他'];
 const COMM_SCENE_ICON={餐廳:'🍽️',交通:'🚆',住宿:'🏨',購物:'🛒',緊急:'🆘',其他:'💡'};
 const EMOJI_QUICK=['🍽️','🥢','🌿','🦐','🚆','🏨','🛒','🆘','💊','👮','📞','🎁','🧾','💳','🔑','🛎️','♨️','🗺️','📦','💴','🙏','🤔','✅','❌'];
-const PERSONS=[{key:'yenru',label:'燕如'},{key:'yueyun',label:'月雲'},{key:'lianke',label:'連科'}];
 
 function mkId(){return Date.now()+Math.floor(Math.random()*10000)}
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
-function linkify(s){if(!s)return '';return esc(s).replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener" onclick="event.stopPropagation();window.open(this.href,\'_blank\');return false;" style="color:inherit;text-decoration:underline;">$1</a>');}
+function linkify(s){
+  if(!s)return '';
+  return esc(s).replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener" onclick="event.stopPropagation();window.open(this.href,\'_blank\');return false;" style="color:inherit;text-decoration:underline;">$1</a>');
+}
 
 let S={},db=null,saveTimer=null,curPage='itinerary',curDay=0,curPerson='yenru',curCommScene='餐廳',sortables={},editCtx=null,confirmCb=null,toastTimer=null,photoUploadCtx=null;
 
-const D={days:[
-  {date:'11/24',wd:'二',label:'Day 1',holiday:false,banners:[],segments:[]},
-  {date:'11/25',wd:'三',label:'Day 2',holiday:false,banners:[],segments:[]},
-  {date:'11/26',wd:'四',label:'Day 3',holiday:false,banners:[],segments:[]},
-  {date:'11/27',wd:'五',label:'Day 4',holiday:false,banners:[],segments:[]},
-  {date:'11/28',wd:'六',label:'Day 5',holiday:false,banners:[],segments:[]}
-],shopping:{yenru:[],yueyun:[],lianke:[]},commCards:[]};
+const D={days:[{date:'9/22',wd:'二',label:'Day 1',holiday:false,banners:[],segments:[]},{date:'9/23',wd:'三',label:'Day 2',holiday:false,banners:[],segments:[]},{date:'9/24',wd:'四',label:'Day 3',holiday:false,banners:[],segments:[]},{date:'9/25',wd:'五',label:'Day 4',holiday:false,banners:[],segments:[]},{date:'9/26',wd:'六',label:'Day 5',holiday:false,banners:[],segments:[]}],shopping:{yenru:[],yueyun:[]},commCards:[]};
 
-function ensureShopping(){if(!S.shopping)S.shopping={};PERSONS.forEach(p=>{if(!S.shopping[p.key])S.shopping[p.key]=[];});}
-function initFirebase(){const dot=document.getElementById('dbDot');if(!FB_CONFIG.apiKey){dot.style.background='#6B7280';loadLocalWithDefault();return;}try{firebase.initializeApp(FB_CONFIG);db=firebase.database();db.ref('osaka2026').once('value').then(snap=>{const val=snap.val();if(val&&val.days&&val.days.length>0){S=val;}else{S=JSON.parse(JSON.stringify(D));db.ref('osaka2026').set(S);}if(!S.commCards)S.commCards=[];ensureShopping();dot.className='db-dot ok';dot.title='Firebase 雲端已連線 ☁️';try{localStorage.setItem('osaka2026',JSON.stringify(S));}catch(e){}renderAll();}).catch(()=>{dot.className='db-dot err';loadLocalWithDefault();});}catch(e){dot.className='db-dot err';loadLocalWithDefault();}}
-function loadLocalWithDefault(){try{const s=localStorage.getItem('osaka2026');if(s){const p=JSON.parse(s);if(p&&p.days&&p.days.length>0){S=p;}else{S=JSON.parse(JSON.stringify(D));}}else{S=JSON.parse(JSON.stringify(D));}}catch(e){S=JSON.parse(JSON.stringify(D));}if(!S.commCards)S.commCards=[];ensureShopping();renderAll();}
-function forceResetData(){if(confirm("確定要清除所有更動，重置回最初的預設行程嗎？")){S=JSON.parse(JSON.stringify(D));S.commCards=[];try{localStorage.setItem('osaka2026',JSON.stringify(S));}catch(e){}if(db){db.ref('osaka2026').set(S).then(()=>{showToast('雲端與本地已重置 🚀');renderAll();});}else{showToast('本地快取已重置 💾');renderAll();}}}
+function initFirebase(){const dot=document.getElementById('dbDot');if(!FB_CONFIG.apiKey){dot.style.background='#6B7280';loadLocalWithDefault();return;}try{firebase.initializeApp(FB_CONFIG);db=firebase.database();db.ref('japan2026').once('value').then(snap=>{const val=snap.val();if(val&&val.days&&val.days.length>0){S=val;}else{S=JSON.parse(JSON.stringify(D));db.ref('japan2026').set(S);}if(!S.commCards)S.commCards=[];dot.className='db-dot ok';dot.title='Firebase 雲端已連線 ☁️';try{localStorage.setItem('japan2026',JSON.stringify(S));}catch(e){}renderAll();}).catch(()=>{dot.className='db-dot err';loadLocalWithDefault();});}catch(e){dot.className='db-dot err';loadLocalWithDefault();}}
+function loadLocalWithDefault(){try{const s=localStorage.getItem('japan2026');if(s){const p=JSON.parse(s);if(p&&p.days&&p.days.length>0){S=p;}else{S=JSON.parse(JSON.stringify(D));}}else{S=JSON.parse(JSON.stringify(D));}}catch(e){S=JSON.parse(JSON.stringify(D));}if(!S.commCards)S.commCards=[];renderAll();}
+function forceResetData(){if(confirm("確定要清除所有更動，重置回最初的預設行程嗎？")){S=JSON.parse(JSON.stringify(D));S.commCards=[];try{localStorage.setItem('japan2026',JSON.stringify(S));}catch(e){}if(db){db.ref('japan2026').set(S).then(()=>{showToast('雲端與本地已重置 🚀');renderAll();});}else{showToast('本地快取已重置 💾');renderAll();}}}
 function scheduleSave(){clearTimeout(saveTimer);saveTimer=setTimeout(doSave,800);}
-function doSave(){try{localStorage.setItem('osaka2026',JSON.stringify(S));}catch(e){}if(db){db.ref('osaka2026').set(S).then(()=>showToast('已同步至雲端 ☁️')).catch(()=>showToast('僅儲存於本地 💾'));}else{showToast('已存至本地 💾');}}
+function doSave(){try{localStorage.setItem('japan2026',JSON.stringify(S));}catch(e){}if(db){db.ref('japan2026').set(S).then(()=>showToast('已同步至雲端 ☁️')).catch(()=>showToast('僅儲存於本地 💾'));}else{showToast('已存至本地 💾');}}
 
 function renderAll(){if(!S||!S.days)return;renderItinerary();renderShopping();renderComm();updateNav();}
 function setPage(p){curPage=p;updateNav();}
 function updateNav(){['itinerary','shopping','comm'].forEach(p=>{document.getElementById('page-'+p).classList.toggle('active',curPage===p);document.getElementById('nav-'+p).classList.toggle('active',curPage===p);});renderTopTabs();}
-function renderTopTabs(){const c=document.getElementById('topTabs');if(!c||!S||!S.days)return;if(curPage==='itinerary'){c.innerHTML='<div class="day-tabs" id="day-tabs-inner"></div>';const dt=document.getElementById('day-tabs-inner');S.days.forEach((d,i)=>{const el=document.createElement('div');el.className='dtab'+(i===curDay?' active':'');el.innerHTML=`<div class="dtab-date">${d.date}</div><div class="dtab-wd">${d.wd}</div>`;el.onclick=()=>{curDay=i;renderAll();};dt.appendChild(el);});}else if(curPage==='shopping'){const tabs=PERSONS.map(p=>`<button class="ptab${curPerson===p.key?' active':''}" onclick="setPerson('${p.key}')">${p.label}</button>`).join('');c.innerHTML=`<div class="person-tabs">${tabs}</div>`;}else if(curPage==='comm'){c.innerHTML='<div class="day-tabs" id="comm-tabs-inner"></div>';const ct=document.getElementById('comm-tabs-inner');COMM_SCENES.forEach(sc=>{const el=document.createElement('div');el.className='dtab'+(sc===curCommScene?' active':'');el.innerHTML=`<div class="dtab-date">${sc}</div><div class="dtab-wd">${COMM_SCENE_ICON[sc]||''}</div>`;el.onclick=()=>{curCommScene=sc;renderComm();renderTopTabs();};ct.appendChild(el);});}else{c.innerHTML='';}}
+function renderTopTabs(){const c=document.getElementById('topTabs');if(!c||!S||!S.days)return;if(curPage==='itinerary'){c.innerHTML='<div class="day-tabs" id="day-tabs-inner"></div>';const dt=document.getElementById('day-tabs-inner');S.days.forEach((d,i)=>{const el=document.createElement('div');el.className='dtab'+(i===curDay?' active':'')+(d.silverWeek?' holiday':'');el.innerHTML=`<div class="dtab-date">${d.date}</div><div class="dtab-wd">${d.wd}${d.holiday?'·假':''}</div>`;el.onclick=()=>{curDay=i;renderAll();};dt.appendChild(el);});}else if(curPage==='shopping'){c.innerHTML=`<div class="person-tabs"><button class="ptab${curPerson==='yenru'?' active':''}" onclick="setPerson('yenru')">燕如</button><button class="ptab${curPerson==='yueyun'?' active':''}" onclick="setPerson('yueyun')">月雲</button></div>`;}else if(curPage==='comm'){c.innerHTML='<div class="day-tabs" id="comm-tabs-inner"></div>';const ct=document.getElementById('comm-tabs-inner');COMM_SCENES.forEach(sc=>{const el=document.createElement('div');el.className='dtab'+(sc===curCommScene?' active':'');el.innerHTML=`<div class="dtab-date">${sc}</div><div class="dtab-wd">${COMM_SCENE_ICON[sc]||''}</div>`;el.onclick=()=>{curCommScene=sc;renderComm();renderTopTabs();};ct.appendChild(el);});}else{c.innerHTML='';}}
 function setPerson(p){curPerson=p;renderAll();}
 
-function renderItinerary(){renderTopTabs();const day=S.days[curDay];if(!day)return;const body=document.getElementById('itinerary-body');let html=`<div class="segments" id="segments-${curDay}">`;(day.segments||[]).forEach(seg=>{if(seg.k==='item')html+=renderItem(seg,curDay);else html+=renderTr(seg,curDay);});html+='</div>';html+=`<div style="position:fixed;bottom:75px;left:0;width:100%;pointer-events:none;z-index:100;"><div style="display:flex;gap:10px;padding:0 20px;pointer-events:auto;max-width:480px;margin:0 auto;"><button class="add-btn" style="flex:1;background:rgba(200,57,43,0.9);color:#fff;border:none;box-shadow:0 4px 12px rgba(0,0,0,0.2);padding:14px;border-radius:25px;font-weight:700;font-size:14px;" onclick="openAddItem(${curDay})">＋ 新增行程</button><button class="add-btn" style="flex:1;background:rgba(15,32,64,0.9);color:#fff;border:none;box-shadow:0 4px 12px rgba(0,0,0,0.2);padding:14px;border-radius:25px;font-weight:700;font-size:14px;" onclick="openAddTr(${curDay})">＋ 新增交通</button></div></div><div style="height:120px;width:100%;"></div>`;body.innerHTML=html;initSortable(curDay);}
+function renderItinerary(){renderTopTabs();const day=S.days[curDay];if(!day)return;const body=document.getElementById('itinerary-body');let html=`<div class="day-hdr"><div class="day-hdr-title">${day.date}（${day.wd}）${day.holiday?`<span class="holiday-badge${day.silverWeek?' sw':''}">${day.holiday}</span>`:''}</div><div class="day-hdr-sub">${day.label||''}</div></div>`;(day.banners||[]).forEach(b=>{html+=`<div class="banner b-${b.t}"><span class="bi">${b.i}</span><div>${b.msg}</div></div>`;});html+=`<div class="segments" id="segments-${curDay}">`;(day.segments||[]).forEach(seg=>{if(seg.k==='item')html+=renderItem(seg,curDay);else html+=renderTr(seg,curDay);});html+='</div>';html+=`<div style="position:fixed;bottom:75px;left:0;width:100%;pointer-events:none;z-index:100;"><div style="display:flex;gap:10px;padding:0 20px;pointer-events:auto;max-width:480px;margin:0 auto;"><button class="add-btn" style="flex:1;background:rgba(200,57,43,0.9);color:#fff;border:none;box-shadow:0 4px 12px rgba(0,0,0,0.2);padding:14px;border-radius:25px;font-weight:700;font-size:14px;" onclick="openAddItem(${curDay})">＋ 新增行程</button><button class="add-btn" style="flex:1;background:rgba(15,32,64,0.9);color:#fff;border:none;box-shadow:0 4px 12px rgba(0,0,0,0.2);padding:14px;border-radius:25px;font-weight:700;font-size:14px;" onclick="openAddTr(${curDay})">＋ 新增交通</button></div></div><div style="height:120px;width:100%;"></div>`;body.innerHTML=html;initSortable(curDay);}
 function renderItem(seg,di){const tc=TC[seg.type]||TC.spot;return `<div class="seg-item" data-id="${seg.id}" data-k="item"><div class="item-card"><div class="ic-top"><span class="drag-handle">⠿</span><div class="ic-main"><div class="ic-meta">${seg.time?`<span class="ic-time">${seg.time}</span>`:''}<span class="type-badge ${tc.badge}">${tc.label}</span></div><div class="ic-title">${esc(seg.title)}</div>${seg.desc?`<div class="ic-desc">${linkify(seg.desc)}</div>`:''} ${seg.note?`<div class="ic-note"><span class="ic-note-icon">📌</span><span class="ic-note-text">${linkify(seg.note)}</span></div>`:''}</div></div><div class="ic-actions"><button class="btn-sm btn-edit" onclick="openEditItem(${di},'${seg.id}')">✏️</button><button class="btn-sm btn-del" onclick="confirmDel(()=>delSeg(${di},'${seg.id}'))">✕</button></div></div></div>`;}
 function renderTr(seg,di){const icon=TOOL_ICON[seg.tool]||'🚌';const timeRow=(seg.dep||seg.arr)?`<span class="tr-time">${seg.dep||'—'}</span><span class="tr-arrow">→</span><span class="tr-time">${seg.arr||'—'}</span>`:'';return `<div class="seg-transport" data-id="${seg.id}" data-k="tr"><div class="transport-card"><span class="tr-drag">⠿</span><span class="tr-icon">${icon}</span><div class="tr-body"><div class="tr-name">${esc(seg.tool)} ${esc(seg.line||'')}</div>${seg.dir?`<div class="tr-line">${esc(seg.dir)}</div>`:''}<div class="tr-times">${timeRow}${seg.dur?`<span class="tr-dur">${esc(seg.dur)}</span>`:''}${seg.cost?`<span class="tr-cost">${esc(seg.cost)}</span>`:''}</div>${seg.note?`<div class="tr-note"><span class="tr-note-icon">📌</span><span class="tr-note-text">${linkify(seg.note)}</span></div>`:''}</div><div class="tr-actions"><button class="btn-sm btn-edit" onclick="openEditTr(${di},'${seg.id}')">✏️</button><button class="btn-sm btn-del" onclick="confirmDel(()=>delSeg(${di},'${seg.id}'))">✕</button></div></div></div>`;}
 function initSortable(di){const el=document.getElementById('segments-'+di);if(!el)return;if(sortables[di])try{sortables[di].destroy();}catch(e){}sortables[di]=Sortable.create(el,{handle:'.drag-handle, .tr-drag',animation:180,onEnd(evt){const day=S.days[di];const moved=day.segments.splice(evt.oldIndex,1)[0];day.segments.splice(evt.newIndex,0,moved);scheduleSave();}});}
@@ -427,17 +434,18 @@ function openEditItem(di,id){const seg=S.days[di].segments.find(s=>s.id==id);if(
 function saveItem(){const title=document.getElementById('iTitle').value.trim();if(!title){alert('請輸入標題');return;}const seg={k:'item',id:editCtx.id||mkId(),type:document.getElementById('iType').value,time:document.getElementById('iTime').value.trim(),title,desc:document.getElementById('iDesc').value.trim(),note:document.getElementById('iNote').value.trim()};const day=S.days[editCtx.dayIdx];if(!Array.isArray(day.segments))day.segments=[];if(editCtx.id){const idx=day.segments.findIndex(s=>s.id==editCtx.id);if(idx>=0)day.segments[idx]=seg;else day.segments.push(seg);}else{day.segments.push(seg);}closeModal('modalItem');scheduleSave();renderItinerary();}
 function delSeg(di,id){S.days[di].segments=S.days[di].segments.filter(s=>s.id!=id);scheduleSave();renderItinerary();}
 
-function openAddTr(di){editCtx={mode:'tr',dayIdx:di,id:null};document.getElementById('modalTrTitle').textContent='新增交通';['tLine','tDir','tDep','tArr','tDur','tCost','tNote'].forEach(id=>document.getElementById(id).value='');document.getElementById('tTool').value='JR';openModal('modalTr');}
+function openAddTr(di){editCtx={mode:'tr',dayIdx:di,id:null};document.getElementById('modalTrTitle').textContent='新增交通';['tTool','tLine','tDir','tDep','tArr','tDur','tCost','tNote'].forEach(id=>document.getElementById(id).value='');document.getElementById('tTool').value='JR';openModal('modalTr');}
 function openEditTr(di,id){const seg=S.days[di].segments.find(s=>s.id==id);if(!seg)return;editCtx={mode:'tr',dayIdx:di,id:seg.id};document.getElementById('modalTrTitle').textContent='編輯交通';document.getElementById('tTool').value=seg.tool||'JR';document.getElementById('tLine').value=seg.line||'';document.getElementById('tDir').value=seg.dir||'';document.getElementById('tDep').value=seg.dep||'';document.getElementById('tArr').value=seg.arr||'';document.getElementById('tDur').value=seg.dur||'';document.getElementById('tCost').value=seg.cost||'';document.getElementById('tNote').value=seg.note||'';openModal('modalTr');}
 function saveTr(){const seg={k:'tr',id:editCtx.id||mkId(),tool:document.getElementById('tTool').value,line:document.getElementById('tLine').value.trim(),dir:document.getElementById('tDir').value.trim(),dep:document.getElementById('tDep').value.trim(),arr:document.getElementById('tArr').value.trim(),dur:document.getElementById('tDur').value.trim(),cost:document.getElementById('tCost').value.trim(),note:document.getElementById('tNote').value.trim()};const day=S.days[editCtx.dayIdx];if(!Array.isArray(day.segments))day.segments=[];if(editCtx.id){const idx=day.segments.findIndex(s=>s.id==editCtx.id);if(idx>=0)day.segments[idx]=seg;else day.segments.push(seg);}else{day.segments.push(seg);}closeModal('modalTr');scheduleSave();renderItinerary();}
 
-function renderShopping(){renderTopTabs();ensureShopping();const list=S.shopping[curPerson]||[];const cats=['大阪','京都','廣島','鳥取','和歌山','機場','其他'];const body=document.getElementById('shopping-body');const total=list.length,done=list.filter(i=>i.done).length,pct=total?Math.round(done/total*100):0;const personLabel=PERSONS.find(p=>p.key===curPerson)?.label||curPerson;let html=`<div class="shop-progress-wrap"><div class="shop-progress-top"><span class="shop-progress-label">${personLabel}的購物進度</span><span class="shop-progress-pct">${done} / ${total}（${pct}%）</span></div><div class="shop-progress"><div class="shop-progress-bar" style="width:${pct}%"></div></div></div>`;let hasAny=false;cats.forEach((cat,catIdx)=>{const items=list.filter(i=>i.cat===cat);if(!items.length)return;hasAny=true;const cc=CAT_COLOR[cat]||'#6B7280';html+=`<div class="shop-cat-section" style="margin-top:${catIdx>0?'20px':'0'}"><div class="shop-cat-hdr"><span style="color:${cc};border-left:3px solid ${cc};padding-left:8px;">${cat}</span></div><div class="sl-grid">`;items.forEach(item=>{const hasPhoto=!!item.photoUrl;const photoSection=hasPhoto?`<div class="sl-photo-area" style="cursor:pointer;" onclick="openPhotoOverlay('${item.photoUrl}')"><img class="sl-photo-img" src="${item.photoUrl}" alt="商品照片"><button class="sl-photo-del-btn" onclick="event.stopPropagation();removePhoto('${curPerson}',${item.id})" title="刪除照片">✕</button></div>`:`<div class="sl-photo-area no-photo" onclick="triggerPhotoUpload('${curPerson}',${item.id})"><span class="sl-photo-placeholder">📷</span><span class="sl-photo-placeholder-txt">加入照片</span></div>`;html+=`<div class="sl-card${item.done?' done':''}" id="sl-${item.id}">${photoSection}<div class="sl-card-body"><div class="sl-card-name">${esc(item.name)}</div>${item.price?`<div class="sl-card-price">${esc(item.price)}</div>`:''}${item.note?`<div class="sl-card-note">${esc(item.note)}</div>`:''}<div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px;"><div style="display:flex;gap:4px;"><button onclick="openEditShop('${curPerson}',${item.id})" style="border:none;background:#F3F4F6;color:#374151;border-radius:6px;padding:3px 8px;font-size:11px;cursor:pointer;">✏️</button><button onclick="delShop('${curPerson}',${item.id})" style="border:none;background:#FEE2E2;color:#B91C1C;border-radius:6px;padding:3px 8px;font-size:11px;cursor:pointer;">✕</button></div><button class="sl-check-btn" onclick="toggleShop('${curPerson}',${item.id})">${item.done?'✓':''}</button></div></div></div>`;});html+=`</div></div>`;});if(!hasAny){html+=`<div style="text-align:center;padding:40px 20px;color:var(--sub)"><div style="font-size:40px;margin-bottom:12px">🛍️</div><div style="font-size:14px">${personLabel}還沒有購物項目</div><div style="font-size:12px;margin-top:6px">點下方按鈕新增吧！</div></div>`;}html+=`<div style="position:fixed;bottom:75px;left:0;width:100%;pointer-events:none;z-index:100;"><div style="padding:0 20px;pointer-events:auto;max-width:480px;margin:0 auto;"><button class="add-btn" style="width:100%;background:rgba(22,163,74,0.9);color:#fff;border:none;box-shadow:0 4px 12px rgba(22,163,74,0.3);padding:14px;border-radius:25px;font-weight:700;font-size:14px;" onclick="openAddShop()">＋ 新增購物項目</button></div></div><div style="height:120px;width:100%;"></div>`;body.innerHTML=html;}
-function openAddShop(){editCtx={mode:'shop',person:curPerson,id:null};const label=PERSONS.find(p=>p.key===curPerson)?.label||curPerson;document.getElementById('modalShopTitle').textContent=label+' 新增購物';document.getElementById('sName').value='';document.getElementById('sCat').value='大阪';document.getElementById('sPrice').value='';document.getElementById('sNote').value='';document.getElementById('modalShop').querySelector('.btn-save').textContent='新增';clearModalPhoto();openModal('modalShop');}
-function openEditShop(person,id){const item=(S.shopping[person]||[]).find(i=>i.id==id);if(!item)return;editCtx={mode:'shop',person,id};document.getElementById('modalShopTitle').textContent='編輯購物項目';document.getElementById('sName').value=item.name||'';document.getElementById('sCat').value=item.cat||'大阪';document.getElementById('sPrice').value=item.price||'';document.getElementById('sNote').value=item.note||'';document.getElementById('modalShop').querySelector('.btn-save').textContent='儲存';const preview=document.getElementById('sPhotoPreview'),hint=document.getElementById('sPhotoHint'),clear=document.getElementById('sPhotoClear');if(item.photoUrl){preview.src=item.photoUrl;preview.style.display='block';hint.style.display='none';clear.style.display='flex';}else{clearModalPhoto();}openModal('modalShop');}
+function renderShopping(){renderTopTabs();if(!S.shopping)S.shopping={yenru:[],yueyun:[]};const list=S.shopping[curPerson]||[];const cats=['高山','上高地','名古屋','機場','其他'];const body=document.getElementById('shopping-body');const total=list.length,done=list.filter(i=>i.done).length,pct=total?Math.round(done/total*100):0;let html=`<div class="shop-progress-wrap"><div class="shop-progress-top"><span class="shop-progress-label">購物進度</span><span class="shop-progress-pct">${done} / ${total}（${pct}%）</span></div><div class="shop-progress"><div class="shop-progress-bar" style="width:${pct}%"></div></div></div>`;cats.forEach((cat,catIdx)=>{const items=list.filter(i=>i.cat===cat);if(!items.length)return;const cc=CAT_COLOR[cat]||'#6B7280';html+=`<div class="shop-cat-section" style="margin-top:${catIdx>0?'20px':'0'}"><div class="shop-cat-hdr"><span style="color:${cc};border-left:3px solid ${cc};padding-left:8px;line-height:1;padding-top:2px;padding-bottom:2px;">${cat}</span></div><div class="sl-grid">`;items.forEach(item=>{const hasPhoto=!!item.photoUrl;const photoSection=hasPhoto?`<div class="sl-photo-area" style="cursor:pointer;" onclick="openPhotoOverlay('${item.photoUrl}')"><img class="sl-photo-img" src="${item.photoUrl}" alt="商品照片"><button class="sl-photo-del-btn" onclick="event.stopPropagation();removePhoto('${curPerson}',${item.id})" title="刪除照片">✕</button></div>`:`<div class="sl-photo-area no-photo" onclick="triggerPhotoUpload('${curPerson}',${item.id})"><span class="sl-photo-placeholder">📷</span><span class="sl-photo-placeholder-txt">加入照片</span></div>`;html+=`<div class="sl-card${item.done?' done':''}" id="sl-${item.id}">${photoSection}<div class="sl-card-body"><div class="sl-card-name">${esc(item.name)}</div>${item.price?`<div class="sl-card-price">${esc(item.price)}</div>`:''}${item.note?`<div class="sl-card-note">${esc(item.note)}</div>`:''}<div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px;"><div style="display:flex;gap:4px;"><button onclick="openEditShop('${curPerson}',${item.id})" style="border:none;background:#F3F4F6;color:#374151;border-radius:6px;padding:3px 8px;font-size:11px;cursor:pointer;">✏️</button><button onclick="delShop('${curPerson}',${item.id})" style="border:none;background:#FEE2E2;color:#B91C1C;border-radius:6px;padding:3px 8px;font-size:11px;cursor:pointer;">✕</button></div><button class="sl-check-btn" onclick="toggleShop('${curPerson}',${item.id})">${item.done?'✓':''}</button></div></div></div>`;});html+=`</div></div>`;});html+=`<div style="position:fixed;bottom:75px;left:0;width:100%;pointer-events:none;z-index:100;"><div style="padding:0 20px;pointer-events:auto;max-width:480px;margin:0 auto;"><button class="add-btn" style="width:100%;background:rgba(22,163,74,0.9);color:#fff;border:none;box-shadow:0 4px 12px rgba(22,163,74,0.3);padding:14px;border-radius:25px;font-weight:700;font-size:14px;" onclick="openAddShop()">＋ 新增購物項目</button></div></div><div style="height:120px;width:100%;"></div>`;body.innerHTML=html;}
+function openAddShop(){editCtx={mode:'shop',person:curPerson,id:null};document.getElementById('modalShopTitle').textContent=(curPerson==='yenru'?'燕如':'月雲')+' 新增購物';document.getElementById('sName').value='';document.getElementById('sCat').value='高山';document.getElementById('sPrice').value='';document.getElementById('sNote').value='';document.getElementById('modalShop').querySelector('.btn-save').textContent='新增';clearModalPhoto();openModal('modalShop');}
+function openEditShop(person,id){const item=(S.shopping[person]||[]).find(i=>i.id==id);if(!item)return;editCtx={mode:'shop',person,id};document.getElementById('modalShopTitle').textContent='編輯購物項目';document.getElementById('sName').value=item.name||'';document.getElementById('sCat').value=item.cat||'高山';document.getElementById('sPrice').value=item.price||'';document.getElementById('sNote').value=item.note||'';document.getElementById('modalShop').querySelector('.btn-save').textContent='儲存';const preview=document.getElementById('sPhotoPreview'),hint=document.getElementById('sPhotoHint'),clear=document.getElementById('sPhotoClear');if(item.photoUrl){preview.src=item.photoUrl;preview.style.display='block';hint.style.display='none';clear.style.display='flex';}else{clearModalPhoto();}openModal('modalShop');}
 function saveShopItem(){const name=document.getElementById('sName').value.trim();if(!name){alert('請輸入商品名稱');return;}const preview=document.getElementById('sPhotoPreview');const photoUrl=(preview.style.display!=='none'&&preview.src)?preview.src:'';if(!S.shopping[editCtx.person])S.shopping[editCtx.person]=[];if(editCtx.id){const idx=S.shopping[editCtx.person].findIndex(i=>i.id==editCtx.id);if(idx>=0){const old=S.shopping[editCtx.person][idx];const updated={...old,cat:document.getElementById('sCat').value,name,price:document.getElementById('sPrice').value.trim(),note:document.getElementById('sNote').value.trim()};if(photoUrl)updated.photoUrl=photoUrl;else delete updated.photoUrl;S.shopping[editCtx.person][idx]=updated;}}else{const item={id:mkId(),cat:document.getElementById('sCat').value,name,price:document.getElementById('sPrice').value.trim(),note:document.getElementById('sNote').value.trim(),done:false};if(photoUrl)item.photoUrl=photoUrl;S.shopping[editCtx.person].push(item);}closeModal('modalShop');scheduleSave();renderShopping();}
 function toggleShop(person,id){const item=(S.shopping[person]||[]).find(i=>i.id==id);if(item){item.done=!item.done;scheduleSave();renderShopping();}}
 function delShop(person,id){confirmDel(()=>{S.shopping[person]=(S.shopping[person]||[]).filter(i=>i.id!=id);scheduleSave();renderShopping();});}
 
+function getAllCommCards(){return S.commCards||[];}
 function renderComm(){const body=document.getElementById('comm-body');const cards=(S.commCards||[]).filter(c=>c.scene===curCommScene);let html='';if(!cards.length){html+=`<div style="text-align:center;padding:40px 20px;color:var(--sub)"><div style="font-size:40px;margin-bottom:12px">${COMM_SCENE_ICON[curCommScene]}</div><div style="font-size:14px">這個場景還沒有小卡</div><div style="font-size:12px;margin-top:6px">點下方按鈕新增吧！</div></div>`;}else{html+='<div class="comm-cards-grid">';cards.forEach(card=>{html+=`<div class="comm-card" onclick="showCommCard(${card.id})"><div class="comm-card-emoji">${card.emoji||'💬'}</div><div class="comm-card-zh">${esc(card.zh)}</div><div class="comm-card-ja">${esc(card.ja)}</div><div class="comm-card-actions"><button class="comm-card-edit-btn" onclick="event.stopPropagation();openEditComm(${card.id})">✏️</button><button class="comm-card-del-btn" onclick="event.stopPropagation();delCommCard(${card.id})">✕</button></div></div>`;});html+='</div>';}html+=`<div class="comm-add-fab"><div class="comm-add-fab-inner"><button class="comm-add-fab-btn" onclick="openAddComm()">＋ 新增自訂小卡</button></div></div><div style="height:120px;width:100%;"></div>`;body.innerHTML=html;}
 function showCommCard(id){const card=(S.commCards||[]).find(c=>c.id==id);if(!card)return;document.getElementById('commDisplayScene').textContent=COMM_SCENE_ICON[card.scene]+' '+card.scene;document.getElementById('commDisplayJa').textContent=card.ja;document.getElementById('commDisplayZh').textContent=card.zh;document.getElementById('commDisplayOverlay').classList.add('open');}
 function closeCommDisplay(){document.getElementById('commDisplayOverlay').classList.remove('open');}
@@ -455,6 +463,7 @@ function compressImage(file,maxPx,quality,cb){const img=new Image(),url=URL.crea
 function removePhoto(person,id){const item=(S.shopping[person]||[]).find(i=>i.id==id);if(item){delete item.photoUrl;scheduleSave();renderShopping();showToast('照片已刪除');}}
 function openPhotoOverlay(url){document.getElementById('photoOverlayImg').src=url;document.getElementById('photoOverlay').classList.add('open');}
 function closePhotoOverlay(e){if(e.target.id==='photoOverlay')document.getElementById('photoOverlay').classList.remove('open');}
+
 function openModal(id){document.getElementById(id).classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
 function closeModalOnBg(e,id){if(e.target.id===id)closeModal(id);}
